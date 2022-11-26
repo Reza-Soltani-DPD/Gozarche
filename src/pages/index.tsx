@@ -1,4 +1,5 @@
 import { type NextPage } from "next";
+import MainLayout from '../components/layouts/MainLayout';
 
 // import { signIn, signOut, useSession } from "next-auth/react";
 
@@ -7,7 +8,10 @@ import { type NextPage } from "next";
 const Home: NextPage = () => {
   return (
     <>
-      
+      <MainLayout>
+        shdf
+
+      </MainLayout>
     </>
   );
 };
