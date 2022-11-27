@@ -6,14 +6,13 @@ import MainLayout from '../components/layouts/MainLayout';
 // import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
-  return (
-    <>
-      <MainLayout>
-        shdf
-
-      </MainLayout>
-    </>
-  );
+   return (
+     <>
+       <MainLayout>
+        hello world
+       </MainLayout>
+     </>
+   );
 };
 
 export default Home;

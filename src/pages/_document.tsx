@@ -24,10 +24,11 @@ class MyDocument extends Document {
   }
 
   render() {
+    
     return (
-      <Html>
+      <Html lang='fa' dir='rtl' >
         <Head />
-        <body>
+        <body className="bg-white text-black dark:bg-black dark:text-white">
           <Main />
           <NextScript />
         </body>

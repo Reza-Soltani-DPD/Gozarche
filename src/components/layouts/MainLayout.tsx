@@ -1,9 +1,19 @@
-import React from 'react'
+import React from "react";
 
-export default function MainLayout({children}:{children:React.ReactNode}) {
+type MainLayoutType = {
+  children: React.ReactNode;
+};
+export default function MainLayout({ children }: MainLayoutType) {
+
   return (
-	<div>
-		{children}
-	</div>
-  )
+    <>
+      <nav className="flex justify-between bg-black">
+        <div>sdf</div>
+        <div>
+          sdf
+        </div>
+      </nav>
+      <main>{children}</main>
+    </>
+  );
 }
