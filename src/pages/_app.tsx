@@ -4,15 +4,21 @@ import { SessionProvider } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 
 import "../styles/globals.css";
+import Head from 'next/head';
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
-         <SessionProvider session={session}>
+    <>
+    <Head>
+      <link rel='icon' type='image/png' sizes='32x32' href='/fav.ico'/>
+    </Head>
+      <SessionProvider session={session}>
         <Component {...pageProps} />
       </SessionProvider>
+    </>
   );
 };
 

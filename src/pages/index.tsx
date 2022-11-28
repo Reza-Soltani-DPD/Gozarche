@@ -8,9 +8,27 @@ import MainLayout from '../components/layouts/MainLayout';
 const Home: NextPage = () => {
    return (
      <>
-       <MainLayout>
-        hello world
-       </MainLayout>
+       <MainLayout/>
+<div className='container m-auto'>
+
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+        <div className='p-16'><button className='border'>test</button></div>
+   
+</div>
+       
      </>
    );
 };
