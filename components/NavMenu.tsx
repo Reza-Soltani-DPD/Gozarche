@@ -10,7 +10,7 @@ export default function MainNav(props: mainNav) {
 
   return (
     <div
-      className={`transition-color fixed z-0 h-full  w-full  top-0 left-0 bg-black bg-opacity-50 duration-300 ease-in-out ${
+      className={`transition-color fixed z-10 h-full  w-full  top-0 left-0 bg-black bg-opacity-50 duration-300 ease-in-out ${
         !show ? "collapse bg-opacity-0 " : ""
       }`}
     >
@@ -23,7 +23,7 @@ export default function MainNav(props: mainNav) {
             onClick={() => setShow(false)}
           ></div>
           <div
-            className={`z-40 bg-white p-2 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]  duration-300 ease-in-out max-md:h-full max-md:w-4/5 md:w-full ${
+            className={` bg-white p-2 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]  duration-300 ease-in-out max-md:h-full max-md:w-4/5 md:w-full ${
               !show && "max-md:translate-x-96 md:-translate-y-96"
             }`}
           >

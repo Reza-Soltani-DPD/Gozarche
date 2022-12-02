@@ -1,36 +1,24 @@
-import { type NextPage } from "next";
-import MainLayout from '../components/layouts/MainLayout';
+import MainLayout from "../components/layouts/MainLayout";
 
 // import { signIn, signOut, useSession } from "next-auth/react";
 
 // import { trpc } from "../utils/trpc";
 
-const Home: NextPage = () => {
-   return (
-     <>
-       <MainLayout/>
-<div className='container m-auto'>
 
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-        <div className='p-16'><button className='border'>test</button></div>
-   
-</div>
-       
-     </>
-   );
-};
+import Carousel from '../components/Carousel'
 
-export default Home;
+
+export default function Home() {
+  return (
+    <>
+        <MainLayout title='ورود'>
+        <div className="container mx-auto">
+          <div className="m-auto flex-col   ">
+            <Carousel/>
+          </div>
+        </div>
+        </MainLayout>
+
+    </>
+  );
+}
