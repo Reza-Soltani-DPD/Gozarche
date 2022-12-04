@@ -6,6 +6,7 @@ import MainLayout from "../components/layouts/MainLayout";
 
 
 import Carousel from '../components/Carousel'
+import MainFooter from '../components/footers/mainfooter';
 
 
 export default function Home() {
@@ -17,7 +18,9 @@ export default function Home() {
             <Carousel/>
           </div>
         </div>
+
         </MainLayout>
+        <MainFooter/>
 
     </>
   );

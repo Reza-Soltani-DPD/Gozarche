@@ -15,7 +15,28 @@ datasource db {
 }
 
 
-// Necessary for Next auth
+
+
+//////////////////////////////////////
+//
+//              USER                //
+//
+//////////////////////////////////////
+
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  lastname      String   @default("")
+  email         String   @unique
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -34,6 +55,7 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
@@ -42,16 +64,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String
-  email         String?   @unique
-  password       String?
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-}
 
 model VerificationToken {
   identifier String
@@ -59,4 +71,17 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+//////////////////////////////////////
+//
+//              SHOP                //
+//
+//////////////////////////////////////
+
+
+
+model Shop{
+  id String @id @default(cuid())
+
 }

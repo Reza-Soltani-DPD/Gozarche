@@ -9,17 +9,17 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import NavMenu from "../NavMenu";
-import { signIn } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 type MainLayoutType = {
   title?: string;
   children?: React.ReactElement;
 };
 
-export default function MainLayout({ title ,children  }: MainLayoutType) {
+export default function MainLayout({ title, children }: MainLayoutType) {
   const [mainNav, setMainNav] = useState(false);
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-
+  const session = useSession();  
   const controlNavbar = () => {
     if (typeof window !== "undefined") {
       if (
@@ -100,12 +100,20 @@ export default function MainLayout({ title ,children  }: MainLayoutType) {
             </div>
 
             <div className="flex items-center p-2">
-              <button onClick={() => signIn()}>
-                <div className=" transition-border m-auto my-auto flex items-center rounded-lg border-2 p-2 duration-300 hover:rounded-[4rem]">
-                  <UserCircleIcon className="h-6  text-gray-700" />
-                  <span className="bold px-2 text-sm">ورود</span>
-                </div>
-              </button>
+              {session.status == "loading" ? (
+                "حساب کاربری"
+              ) : session.status == "unauthenticated" ? (
+                <button onClick={() => signIn()}>
+                  <div className=" transition-border m-auto  flex items-center rounded-lg border-2 p-2 duration-500 hover:rounded-3xl">
+                    <UserCircleIcon className="h-6  text-gray-700" />
+                    <span className="bold px-2 font-iransans text-sm">
+                      ورود
+                    </span>
+                  </div>
+                </button>
+              ) : (
+                "authenicated"
+              )}
               <ShoppingCartIcon className="mx-2 h-6 text-gray-700" />
             </div>
           </div>
@@ -114,11 +122,10 @@ export default function MainLayout({ title ,children  }: MainLayoutType) {
       <NavMenu show={mainNav} setShow={setMainNav}>
         hello
       </NavMenu>
-      <div className='flex flex-col min-h-screen'>
+      <div className="mx-auto flex min-h-screen flex-col">
         <div className={`h-16 ${show ?? "hidden"}`} />
         {children}
-        </div>
-
+      </div>
     </>
   );
 }

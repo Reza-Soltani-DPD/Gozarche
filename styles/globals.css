@@ -4,12 +4,40 @@
 
 
 .card{
-	@apply shadow-[0_0_20px_4px_rgba(0,0,0,0.2)] rounded-3xl
+	@apply shadow-[0_0_20px_4px_rgba(0,0,0,0.2)] rounded-3xl 
 }
 
 input{
-@apply outline-none shadow-[0_0_5px_0_rgba(0,0,2,0.4)] rounded-md hover:rounded-2xl active:rounded-2xl focus:rounded-2xl  mb-4 mt-2 mx-4 p-2  transition-all duration-500 
+@apply outline-none shadow-[0_0_5px_0_rgba(0,0,2,0.4)] rounded-md hover:rounded-3xl active:rounded-2xl focus:rounded-2xl  mb-8 mt-2 mx-4 p-2  transition-all duration-500 
 
 }
 
+.grid-center-container{
+	@apply flex flex-col items-center mt-2
+}
+
+.primary-button{
+  @apply  items-center p-2 font-vazir font-bold rounded-md hover:rounded-3xl bg-primary-500 shadow-xl text-white  mx-4 mb-8 mt-4 transition-all duration-500 flex-grow
+  }
+
+@font-face {
+  font-family: 'yakan';
+  src: local(''), url('/public/fonts/Far_Yekan.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'vazir';
+  src: local(''), url('/public/fonts/Vazir.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'homa';
+  src: local(''), url('/public/fonts/Far_Homa.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'iransans';
+  src: local(''), url('/public/fonts/IranianSans.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'samim';
+  src: local(''), url('/public/fonts/Samim.ttf') format('ttf');
+}
 
