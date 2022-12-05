@@ -14,12 +14,14 @@ FROM node:18-alpine AS build
 WORKDIR /app
 #build3/4
 COPY --from=dependencies /app/node_modules ./node_modules
+COPY  prisma/schema.prisma ./prisma/
 COPY . .
 #build5/6
 RUN npx prisma generate
+ENV DATABASE_URL postgresql://root:IokxLnuo9vltRPu1mrEVSjBL@gozarche-db:5432/postgres
+ENV NEXTAUTH_SECRET 2497766051bc79ad394d017575fb3b13
+ENV NEXTAUTH_URL https://gozarche.iran.liara.run
 RUN yarn build
-
-
 
 
 FROM node:18-alpine AS deploy
