@@ -17,10 +17,11 @@ COPY --from=dependencies /app/node_modules ./node_modules
 COPY  prisma/schema.prisma ./prisma/
 COPY . .
 #build5/6
-RUN npx prisma generate
-ENV DATABASE_URL postgresql://root:IokxLnuo9vltRPu1mrEVSjBL@gozarche-db:5432/postgres
+ENV DATABASE_URL postgresql://root:IokxLnuo9vltRPu1mrEVSjBL@esme.iran.liara.ir:30836/postgres
 ENV NEXTAUTH_SECRET 2497766051bc79ad394d017575fb3b13
 ENV NEXTAUTH_URL https://gozarche.iran.liara.run
+
+RUN yarn prisma migrate deploy
 RUN yarn build
 
 
@@ -32,12 +33,12 @@ ENV NODE_ENV production
 #deploy4/5/6
 COPY --from=build /app/public ./public
 COPY --from=build /app/package.json ./package.json
-COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next ./
 COPY --from=build /app/.next/static ./.next/static
 #deploy7
 EXPOSE 3000
 #deploy8
 ENV PORT 3000
 #deploy9
-CMD ["node","server.js"]
+CMD ["yarn","start"]
 
