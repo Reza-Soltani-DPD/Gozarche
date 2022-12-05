@@ -15,6 +15,37 @@ datasource db {
 }
 
 
+
+
+
+
+
+model group{
+  id String @id @default(cuid())
+  name String ?
+  rules rule[]
+  accounts Account[]
+}
+model rule{
+  id String @id @default(cuid())
+  name String
+  description String?
+  rules Json
+  groups group[]
+}
+
+
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String?   @unique
+  password       String?
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+}
 // Necessary for Next auth
 model Account {
   id                String  @id @default(cuid())
@@ -30,6 +61,7 @@ model Account {
   id_token          String? // @db.Text
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  groups group[]
 
   @@unique([provider, providerAccountId])
 }
@@ -40,18 +72,9 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cart         cart?
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String
-  email         String?   @unique
-  password       String?
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-}
 
 model VerificationToken {
   identifier String
@@ -59,4 +82,18 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+
+model cart {
+  id String @id @default(cuid())
+  token String
+  sessionId String @unique
+  session Session?  @relation(fields: [sessionId] ,references: [id])
+  
+}
+model shop{
+  id String @id @default(cuid())
+  title String 
+  description  String
 }

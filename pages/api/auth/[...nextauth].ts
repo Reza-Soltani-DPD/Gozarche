@@ -10,16 +10,16 @@ export const authOptions: NextAuthOptions = {
 
   },
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      return user
+    async signIn() {
+      return true
     },
-    async redirect({ url, baseUrl }) {
-      return baseUrl+url
+    async redirect({ baseUrl }) {
+      return baseUrl
     },
-    async session({ session, user, token }) {
+    async session({ session }) {
       return session
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user }) {
       if(user?.id)token.id=user.id
       return token
     }
@@ -37,12 +37,12 @@ export const authOptions: NextAuthOptions = {
         password: { label: "uassword", type: "password" },
       },
       async authorize(credentials) {
-        
         const user = await prisma.user.findUnique({
           where: {
             email: credentials?.username,
           },
         });
+
         if (user && user.password == credentials?.password) {
           return user;
         } else {

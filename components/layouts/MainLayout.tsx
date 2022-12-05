@@ -19,7 +19,8 @@ export default function MainLayout({ title, children }: MainLayoutType) {
   const [mainNav, setMainNav] = useState(false);
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const session = useSession();  
+  const session = useSession();
+
   const controlNavbar = () => {
     if (typeof window !== "undefined") {
       if (
@@ -98,10 +99,8 @@ export default function MainLayout({ title, children }: MainLayoutType) {
                 </button>
               </form>
             </div>
-
             <div className="flex items-center p-2">
-              {session.status == "loading" ? (
-                "حساب کاربری"
+              {session.status == "loading" ? ("بارگذاری"
               ) : session.status == "unauthenticated" ? (
                 <button onClick={() => signIn()}>
                   <div className=" transition-border m-auto  flex items-center rounded-lg border-2 p-2 duration-500 hover:rounded-3xl">
@@ -112,7 +111,7 @@ export default function MainLayout({ title, children }: MainLayoutType) {
                   </div>
                 </button>
               ) : (
-                "authenicated"
+                <span className='px-2'>{session.data?.user?.name}</span>
               )}
               <ShoppingCartIcon className="mx-2 h-6 text-gray-700" />
             </div>

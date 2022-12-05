@@ -17,9 +17,11 @@ const LoginPage: NextPage = () => {
   const router = useRouter()
 
   const onSubmit =handleSubmit( (data)=> {
-    signIn("credentials",{username:data.username ,password:data.password,redirect:false}).then(function(result){
+    signIn("credentials",{username:data.username ,password:data.password}).then(function(result){
       if(!result?.error){
-        router.push(router?.query?.callbackUrl ? router.query.callbackUrl as URL :'/')
+        console.log(result);
+        
+        router.push('/')
       }
       
     })
