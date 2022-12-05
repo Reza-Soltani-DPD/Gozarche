@@ -1,19 +1,21 @@
 FROM node:18-alpine AS dependencies
-
+#dep2
 WORKDIR /app
-copy package.json yarn.lock ./
+#dep3
+COPY package.json yarn.lock ./
+#dep4
 RUN yarn
 
 
 
 
 FROM node:18-alpine AS build
-
+#build2
 WORKDIR /app
-
+#build3/4
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
-
+#build5/6
 RUN npx prisma generate
 RUN yarn build
 
@@ -21,19 +23,19 @@ RUN yarn build
 
 
 FROM node:18-alpine AS deploy
-
+#deploy2
 WORKDIR /app
-
+#deploy3
 ENV NODE_ENV production
-
+#deploy4/5/6
 COPY --from=build /app/public ./public
 COPY --from=build /app/package.json ./package.json
 COPY --from=build /app/.next/standalone ./
 COPY --from=build /app/.next/static ./.next/static
-
+#deploy7
 EXPOSE 3000
-
+#deploy8
 ENV PORT 3000
-
+#deploy9
 CMD ["node","server.js"]
 
