@@ -17,7 +17,7 @@ input{
 }
 
 .primary-button{
-  @apply  items-center p-2 font-vazir font-bold rounded-md hover:rounded-3xl bg-primary-500 shadow-xl text-white  mx-4 mb-8 mt-4 transition-all duration-500 flex-grow
+  @apply  items-center p-2 font-vazir font-bold rounded-md hover:rounded-3xl bg-primary-500 shadow-xl text-white  mx-4  mt-4 transition-all duration-500 flex-grow
   }
 
 @font-face {
