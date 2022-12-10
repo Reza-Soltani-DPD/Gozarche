@@ -65,7 +65,7 @@ const LoginPage: NextPage = () => {
             </form>
             <div className='flex flex-row justify-around mb-4'>
               <div>
-                <Link href="/authenication/registeration" className='text-sm'>ثبت نام؟</Link>
+                <Link href="/authentication/registeration" className='text-sm'>ثبت نام؟</Link>
               </div>
               <div>
                 <Link href={router.query?.callbackUrl?router.query.callbackUrl as string:"/"}className='text-sm'>صفحه اصلی</Link>

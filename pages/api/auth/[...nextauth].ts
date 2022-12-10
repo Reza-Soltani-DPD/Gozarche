@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import type{CallbacksOptions} from 'next-auth'
+import type{CallbacksOptions, NextAuthOptions} from 'next-auth'
 import type{JWTDecodeParams,JWTEncodeParams} from 'next-auth/jwt'
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
@@ -21,9 +21,20 @@ const generateSessionToken = () => {
 	return new Date(date + time * 1000)
   }	
 
-
-
-
+export const authOptions:NextAuthOptions ={
+  providers: [
+    CredentialsProvider({
+      name:'credentialprovider',
+      credentials:{
+        username:{label:"Username",type:"text"},
+        password:{label:'Password',type:'password'}
+      },
+      async authorize() {
+        return null
+    }})
+  ],
+  secret:process.env.NEXTAUTH_SECRET
+}
 export default async function auth(req: NextApiRequest, res: NextApiResponse) {
 
   // Do whatever you want here, before the request is passed down to `NextAuth` 
@@ -57,8 +68,9 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     })
   ]
   const pages={
-    signIn:'/signin'
+    signIn:'/authentication/login'
   }
+  const secret=process.env.NEXTAUTH_SECRET
   const jwt={
     encode:async ({token, secret, maxAge}:JWTEncodeParams)=>{
       if (req.query.nextauth?.includes('callback') && req.query.nextauth?.includes('credentials') && req.method === 'POST') {
@@ -85,7 +97,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   const callbacks:Partial<CallbacksOptions>= {
     async session({ session,user}) {
       if (session.user&&user.id) {
-        session.user.id = user.id;
+        session.user = {...session.user,...user};
       }
       return session;
     },
@@ -118,9 +130,9 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
     providers,
     callbacks,
     jwt,
-    pages
+    pages,
+    secret
     }
     
   )
 }
-
