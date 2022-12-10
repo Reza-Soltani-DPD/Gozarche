@@ -12,7 +12,7 @@ import MainFooter from '../components/footers/mainfooter';
 export default function Home() {
   return (
     <>
-        <MainLayout title='ورود'>
+        <MainLayout >
         <div className="container mx-auto">
           <div className="m-auto flex-col   ">
             <Carousel/>

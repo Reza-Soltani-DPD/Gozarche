@@ -1,8 +1,7 @@
-node-modules
-.next
-.eslint*
 .env
-README.md
+.dockerignore
+node_modules
 npm-debug.log
-yarn.error.log
-
+README.md
+.next
+.git

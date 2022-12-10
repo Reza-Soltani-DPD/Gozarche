@@ -53,15 +53,15 @@ const LoginPage: NextPage = () => {
                 })}
               />
               <button type="submit" className="primary-button ">
-                ورود
+                ثبت نام
               </button>
             </form>
             <div className='flex flex-row justify-around mb-4'>
               <div>
-                <Link href="/authenication/registeration" className='text-sm'>ثبت نام؟</Link>
+                <Link href="/authenication/login" className='text-sm'>ورود</Link>
               </div>
               <div>
-                <Link href={router.query?.callbackUrl?router.query.callbackUrl as string:"/"}className='text-sm'>بازگشت</Link>
+                <Link href={router.query?.callbackUrl?router.query.callbackUrl as string:"/"}className='text-sm'>صفحه اصلی</Link>
               </div>
             </div>
           </div>

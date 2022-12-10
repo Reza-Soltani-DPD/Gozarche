@@ -9,6 +9,7 @@
 /coverage
 
 # database
+prisma/migrations/
 /prisma/db.sqlite
 /prisma/db.sqlite-journal
 
@@ -40,5 +41,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-
-prisma/migrations/

@@ -1,44 +1,53 @@
-FROM node:18-alpine AS dependencies
-#dep2
+##### DEPENDENCIES
+
+FROM --platform=linux/amd64 node:16-alpine AS deps
+RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
-#dep3
+
+
+COPY prisma ./
 COPY package.json yarn.lock ./
-#dep4
-RUN yarn
 
+RUN yarn 
+RUN yarn prisma generate
+##### BUILDER
 
-
-
-FROM node:18-alpine AS build
-#build2
-WORKDIR /app
-#build3/4
-COPY --from=dependencies /app/node_modules ./node_modules
-COPY  prisma/schema.prisma ./prisma/
-COPY . .
-#build5/6
-ENV DATABASE_URL postgresql://root:IokxLnuo9vltRPu1mrEVSjBL@esme.iran.liara.ir:30836/postgres
+FROM node:16-alpine AS builder
+ENV DATABASE_URL postgresql://root:IokxLnuo9vltRPu1mrEVSjBL@esme.iran.liara.ir:30836/
 ENV NEXTAUTH_SECRET 2497766051bc79ad394d017575fb3b13
 ENV NEXTAUTH_URL https://gozarche.iran.liara.run
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY prisma ./prisma/
+COPY . .
 
-RUN yarn prisma migrate deploy
+RUN yarn prisma generate
 RUN yarn build
 
 
-FROM node:18-alpine AS deploy
-#deploy2
-WORKDIR /app
-#deploy3
-ENV NODE_ENV production
-#deploy4/5/6
-COPY --from=build /app/public ./public
-COPY --from=build /app/package.json ./package.json
-COPY --from=build /app/.next ./
-COPY --from=build /app/.next/static ./.next/static
-#deploy7
-EXPOSE 3000
-#deploy8
-ENV PORT 3000
-#deploy9
-CMD ["yarn","start"]
+##### RUNNER
 
+FROM node:16-alpine AS runner
+WORKDIR /app
+
+
+ARG DB
+
+ENV DS $DB
+RUN printenv
+ENV NODE_ENV production
+ENV DATABASE_URL postgresql://root:IokxLnuo9vltRPu1mrEVSjBL@esme.iran.liara.ir:30836/
+ENV NEXTAUTH_SECRET 2497766051bc79ad394d017575fb3b13
+ENV NEXTAUTH_URL https://gozarche.iran.liara.run
+ENV PORT 3000
+
+
+COPY --from=builder /app/next.config.mjs ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package.json  /app/yarn.lock ./
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]

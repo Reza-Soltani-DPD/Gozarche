@@ -35,7 +35,7 @@ const LoginPage: NextPage = () => {
       <NavlessLayout title="ورود" />
       <div className="container m-auto flex  min-h-screen flex-1 items-center justify-center ">
         <div className="grid md:grid-cols-4 lg:grid-cols-3 w-screen ">
-          <div className="card mb-8 mx-2 py-2 px-4  md:col-span-2 md:col-start-2 lg:col-span-1 lg:col-start-2 ">
+          <div className="card mb-8 max-sm:mx-4 py-2 px-4  md:col-span-2 md:col-start-2 lg:col-span-1 lg:col-start-2 ">
             <form className="flex flex-col" onSubmit={onSubmit}>
               <h1 className="w-full py-8 px-2 text-center text-lg font-bold ">
                 ورود
@@ -68,7 +68,7 @@ const LoginPage: NextPage = () => {
                 <Link href="/authenication/registeration" className='text-sm'>ثبت نام؟</Link>
               </div>
               <div>
-                <Link href={router.query?.callbackUrl?router.query.callbackUrl as string:"/"}className='text-sm'>بازگشت</Link>
+                <Link href={router.query?.callbackUrl?router.query.callbackUrl as string:"/"}className='text-sm'>صفحه اصلی</Link>
               </div>
             </div>
           </div>

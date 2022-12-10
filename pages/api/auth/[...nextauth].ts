@@ -37,17 +37,17 @@ export const authOptions: NextAuthOptions = {
         password: { label: "uassword", type: "password" },
       },
       async authorize(credentials) {
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials?.username,
-          },
-        });
+          const user = await prisma.user.findFirst({
+            where: {
+              email: credentials?.username,
+            },
+          });
 
-        if (user && user.password == credentials?.password) {
-          return user;
-        } else {
-          return null;
-        }
+          if (user && user.password == credentials?.password) {
+            return user;
+          } else {
+            return null;
+          }
       },
     }),
   ],

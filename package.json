@@ -23,6 +23,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.40.0",
+    "sharp": "^0.31.2",
     "superjson": "1.9.1",
     "swiper": "^8.4.5",
     "zod": "^3.18.0"
