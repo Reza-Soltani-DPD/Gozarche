@@ -4,25 +4,26 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import NavlessLayout from "../../components/layouts/NavlessLayout";
 import Link from 'next/link';
-import type { Url } from 'url';
-
+import {trpc }from "../../utils/trpc"
 type formdata = {
   username: string;
   password: string;
 };
+
+
 const LoginPage: NextPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<formdata>();
-
+  const mutation =trpc.auth.signUp.useMutation()
   const router = useRouter();
 
   const onSubmit = handleSubmit((data) => {
-        
-        router.push(router.query?.callbackUrl?router.query.callbackUrl as unknown as Url:"/");
-  });
+    console.log(data);
+     
+    mutation.mutate({password:"adklffj",username:"hello"}) });
   return (
     <>
       <NavlessLayout title="ثبت نام " />
