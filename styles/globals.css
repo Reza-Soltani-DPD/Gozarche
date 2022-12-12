@@ -8,7 +8,7 @@
 }
 
 input{
-@apply outline-none shadow-[0_0_5px_0_rgba(0,0,2,0.4)] rounded-md hover:rounded-3xl active:rounded-2xl focus:rounded-2xl  mb-8 mt-2 mx-4 p-2  transition-all duration-500 
+@apply outline-none mb-8 rounded-md hover:rounded-3xl active:rounded-2xl focus:rounded-2xl  mt-2 mx-4 p-2  transition-all duration-500 
 
 }
 

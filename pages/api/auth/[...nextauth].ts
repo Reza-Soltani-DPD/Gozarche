@@ -40,10 +40,13 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   // Do whatever you want here, before the request is passed down to `NextAuth` 
   const adapter=PrismaAdapter(prisma)
 
+
   const session={
     strategy:'database',
     maxAge:60*60*24*7,
   }
+
+
 
   const providers= [
     CredentialsProvider({
@@ -53,24 +56,30 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         password:{label:'Password',type:'password'}
       },
       async authorize(credentials) {
-        const res = await fetch("/your/endpoint", {
-          method: 'POST',
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" }
-        })
-        const user = await res.json()
+        const user = credentials?prisma.user.findFirst({
+          where:{
+            name: credentials.username,
+            password : credentials.password
 
-        if (res.ok && user) {
+          
+        }}):null
+        if(user) {
           return user
         }
         return null
       }
     })
   ]
+
+  
   const pages={
     signIn:'/authentication/login'
   }
+
+
   const secret=process.env.NEXTAUTH_SECRET
+
+
   const jwt={
     encode:async ({token, secret, maxAge}:JWTEncodeParams)=>{
       if (req.query.nextauth?.includes('callback') && req.query.nextauth?.includes('credentials') && req.method === 'POST') {
@@ -94,6 +103,9 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
   }
 
   }
+
+
+
   const callbacks:Partial<CallbacksOptions>= {
     async session({ session,user}) {
       if (session.user&&user.id) {
