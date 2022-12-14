@@ -9,26 +9,29 @@ export const authRouter = router({
     return "you can now see this secret message!";
   }),
   signUp:publicProcedure.input(z.object({
-    idname:z.optional(z.string()),
-    name:z.optional(z.string()),
-    lastname:z.optional(z.string()),
-    email:z.optional(z.string()),
+    username:z.optional(z.string()),
+    name:z.string(),
+    lastname:z.string(),
+    email:z.string(),
     phonenumber:z.optional(z.string()),
     password:z.optional(z.string()),
     pasconfirm:z.optional(z.string()),
-  })).mutation(async({input})=>{
+  }))
+  .mutation(async({input})=>{
     console.log("mutation",input);
-    try{const user= await prisma.user.create({
+    try{
+      const user= await prisma.user.create({
       data:{
-        aname:"asdfsf",
-        name:"skjdfh",
-        email:"sdf",
-        password:"skdjf",
-        phonenumber:"sdf"
+        username:input.username,
+        name:input.name,
+        lastname:input.lastname,
+        email:input.email,
+        password:input.password,
+        phonenumber:input.phonenumber
 
       }
     })
-    console.log(user)
+    console.log("user is :",user)
 
   }catch(err){
     console.log(err);

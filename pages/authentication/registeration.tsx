@@ -8,7 +8,7 @@ import {trpc }from "../../utils/trpc"
 import * as z from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 type formdata = {
-  idname : string;
+  username : string;
   name:string;
   lastname:string;
   email:string;
@@ -23,7 +23,7 @@ const LoginPage: NextPage = () => {
 
 
   const formschema=z.object({
-    idname:z.string().min(3,"نام کاربری کوتاه است"),
+    username:z.string().min(3,"نام کاربری کوتاه است"),
     name:z.string().min(3,"نام کوتاه است"),
     lastname:z.string().min(3,"نام خوانوادگی کوتاه است"),
     email:z.string().email({message:"ایمیل معتبر نیست"}),
@@ -43,8 +43,11 @@ const LoginPage: NextPage = () => {
   
   const onSubmit = (data:formdata)=> {
     console.log(data);
-    mutation.mutate(data) 
-    return true
+    mutation.mutate(data,{onSuccess:()=>{
+      router.push(router.query?.callbackUrl?router.query.callbackUrl as unknown as string : "/" )
+        return true
+    }})
+    
   };
   return (
     <>
@@ -52,16 +55,16 @@ const LoginPage: NextPage = () => {
       <div className="container m-auto flex  min-h-screen flex-1 items-center justify-center ">
         <div className="grid md:grid-cols-4 lg:grid-cols-3 w-screen ">
           <div className="card mb-8 mx-2 py-2 px-4  md:col-span-2 md:col-start-2 lg:col-span-1 lg:col-start-2 ">
-            <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+            <form className="flex flex-col" >
               <h1 className="w-full py-8 px-2 text-center text-lg font-bold ">
                 ثبت نام
               </h1>
 
               
-              <label className=" mx-4">نام کاربری : <span className='text-red-500 font-bold'>{"   "}{errors.idname && errors.idname?.message}</span></label>
+              <label className=" mx-4">نام کاربری : <span className='text-red-500 font-bold'>{"   "}{errors.username && errors.username?.message}</span></label>
               <input
-                className={errors.idname?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
-                {...register("idname")}
+                className={errors.username?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
+                {...register("username")}
               />
 
               <label className=" mx-4">نام  : <span className='text-red-500 font-bold'>{"   "}{errors.name && errors.name?.message}</span></label>
@@ -109,7 +112,7 @@ const LoginPage: NextPage = () => {
 
 
 
-              <button type="submit" className="primary-button ">
+              <button onClick={handleSubmit(onSubmit)} className="primary-button " disabled={mutation.isLoading}>
                 ثبت نام
               </button>
             </form>

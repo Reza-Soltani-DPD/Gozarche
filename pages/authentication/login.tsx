@@ -2,10 +2,9 @@ import type { NextPage } from "next";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
 import NavlessLayout from "../../components/layouts/NavlessLayout";
 import Link from 'next/link';
-import type { Url } from 'url';
+
 
 type formdata = {
   username: string;
@@ -18,18 +17,14 @@ const LoginPage: NextPage = () => {
     formState: { errors },
   } = useForm<formdata>();
 
-  const router = useRouter();
 
   const onSubmit = handleSubmit((data) => {
-    signIn("credentials", {
+    signIn("credentials",{
       username: data.username,
       password: data.password,
-    }).then(function (result) {
-      if (!result?.error) {
-        router.push(router.query?.callbackUrl?router.query.callbackUrl as unknown as Url:"/");
-      }
-    });
-  });
+      callbackUrl:"/",
+  })
+  })
   return (
     <>
       <NavlessLayout title="ورود" />
@@ -68,7 +63,7 @@ const LoginPage: NextPage = () => {
                 <Link href="/authentication/registeration" className='text-sm'>ثبت نام؟</Link>
               </div>
               <div>
-                <Link href={router.query?.callbackUrl?router.query.callbackUrl as string:"/"}className='text-sm'>صفحه اصلی</Link>
+                <Link href={"/"}className='text-sm'>صفحه اصلی</Link>
               </div>
             </div>
           </div>
