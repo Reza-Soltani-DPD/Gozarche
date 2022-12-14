@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-gozarche.rar
+/gozarche.rar
 /.pnp
 .pnp.js
 
@@ -10,7 +10,7 @@ gozarche.rar
 /coverage
 
 # database
-prisma/migrations/
+/prisma/migrations/
 /prisma/db.sqlite
 /prisma/db.sqlite-journal
 
