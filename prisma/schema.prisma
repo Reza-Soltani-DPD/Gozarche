@@ -28,52 +28,34 @@ datasource db {
 
 
 model role{
-  id String @id @default(cuid())
-  name String
+  id          String @id @default(cuid())
+  name        String
   description String?
-  roles String?
-  groups group[]
+  roles       String?
+  groups      group[]
 }
 
 model group{
-  id String @id @default(cuid())
-  name String ?
+  id    String @id @default(cuid())
+  name  String ?
   rules role[]
-  user user[]
+  user  user[]
 }
 
 
 
 
 
-
-
-
-
-//------------------------------------
+//--------------------------------------------------------------------------
 //
-//         USER MODELS
 //
-//------------------------------------
+//
+//                                    USER MODELS
+//
+//
+//
+//-------------------------------------------------------------------------
 
-model Account {
-  id                String  @id @default(cuid()) 
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? // @db.Text
-  access_token      String? // @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? // @db.Text
-  session_state     String?
-
-  userId            String
-  user              user    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
 
 
 model user {
@@ -86,6 +68,7 @@ model user {
   phonenumber   String?   @unique
   emailVerified DateTime?
   image         String?
+  shops         shop[]
   cart          cart[]
   accounts      Account[]
   sessions      Session[]
@@ -96,7 +79,35 @@ model user {
   productcomment productcomment[]
   productrating productrating[]
   productreview productreview[]
+  postcomments  postcomment[]
+  adresses      adress[]
+  subscription  subscription[]
+  posts         post[]
+  messages      message[]
+  shopratings   shoprating[]
+  shopcomments  shopcomment[]
 }
+
+
+model Account {
+  id                String  @id @default(cuid()) 
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?  @db.Text
+  session_state     String?
+
+  userId            String
+  user              user    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
 
 
 model Session {
@@ -119,17 +130,83 @@ model VerificationToken {
 
 
 
+enum messagetype {
+  REQUESTS
+  GRANT
+  ACTIVATION
+  DEACTIVATION
+}
+
+model message {
+  id           String    @id @default(cuid())
+  userid       String?
+  fileUrl      String[]  @db.VarChar(250)
+  title        String?
+  intro        String?
+  createdat    DateTime  @default(now())
+  updatedat    DateTime  @updatedAt
+  responsedate DateTime?
+  type         messagetype     @default(REQUESTS)
+  user         user?     @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+  request      message[] @relation("message")
+  response     message[] @relation("message")
+}
+
+
+model adress {
+  id          String   @id @default(cuid())
+  phonenumber String[] @db.Char(15)
+  country     String?  @db.VarChar(50)
+  proviance   String?  @db.VarChar(50)
+  city        String?  @db.VarChar(50)
+  street      String?  @db.VarChar(50)
+  alley       String?  @db.VarChar(50)
+  content     String?
+  createdat   DateTime @default(now())
+  updatedat   DateTime @updatedAt
+  userid      String?
+  user        user?    @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+  shopid      String?
+  shop        shop?  @relation(fields: [shopid],references: [id])
+}
+model subscription {
+  id        String            @id @default(cuid())
+  userid    String?
+  duation   DateTime          @db.Timestamp(6)
+  startedat DateTime          @default(now())
+  endedat   DateTime
+  createdat DateTime          @default(now())
+  updatedat DateTime          @updatedAt
+  subtypeid String?
+  user      user?             @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+  subtype   subscriptiontype? @relation(fields: [subtypeid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+}
+
+model subscriptiontype {
+  id            String         @id @default(cuid())
+  duration      DateTime?      @db.Timestamp(6)
+  price         Int?
+  discount      Int?
+  startedat     DateTime       @default(now())
+  endedat       DateTime?
+  createdat     DateTime       @default(now())
+  updatedat     DateTime       @updatedAt
+  discription   String?
+  subscriptions subscription[]
+}
 
 
 
-
-
-
-//----------------------------
+//--------------------------------------------------------------------------
 //
-//        SHOP MODELS
 //
-//----------------------------
+//
+//                                    PRODUCTS MODELS
+//
+//
+//
+//-------------------------------------------------------------------------
+
 
 enum  producttype {
  PSC
@@ -163,6 +240,7 @@ model product{
   createdAT      DateTime        @default(now())
   updatedAT      DateTime        @updatedAt
   startedAT      DateTime        @default(now())
+
   comments       productcomment[]
   meta           meta[]
   tag            tags[]
@@ -351,22 +429,118 @@ model cartitem{
   product product @relation(fields: [productid],references: [id])
  
 }
+
+
+
+
+
+
+//--------------------------------------------------------------------------
+//
+//
+//
+//                                   SHOP MODELS
+//
+//
+//
+//-------------------------------------------------------------------------
+
+
+enum shoptype {
+  SHOP
+  VISITOR
+  BIGSHOP
+}
+
 model shop{
-  id String @id @default(cuid())
-  title String 
-  description  String
-  products product[]
+  id           String @id @default(cuid())
+  title        String 
+  profile       String?
+  slug         String?
+  imgid        String?
+  description  String?
+  phonenumber  String[]
+  rating       Float?
+  active       Boolean         @default(true)
+  ratingcount  Int?
+  createdat    DateTime        @default(now())
+  updatedat    DateTime        @updatedAt
+  deletedat    DateTime?
+  shoptype     shoptype        @default(SHOP)
+  adress       adress[]
+  products     product[]
+  comments     shopcomment[]
+  ratings      shoprating[]
+  patment      shoppayment[]
+  ownerid      String
+  owner        user  @relation(fields: [ownerid],references: [id])
+}
+
+
+model shoprating {
+  id        String   @id @default(cuid())
+  userid    String?
+  shopid    String?
+  rate      Int?
+  createdat DateTime @default(now())
+  user      user?    @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: SetNull)
+  shop      shop?    @relation(fields: [shopid], references: [id],onDelete: SetNull, onUpdate: SetNull)
+}
+
+
+model shopcomment {
+  id        String   @id @default(cuid())
+  userid    String?
+  shopid    String?
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
+  content   String?
+  user      user?    @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+  shop      shop?    @relation(fields: [shopid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+}
+
+enum paymenttype {
+  WITHDRAW
+}
+enum paymentstatus {
+  CREATED
+  REQ
+  INORDER
+  DONE
+  FAILD
+}
+
+model shoppayment {
+  id          String        @id @default(cuid())
+  userid      String?
+  shopid      String?
+  type        paymenttype   @default(WITHDRAW)
+  status      paymentstatus @default(CREATED)
+  ampount     Int?
+  title       String?       @db.VarChar(50)
+  createdat   DateTime      @default(now())
+  updatedat   DateTime      @updatedAt
+  completedat DateTime?
+  startedat   DateTime      @default(now())
+  content     String?
+  shop        shop?         @relation(fields: [shopid], references: [id],onDelete: SetNull, onUpdate: Cascade)
 }
 
 
 
 
 
-//-----------------------------------------------------------
+
+//--------------------------------------------------------------------------
 //
-//         payment
 //
-//-----------------------------------
+//
+//                                 PAYMENT MODELS
+//
+//
+//
+//-------------------------------------------------------------------------
+
 
 
 model orderitem {
@@ -477,3 +651,79 @@ model transaction {
   order     order?            @relation(fields: [orderid], references: [id],onDelete: SetNull, onUpdate: Cascade)
 }
 
+
+
+
+//--------------------------------------------------------------------------
+//
+//
+//
+//                                    Blog Models
+//
+//
+//
+//-------------------------------------------------------------------------
+
+
+model post {
+  id           String         @id @default(cuid())
+  title        String?        @db.Char(50)
+  headimgurl   String?
+  slug         String?        @db.Char(100)
+  content      String?
+  active       Boolean        @default(true)
+  createdat    DateTime       @default(now())
+  poblishedat  DateTime       @default(now())
+  updatedat    DateTime       @updatedAt
+  userid       String?
+  user         user?          @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+  postcategory postcategory[]
+  meta         postmeta[]
+  tags         posttags[]
+  postcomment  postcomment[]
+}
+
+model postcategory {
+  id         String         @id @default(cuid())
+  title      String?        @db.Char(50)
+  headimgurl String?
+  slug       String?        @db.Char(100)
+  content    String?
+  imgurls    String
+  createdat  DateTime       @default(now())
+  updatedat  DateTime       @updatedAt
+  post       post[]
+  tags       posttags[]
+  parent     postcategory[] @relation("postcategory")
+  child      postcategory[] @relation("postcategory")
+}
+model postmeta {
+  id        String   @id @default(cuid())
+  title     String?
+  key       String?
+  value     String?
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
+  post      post[]
+}
+
+model posttags {
+  id           String         @id @default(cuid())
+  tag          String?
+  post         post[]
+  postcategory postcategory[]
+}
+
+
+model postcomment {
+  id        String        @id @default(cuid())
+  content   String
+  createdat DateTime      @default(now())
+  updatedat DateTime      @updatedAt
+  userid    String?
+  postid    String?
+  user      user?         @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+  post      post?         @relation(fields: [postid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+  parent    postcomment[] @relation("postcomment")
+  child     postcomment[] @relation("postcomment")
+}
