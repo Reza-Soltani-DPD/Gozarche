@@ -56,7 +56,6 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         password:{label:'Password',type:'password'}
       },
       async authorize(credentials) {
-        console.log(credentials);
         
         const userpromise = credentials?prisma.user.findFirst({
           where:{
@@ -78,7 +77,6 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
           
         }}):null
         const user= await userpromise
-        console.log(user);
         
         if(user) {
           return user

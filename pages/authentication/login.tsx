@@ -4,26 +4,32 @@ import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import NavlessLayout from "../../components/layouts/NavlessLayout";
 import Link from 'next/link';
-
+import * as z from 'zod'
+import {zodResolver} from '@hookform/resolvers/zod'
 
 type formdata = {
   username: string;
   password: string;
 };
 const LoginPage: NextPage = () => {
+  const formschema = z.object({
+    username:z.string().min(3,"نام کاربری کوتاه است"),
+    password:z.string().min(8,"رمز کوتاه است")
+
+  })
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<formdata>();
-
-
-  const onSubmit = handleSubmit((data) => {
-    signIn("credentials",{
+  } = useForm<formdata>({resolver:zodResolver(formschema)});
+  const onSubmit = handleSubmit(async (data) => {
+    const d = await signIn("credentials",{
       username: data.username,
       password: data.password,
       callbackUrl:"/",
   })
+  console.log(d);
+  
   })
   return (
     <>
@@ -35,24 +41,19 @@ const LoginPage: NextPage = () => {
               <h1 className="w-full py-8 px-2 text-center text-lg font-bold ">
                 ورود
               </h1>
-              <label className=" mx-4">ایمیل/نام کاربری : </label>
+              <label className=" mx-4 font-iransans font-bold ">ایمیل/نام کاربری : <span className='text-red-500 font-bold text-sm'>{errors.username&&errors.username.message}</span></label>
 
               <input
-                {...register("username", {
-                  required: "Email is Required",
-                  minLength: { value: 3, message: "Email is not Valid" },
-                })}
+                className={errors.username?'shadow-[0_0_5px_rgba(255,50,50,0.7)]':`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
+                {...register("username")}
               />
 
-              {errors.username && <div>{errors.username?.message}</div>}
 
-              <label className=" mx-4">رمز : </label>
+              <label className=" mx-4 font-iransans font-bold">رمز :  <span className='text-red-500 font-bold text-sm'>{errors.password&&errors.password.message}</span></label>
               <input
+                className={errors.password?'shadow-[0_0_5px_rgba(255,50,50,0.7)]':`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
                 type="password"
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: { value: 8, message: "password is to short" },
-                })}
+                {...register("password")}
               />
               <button type="submit" className="primary-button ">
                 ورود

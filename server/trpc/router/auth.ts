@@ -18,7 +18,6 @@ export const authRouter = router({
     pasconfirm:z.optional(z.string()),
   }))
   .mutation(async({input})=>{
-    console.log("mutation",input);
     try{
       const user= await prisma.user.create({
       data:{
@@ -31,10 +30,8 @@ export const authRouter = router({
 
       }
     })
-    console.log("user is :",user)
 
   }catch(err){
-    console.log(err);
     
   }
 

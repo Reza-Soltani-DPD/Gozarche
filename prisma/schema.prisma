@@ -61,31 +61,46 @@ model group{
 model user {
   id            String    @id @default(cuid())
   username      String?   @unique
-  name          String
-  lastname      String  
+  name          String?
+  lastname      String?
   email         String?   @unique
   password      String?
   phonenumber   String?   @unique
-  emailVerified DateTime?
   image         String?
-  shops         shop[]
-  cart          cart[]
-  accounts      Account[]
-  sessions      Session[]
-  groups        group[]
-  wishproduct   product[]
-  orders        order[]
-  transaction   transaction[]
+  slug          String?
+  about         String?
+  wallet        Int?
+
+  isSuperuser   Boolean          @default(false)
+  isstaff       Boolean          @default(false)
+  canhaveshop   Boolean          @default(false)
+  isactive      Boolean          @default(true)
+  
+  emailVerified DateTime?
+  deactivetime  DateTime?
+  activefrom    DateTime         @default(now())
+  lastlogin     DateTime         @default(now())
+  createdAT     DateTime         @default(now())
+  updatedAT     DateTime         @updatedAt
+
+  accounts       Account[]
+  sessions       Session[]
+  groups         group[]
+  shops          shop[]
+  carts          cart[]
+  wishlist       product[]
+  orders         order[]
+  transactions   transaction[]
   productcomment productcomment[]
-  productrating productrating[]
-  productreview productreview[]
-  postcomments  postcomment[]
-  adresses      adress[]
-  subscription  subscription[]
-  posts         post[]
-  messages      message[]
-  shopratings   shoprating[]
-  shopcomments  shopcomment[]
+  productrating  productrating[]
+  productreview  productreview[]
+  postcomments   postcomment[]
+  adresses       adress[]
+  subscription   subscription[]
+  posts          post[]
+  messages       message[]
+  shopratings    shoprating[]
+  shopcomments   shopcomment[]
 }
 
 
@@ -116,7 +131,6 @@ model Session {
   userId       String
   expires      DateTime
   user         user     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  cartid       String
   cart         cart[]    
 }
 
@@ -140,9 +154,11 @@ enum messagetype {
 model message {
   id           String    @id @default(cuid())
   userid       String?
-  fileUrl      String[]  @db.VarChar(250)
+  fileId       String[]  
   title        String?
   intro        String?
+  describtion  String
+  read         Boolean   @default(false)
   createdat    DateTime  @default(now())
   updatedat    DateTime  @updatedAt
   responsedate DateTime?
@@ -161,6 +177,7 @@ model adress {
   city        String?  @db.VarChar(50)
   street      String?  @db.VarChar(50)
   alley       String?  @db.VarChar(50)
+  postalcode  String?  @db.VarChar(50)
   content     String?
   createdat   DateTime @default(now())
   updatedat   DateTime @updatedAt
@@ -726,4 +743,12 @@ model postcomment {
   post      post?         @relation(fields: [postid], references: [id],onDelete: SetNull, onUpdate: Cascade)
   parent    postcomment[] @relation("postcomment")
   child     postcomment[] @relation("postcomment")
+}
+
+model media {
+  id          String @id @default(cuid())
+  url         String
+  title       String?
+  description String?
+  ariaLabel   String?
 }

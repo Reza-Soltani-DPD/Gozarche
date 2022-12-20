@@ -40,9 +40,7 @@ const LoginPage: NextPage = () => {
 
   const mutation =trpc.auth.signUp.useMutation<formdata>()
   const router = useRouter();
-  
   const onSubmit = (data:formdata)=> {
-    console.log(data);
     mutation.mutate(data,{onSuccess:()=>{
       router.push(router.query?.callbackUrl?router.query.callbackUrl as unknown as string : "/" )
         return true
@@ -118,7 +116,7 @@ const LoginPage: NextPage = () => {
             </form>
             <div className='flex flex-row justify-around mb-4'>
               <div>
-                <Link href="/authenication/login" className='text-sm'>ورود</Link>
+                <Link href="/authentication/login" className='text-sm'>ورود</Link>
               </div>
               <div>
                 <Link href={router.query?.callbackUrl?router.query.callbackUrl as string:"/"}className='text-sm'>صفحه اصلی</Link>
