@@ -2,7 +2,7 @@ import {prisma as cl} from './db'
 
 cl.$use(async (params,next)=>{
   try{
-    if(params.model=="dbchanges"&&["create","createMany","updata","updataMany","delete","deleteMany","upsert"].includes(params.action)){
+    if(params.model=="dbchanges" && !["create","createMany","updata","updataMany","delete","deleteMany","upsert"].includes(params.action)){
       return await next(params)
     }else{
        await cl.dbchanges.create({data:{
