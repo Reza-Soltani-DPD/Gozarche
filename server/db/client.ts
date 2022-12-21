@@ -1,19 +1,23 @@
-import { PrismaClient } from "@prisma/client";
+import {prisma as cl} from './db'
 
-import { env } from "../../env/server.mjs";
+cl.$use(async (params,next)=>{
+  try{
+    if(params.model=="dbchanges"&&["create","createMany","updata","updataMany","delete","deleteMany","upsert"].includes(params.action)){
+      return await next(params)
+    }else{
+       await cl.dbchanges.create({data:{
+        argdata: JSON.stringify(params.args),
+        actionName:params.action,
+        modelName:params.model,
+        
+      }})
+      const result =await next(params)
+      return result
 
-declare global {
-  // eslint-disable-next-line no-var
-  var prisma: PrismaClient | undefined;
-}
+    }
+  }
+  catch(err){
+  }
+})
 
-export const prisma:PrismaClient =
-  global.prisma ||
-  new PrismaClient({
-    log:
-      env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
-  });
-
-if (env.NODE_ENV !== "production") {
-  global.prisma = prisma;
-}
+export const prisma =cl

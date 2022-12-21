@@ -14,35 +14,26 @@ datasource db {
 
 
 
-//--------------------------------------
+//----------------------------------------------------------------------------
 //
 //
 //
-//           permission MODELS
+//                                 LOGGER MODEL
 //
 //
 //
-//--------------------------------------
+//----------------------------------------------------------------------------
 
 
 
 
-model role{
+model dbchanges{
   id          String @id @default(cuid())
-  name        String
-  description String?
-  roles       String?
-  groups      group[]
+  argdata     String?
+  userid      String?
+  modelName   String?
+  actionName  String?
 }
-
-model group{
-  id    String @id @default(cuid())
-  name  String ?
-  rules role[]
-  user  user[]
-}
-
-
 
 
 
@@ -67,7 +58,7 @@ model user {
   password      String?
   phonenumber   String?   @unique
   image         String?
-  slug          String?
+  slug          String?   @unique
   about         String?
   wallet        Int?
 
@@ -85,7 +76,6 @@ model user {
 
   accounts       Account[]
   sessions       Session[]
-  groups         group[]
   shops          shop[]
   carts          cart[]
   wishlist       product[]

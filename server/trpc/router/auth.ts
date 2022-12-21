@@ -6,7 +6,7 @@ export const authRouter = router({
     return ctx.session;
   }),
   getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
+    return "secret message!";
   }),
   signUp:publicProcedure.input(z.object({
     username:z.optional(z.string()),
@@ -19,6 +19,7 @@ export const authRouter = router({
   }))
   .mutation(async({input})=>{
     try{
+      
       const user= await prisma.user.create({
       data:{
         username:input.username,
@@ -29,10 +30,12 @@ export const authRouter = router({
         phonenumber:input.phonenumber
 
       }
+
     })
+    return user
 
   }catch(err){
-    
+    return err
   }
 
     
