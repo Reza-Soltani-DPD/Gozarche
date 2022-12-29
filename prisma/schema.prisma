@@ -83,19 +83,21 @@ model user {
   sessions       Session[]
   shops          shop[]
   carts          cart[]
-  wishlist       product[]
+  wishlist       productinventory[]  @relation("productwish")
   orders         order[]
   transactions   transaction[]
-  productcomment productcomment[]
+  productcomment productcomment[]   
   productrating  productrating[]
   productreview  productreview[]
   postcomments   postcomment[]
   adresses       adress[]
   subscription   subscription[]
-  posts          post[]
+  posts          post[]  @relation(name: "postowner")
+  readedpost     post[]  @relation(name: "postread")
   messages       message[]
   shopratings    shoprating[]
   shopcomments   shopcomment[]
+  productvisit   productvisit[]
 }
 
 model wallet {
@@ -180,7 +182,6 @@ model Session {
   userId       String
   expires      DateTime
   user         user     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  cart         cart[]    
 }
 
 
@@ -236,8 +237,6 @@ model adress {
 
   userid      String?
   user        user?    @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
-  shopid      String?
-  shop        shop?  @relation(fields: [shopid],references: [id])
 }
 
 
@@ -301,36 +300,67 @@ model product{
   summary        String
   type           producttype     @default(PSC)
   sku            String?
-  minquant       Int             @default(1)
-  price          Int?
-  discount       Int             @default(0)
-  quant          Int             @default(0)
-  status         productstatus   @default(ACTIVE)
-  rating         Float?
+  minquant       Float?          @default(1)
   ratingcount    Int             @default(0)
   imageid        String[]
   createdAT      DateTime        @default(now())
   updatedAT      DateTime        @updatedAt
   startedAT      DateTime        @default(now())
 
-  cartitem       cartitem[]
-  comments       productcomment[]
+  productinv     productinventory[]
   meta           meta[]
   tag            tags[]
-  orderitem      orderitem[]
-  productprop    productprop[]
-  productrating  productrating[]
-  productreview  productreview[]
   category       category[]
   variants       productvariant[]
-  wish           user[]
+  productprop    productprop[]
 
 
-  shopid String
-  shop   shop   @relation(fields: [shopid],references: [id])
 
 }
 
+
+model   discount  {
+  id     String     @id  @default(cuid())
+  name   String?
+  desc   String?
+  amount Float?
+  active Boolean    @default(true)
+
+  products productinventory[]
+}
+model productinventory {
+  id        String     @id    @default(cuid())
+  quant     Float      @default(0)
+  price     Float
+  createdAT DateTime   @default(now())
+  updatedAT DateTime   @updatedAt
+  deletedAT DateTime?
+  rating         Float?
+  status         productstatus   @default(ACTIVE)
+  wish           user[]      @relation("productwish")
+  visits         productvisit[]
+  cartitem       cartitem[]
+  comments       productcomment[]
+  productrating  productrating[]
+  productreview  productreview[]
+  orderitem      orderitem[]
+  discounts discount[]
+  productId String   
+  product   product    @relation(fields:[productId],references:[id])
+  shopId    String   
+  shop      shop       @relation(fields: [shopId],references: [id])
+}
+
+
+
+model productvisit {
+  id             String   @id @default(cuid())
+  numberofvisit  Int
+  userId         String
+  user           user     @relation(fields: [userId],references: [id])  
+  productId      String
+  product        productinventory  @relation(fields: [productId],references: [id])
+}
 model productprop {
   id                   String                 @id @default(cuid())
   title                String
@@ -367,7 +397,7 @@ model productreview {
   updatedat   DateTime @updatedAt
   publishedat DateTime @default(now())
   user        user?    @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
-  product     product? @relation(fields: [productid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+  product     productinventory? @relation(fields: [productid], references: [id],onDelete: SetNull, onUpdate: Cascade)
 }
 model productrating {
   id        String   @id @default(cuid())
@@ -377,16 +407,9 @@ model productrating {
   createdat DateTime @default(now())
   updatedat DateTime @updatedAt
   user      user?    @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
-  product   product? @relation(fields: [productid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+  product   productinventory? @relation(fields: [productid], references: [id],onDelete: SetNull, onUpdate: Cascade)
 }
 
-model productmeta {
-  id        String   @id @default(cuid())
-  title     String?
-  value     String?
-  createdat DateTime @default(now())
-  updatedat DateTime @default(now())
-}
 
 model productcomment {
   id        String              @id @default(cuid())
@@ -396,7 +419,7 @@ model productcomment {
   updatedat DateTime            @updatedAt
   deletedat DateTime?
   productid String
-  product   product             @relation(fields: [productid],references: [id])
+  product   productinventory    @relation(fields: [productid],references: [id])
   userid    String?
   user      user?               @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
   tags      productcommenttag[]
@@ -479,8 +502,7 @@ model cart {
   userid        String?
   user          user?    @relation(fields: [userid],references: [id])
 
-  sessionId String?  
-  session   Session? @relation(fields:[sessionId],references: [id]) 
+
 }
 
 model cartitem{
@@ -499,7 +521,7 @@ model cartitem{
   cartid      String?
   cart        cart?    @relation(fields: [cartid],references: [id],onUpdate:Cascade,onDelete: Cascade)
   productid   String 
-  product     product  @relation(fields: [productid],references: [id])
+  product     productinventory  @relation(fields: [productid],references: [id])
  
 }
 
@@ -533,6 +555,7 @@ model shop{
   imgid        String?
   description  String?
   phonenumber  String[]
+  adress       String[]
   rating       Float?
   active       Boolean         @default(true)
   ratingcount  Int?
@@ -540,8 +563,7 @@ model shop{
   updatedat    DateTime        @updatedAt
   deletedat    DateTime?
   shoptype     shoptype        @default(SHOP)
-  adress       adress[]
-  products     product[]
+  products     productinventory[]
   comments     shopcomment[]
   ratings      shoprating[]
   patment      shoppayment[]
@@ -628,7 +650,7 @@ model orderitem {
   createdat DateTime @default(now())
   updatedat DateTime @updatedAt
   order     order?   @relation(fields: [orderid], references: [id],onDelete: SetNull, onUpdate: Cascade)
-  product   product? @relation(fields: [productid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+  product   productinventory? @relation(fields: [productid], references: [id],onDelete: SetNull, onUpdate: Cascade)
 }
 
 
@@ -691,12 +713,6 @@ model order {
 
 
 
-enum transactionstatus {
-  FACTOR
-  INORDER
-  DONE
-  FAILD
-}
 
 enum transactiontype {
   ONDOOR
@@ -713,14 +729,20 @@ enum transactionbank {
   BHM
   MLT
 }
-
+enum transactiostatus {
+  COMPLETED
+  FAILD
+  INPROGRES
+  SENT
+  START
+}
 
 model transaction {
   id        String            @id @default(cuid())
   code      String?
+  status    transactiostatus? @default(START)
   bank      transactionbank?
   type      transactiontype   @default(BANKGW)
-  status    transactionstatus @default(FACTOR)
   createdat DateTime          @default(now())
   updatedat DateTime          @updatedAt
   content   String?
@@ -756,12 +778,14 @@ model post {
   poblishedat  DateTime       @default(now())
   updatedat    DateTime       @updatedAt
   userid       String?
-  user         user?          @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+  owner        user?          @relation(name:"postowner",fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
   postcategory postcategory[]
   meta         postmeta[]
   tags         posttags[]
-  postcomment  postcomment[]
+  postcomment  postcomment[]  
+  userread     user[]         @relation("postread")
 }
+
 
 model postcategory {
   id         String         @id @default(cuid())
@@ -804,8 +828,8 @@ model postcomment {
   postid    String?
   user      user?         @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
   post      post?         @relation(fields: [postid], references: [id],onDelete: SetNull, onUpdate: Cascade)
-  parent    postcomment[] @relation("postcomment")
-  child     postcomment[] @relation("postcomment")
+  parent    postcomment[] @relation("postcommentparenting")
+  child     postcomment[] @relation("postcommentparenting")
 }
 
 
