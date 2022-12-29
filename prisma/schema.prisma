@@ -306,15 +306,10 @@ model product{
   createdAT      DateTime        @default(now())
   updatedAT      DateTime        @updatedAt
   startedAT      DateTime        @default(now())
-
-  productinv     productinventory[]
+  variants       productvariant[]
   meta           meta[]
   tag            tags[]
   category       category[]
-  variants       productvariant[]
-  productprop    productprop[]
-
-
 
 }
 
@@ -336,6 +331,8 @@ model productinventory {
   updatedAT DateTime   @updatedAt
   deletedAT DateTime?
   rating         Float?
+  productId      String 
+  product        productvariant  @relation(fields: [productId],references: [id])
   status         productstatus   @default(ACTIVE)
   wish           user[]      @relation("productwish")
   visits         productvisit[]
@@ -345,8 +342,6 @@ model productinventory {
   productreview  productreview[]
   orderitem      orderitem[]
   discounts discount[]
-  productId String   
-  product   product    @relation(fields:[productId],references:[id])
   shopId    String   
   shop      shop       @relation(fields: [shopId],references: [id])
 }
@@ -364,7 +359,7 @@ model productvisit {
 model productprop {
   id                   String                 @id @default(cuid())
   title                String
-  product              product[]
+  product              productvariant[]
   producpropertiestype producproptype[]
   
 }
@@ -377,14 +372,17 @@ model producproptype {
   productprop productprop[]
 
 }
+
 model productvariant {
-  id        String        @id @default(cuid())
-  value     String?
-  sku       String?
-  price     Int?
-  productid String?
-  status    productstatus @default(ACTIVE)
-  product   product?      @relation(fields: [productid], references: [id],onDelete: SetNull, onUpdate: Cascade)
+  id         String        @id @default(cuid())
+  value      String?
+  sku        String?
+  inventoryId String
+  inventory  productinventory[]
+  productid  String?
+  products   product[]
+  status     productstatus @default(ACTIVE)
+  properties productprop[]
 }
 model productreview {
   id          String   @id @default(cuid())
