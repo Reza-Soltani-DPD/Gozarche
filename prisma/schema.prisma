@@ -32,7 +32,9 @@ model dbchanges{
   argdata     String? @db.Text
   userid      String?
   modelName   String?
-  actionName  String?
+  actionName  String? 
+  createdAT   DateTime @default(now())
+  updatedAT   DateTime @updatedAt @default(now())
 }
 
 
@@ -73,7 +75,7 @@ model user {
   lastlogin     DateTime         @default(now())
   createdAT     DateTime         @default(now())
   updatedAT     DateTime         @updatedAt
-  deactivetime  DateTime?
+  deactiveAT    DateTime?
 
   followers      user[]   @relation("userfollows")
   followings     user[]   @relation("userfollows")
@@ -104,7 +106,7 @@ model wallet {
   id            String           @id @default(cuid())
   describtion   String           @db.Text
 
-  isActive      Boolean          @default(true)
+  Active        Boolean          @default(true)
   depositAllow  Boolean          @default(true)
   withrawAllow  Boolean          @default(true)
 
@@ -123,6 +125,7 @@ model wallet {
 enum wallettransactiontype {
   W2W  //wallet to wallet
   BAT  //bank transaction
+  WIT  //wallet withraw
 }
 model walletTransaction {
   id             String   @id   @default(cuid())
@@ -145,12 +148,15 @@ model walletItem {
   walletid  String
   wallet    wallet @relation(fields: [walletid],references: [id])
   currency  currency[]
+  createdAt DateTime? @default(now())
+  updatedAT DateTime  @updatedAt
 } 
 model currency {
   id         String   @id  @default(cuid())
   name       String
   value      Float
   walletItem walletItem[]
+  createdAT  DateTime @default(now())
 }
 
 
@@ -170,7 +176,8 @@ model Account {
 
   userId            String
   user              user    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  createdAT         DateTime @default(now())
+  updatedAT         DateTime @updatedAt
   @@unique([provider, providerAccountId])
 }
 
@@ -189,6 +196,8 @@ model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
+  createdAT  DateTime @default(now())
+  updatedAT  DateTime @updatedAt
   @@unique([identifier, token])
 }
 
