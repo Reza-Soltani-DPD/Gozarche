@@ -17,7 +17,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <link rel='icon' type='image/png' sizes='32x32' href='/fav.ico'/>
     </Head>
       <SessionProvider session={session}>
-        <Component {...pageProps} />
+        <Component {...pageProps}  />
       </SessionProvider>
     </>
   );
