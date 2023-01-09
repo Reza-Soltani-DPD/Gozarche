@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .card{
 	@apply shadow-[0_0_20px_4px_rgba(0,0,0,0.2)] rounded-3xl 
 }
@@ -20,24 +19,36 @@ input{
   @apply  items-center p-2 font-vazir font-bold rounded-md hover:rounded-3xl bg-primary-500 shadow-xl text-white  mx-4  mt-4 transition-all duration-500 flex-grow
   }
 
+ul > li.footer{
+  @apply  text-center font-sans p-1
+}
+ul>li:first-child.footer {
+  @apply  font-bold text-base
+}
+ul > li:not(:first-child).footer{
+  @apply text-gray-600 text-sm
+}
+ul.footer{
+  @apply p-2
+}
 @font-face {
   font-family: 'yekan';
-  src: local(''), url('/public/fonts/Far_Yekan.ttf') format('ttf');
+  src: url('/fonts/Far_Yekan.ttf') format('truetype');
 }
 @font-face {
   font-family: 'vazir';
-  src: local(''), url('/public/fonts/Vazir.ttf') format('ttf');
+  src:  url('/fonts/Vazir.ttf') format('truetype');
 }
 @font-face {
   font-family: 'homa';
-  src: local(''), url('/public/fonts/Far_Homa.ttf') format('ttf');
+  src: url('/fonts/Far_Homa.ttf') format('truetype');
 }
 @font-face {
   font-family: 'iransans';
-  src: local(''), url('/public/fonts/IranianSans.ttf') format('ttf');
+  src: url('/fonts/IranianSans.ttf') format('truetype');
 }
 @font-face {
   font-family: 'samim';
-  src: local(''), url('/public/fonts/Samim.ttf') format('ttf');
+  src:  url('/fonts/Samim.ttf') format('truetype');
 }
 

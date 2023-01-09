@@ -33,13 +33,11 @@ export default function Carousel() {
         spaceBetween={8}
         slidesPerView={3}
       >
-        {[...Array(100).keys()].map((number)=>{
-        return(
+        {[...Array(100).keys()].map((number)=>(
         <SwiperSlide key={number}>
           <div className="flex justify-center bg-black text-rose-600 h-48">{number}</div>
         </SwiperSlide>
-        ) 
-        })}
+        ))}
         <div ref={navigationPrevRef}>perv</div>
         <div ref={navigationNextRef}>next</div>
       </Swiper>

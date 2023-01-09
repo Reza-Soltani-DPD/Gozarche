@@ -14,7 +14,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <>
     <Head>
       <meta name="theme-color" content="#ff3c00"/>
-      <link rel='icon' type='image/png' sizes='32x32' href='/fav.ico'/>
+      <link rel='icon' type='image/png' sizes='32x32' href='/favicon/favicon-32x32.png'/>
     </Head>
       <SessionProvider session={session}>
         <Component {...pageProps}  />
