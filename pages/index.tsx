@@ -6,21 +6,19 @@ import MainLayout from "../components/layouts/MainLayout";
 
 
 import Carousel from '../components/Carousel'
-import MainFooter from '../components/footers/mainfooter';
 
 
 export default function Home() {
   return (
     <>
         <MainLayout >
-        <div className="container mx-auto">
+        <div className="container mx-auto p-2">
           <div className="m-auto flex-col   ">
             <Carousel/>
           </div>
         </div>
 
         </MainLayout>
-        <MainFooter/>
 
     </>
   );

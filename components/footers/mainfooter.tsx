@@ -92,7 +92,7 @@ export default function MainFooter() {
               <li className='footer'>علاقه مندی ها</li>
             </ul>
           </div>
-          <div className='text-center max-md:border-t md:border-r p-4 md:pr-8'>
+          <div className='text-center max-md:border-t md:border-r p-4 md:pr-8 '>
             <p>همراه ما باشید!</p>
           <div className="flex flex-shrink max-md:justify-center p-4   font-semibold ">
           <div className='flex aspect-square w-12 border rounded-xl items-center justify-center m-2 text-xs'> تلگرام</div>
@@ -101,20 +101,24 @@ export default function MainFooter() {
           <div className='flex aspect-square w-12 border rounded-xl items-center justify-center m-2 text-xs'> آپارات</div>
           </div>
           <p>با ثبت ایمیل از جدیدترین تخفیف‌ها با خبر شوید</p>
-          <form action="" className='flex p-2'>
-            <input type="email" className='border rounded-lg'/>
+          <form action="" className=' p-2 '>
+            <span>
+              <input type="email" className='border rounded-lg '/>
+              </span>
+              <span>
             <input type='submit' className='border rounded-lg px-4 bg-gray-200 ' value="ثبت"/>
+              </span>
           </form>
           </div>
         </div>
         <div className="flex w-full border-b p-4 max-md:flex-col md:justify-between">
           <div className="grow place-items-center pb-4 max-w-4xl pr-4">
-          یک خرید اینترنتی مطمئن، نیازمند فروشگاهی است که بتواند کالاهایی متنوع، باکیفیت و دارای قیمت مناسب را در مدت زمانی کوتاه به دست مشتریان خود برساند و ضمانت بازگشت کالا هم داشته باشد؛ ویژگی‌هایی که فروشگاه اینترنتی دیجی‌کالا سال‌هاست بر روی آن‌ها کار کرده و توانسته از این طریق مشتریان ثابت خود را داشته باشد.
+          یک خرید اینترنتی مطمئن، نیازمند فروشگاهی است که بتواند کالاهایی متنوع، باکیفیت و دارای قیمت مناسب را در مدت زمانی کوتاه به دست مشتریان خود برساند و ضمانت بازگشت کالا هم داشته باشد؛ ویژگی‌هایی که فروشگاه اینترنتی گذرچه سال‌هاست بر روی آن‌ها کار کرده و توانسته از این طریق مشتریان ثابت خود را داشته باشد.
           </div>
           <div className="flex p-4 text-center max-md:border-t flex-nowrap justify-end m-auto">
-            <div className='flex aspect-square w-24 border rounded-xl items-center justify-center m-2'> اعتماد</div>
-            <div className='flex aspect-square w-24 border rounded-xl items-center justify-center m-2'> اعتماد</div>
-            <div className='flex aspect-square w-24 border rounded-xl items-center justify-center m-2'> اعتماد</div>
+            <div className='flex aspect-square w-16 border rounded-xl items-center justify-center m-2'> اعتماد</div>
+            <div className='flex aspect-square w-16 border rounded-xl items-center justify-center m-2'> اعتماد</div>
+            <div className='flex aspect-square w-16 border rounded-xl items-center justify-center m-2'> اعتماد</div>
           </div>
         </div>
 

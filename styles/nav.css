@@ -1,0 +1,47 @@
+nav:has(.choices) * {
+	transition: transform .4s cubic-bezier(.5, -0.5, .5, 1.5),color .2s ease-out;
+}
+
+
+nav:has(.choices > .choice1:checked) .labels .nav1 >*{
+	transform: translateY(-1.5rem);
+	color:white;
+}
+nav:has(.choices > .choice2:checked) .labels .nav2 >*{
+	transform: translateY(-1.5rem);
+	color:white;
+}
+nav:has(.choices > .choice3:checked) .labels .nav3 >*{
+	transform: translateY(-1.5rem);
+	color:white;
+}
+nav:has(.choices > .choice4:checked) .labels .nav4 >*{
+	transform: translateY(-1.5rem);
+	color:white;
+}
+nav:has(.choices > .choice5:checked) .labels .nav5 >*{
+	transform: translateY(-1.5rem);
+	color:white;
+}
+nav:has(.choices > .choice1:checked) #bg  {
+	transform: translateX(40%);
+	color:white;
+}
+nav:has(.choices > .choice2:checked) #bg  {
+	transform: translateX(20%);
+	color:white;
+}
+nav:has(.choices > .choice3:checked) #bg  {
+	transform: translateX(-0%);
+	color:white;
+}
+nav:has(.choices > .choice4:checked) #bg  {
+	transform: translateX(-20%);
+	color:white;
+}
+nav:has(.choices > .choice5:checked) #bg  {
+	transform: translateX(-40%);
+	color:white;
+}
+
+

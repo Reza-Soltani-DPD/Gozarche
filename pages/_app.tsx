@@ -13,6 +13,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <>
     <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="theme-color" content="#ff3c00"/>
       <link rel='icon' type='image/png' sizes='32x32' href='/favicon/favicon-32x32.png'/>
     </Head>
