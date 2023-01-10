@@ -7,7 +7,7 @@ import Image from "next/image";
 import SevenDay from "../SVG/SevenDay";
 export default function MainFooter() {
   return (
-    <div className="border-t bg-white">
+    <div className="border-t bg-white font-samim">
       <div className="max-w-8xl container  p-4 m-auto">
         <div className="flex w-full justify-between border-b max-md:flex-col">
           <div className="grow  max-md:m-auto p-2">
@@ -18,18 +18,18 @@ export default function MainFooter() {
               alt="logo"
             ></Image>
             
-            <div className="font-yakans font-semibold px-4 py-4 text-xs text-gray-500 max-md:text-center whitespace-pre-wrap pb-4">
+            <div className=" font-semisemibold px-4 py-4 text-xs text-gray-500 max-md:text-center whitespace-pre-wrap pb-4">
 تلفن تماس : ۰۹۸۷۶۵۴۳۲۱
             </div>
           </div>
-          <div className="max-md:m-auto my-auto "><button className='font-bold b-2 border font-iransanss py-2 px-4 rounded-lg whitespace-nowrap mb-4 mt-2'>بازگشت به بالا</button></div>
+          <div className="max-md:m-auto my-auto "><button className='font-semibold b-2 border  py-2 px-4 rounded-lg whitespace-nowrap mb-4 mt-2'>بازگشت به بالا</button></div>
         </div>
         <div className="grid place-items-center border-b p-4 max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-4 ">
           <div className="p-4 ">
             <div className=" p-2">
               <SevenDay />
             </div>
-            <p className="text-center font-yakan font-bold text-sm  text-slate-400">
+            <p className="text-center  font-semibold text-sm  text-slate-400">
               برگشت کالا
             </p>
           </div>
@@ -37,7 +37,7 @@ export default function MainFooter() {
             <div className=" p-2">
               <ExpresDelivery />
             </div>
-            <p className="text-center font-yekan font-bold  text-slate-400">
+            <p className="text-center  font-semibold  text-slate-400">
               تحویل سریع
             </p>
           </div>
@@ -45,7 +45,7 @@ export default function MainFooter() {
             <div className="h-28 w-28 p-2">
               <FullTimeAnswer />
             </div>
-            <p className="text-center font-yekan font-bold  text-slate-400">
+            <p className="text-center  font-semibold  text-slate-400">
               پاسخ گویی سوالات
             </p>
           </div>
@@ -53,7 +53,7 @@ export default function MainFooter() {
             <div className="h-28 w-28 p-2">
               <Garanty />
             </div>
-            <p className="text-center font-yakan font-bold  text-slate-400">
+            <p className="text-center  font-semibold  text-slate-400">
               تضمین کیفیت
             </p>
           </div>
@@ -94,7 +94,7 @@ export default function MainFooter() {
           </div>
           <div className='text-center max-md:border-t md:border-r p-4 md:pr-8'>
             <p>همراه ما باشید!</p>
-          <div className="flex flex-shrink max-md:justify-center p-4  font-vazir font-bold ">
+          <div className="flex flex-shrink max-md:justify-center p-4   font-semibold ">
           <div className='flex aspect-square w-12 border rounded-xl items-center justify-center m-2 text-xs'> تلگرام</div>
           <div className='flex aspect-square w-12 border rounded-xl items-center justify-center m-2 text-xs'> واتساپ</div>
           <div className='flex aspect-square w-12 border rounded-xl items-center justify-center m-2 text-xs'> انستاگرام</div>
@@ -118,7 +118,7 @@ export default function MainFooter() {
           </div>
         </div>
 
-        <div className="pt-2 text-center font-yekan text-xs ">
+        <div className="pt-2 text-center  text-xs ">
         برای استفاده از مطالب این وبسایت، داشتن «هدف غیرتجاری» و ذکر «منبع» کافیست. (فروشگاه آنلاین گذرچه) .
         </div>
       </div>

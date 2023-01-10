@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
+  import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import {
@@ -14,7 +14,6 @@ type MainLayoutType = {
   title?: string;
   children?: React.ReactElement;
 };
-
 export default function MainLayout({ title, children }: MainLayoutType) {
   const [mainNav, setMainNav] = useState(false);
   const [show, setShow] = useState(true);
@@ -38,7 +37,6 @@ export default function MainLayout({ title, children }: MainLayoutType) {
         // if scroll up show the navbar
         setShow(true);
       }
-
       // remember current page location to use in the next move
       setLastScrollY(window.scrollY);
     }
@@ -46,7 +44,6 @@ export default function MainLayout({ title, children }: MainLayoutType) {
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", controlNavbar);
-
       // cleanup function
       return () => {
         window.removeEventListener("scroll", controlNavbar);

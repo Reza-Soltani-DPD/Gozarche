@@ -20,7 +20,7 @@ input{
   }
 
 ul > li.footer{
-  @apply  text-center font-sans p-1
+  @apply  text-center  p-1
 }
 ul>li:first-child.footer {
   @apply  font-bold text-base
