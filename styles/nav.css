@@ -1,47 +1,64 @@
-nav:has(.choices) * {
-	transition: transform .4s cubic-bezier(.5, -0.5, .5, 1.5),color .2s ease-out;
+.nav * {
+	transition: transform .5s cubic-bezier(0.5, 1, 0.5,-0.5),color .2s ease-out;
+	/* transition: transform .4s cubic-bezier(.5, -0.5, .5, 1.5),color .2s ease-out; */
 }
 
+.nav .choice1:checked ~ * .nav1 > *{
+	transform: translateY(-1.8rem);
+	color:white;
+}
 
-nav:has(.choices > .choice1:checked) .labels .nav1 >*{
-	transform: translateY(-1.5rem);
+.nav .choice2:checked ~ * .nav2 > *{
+	transform: translateY(-1.8rem);
 	color:white;
 }
-nav:has(.choices > .choice2:checked) .labels .nav2 >*{
-	transform: translateY(-1.5rem);
+
+.nav .choice3:checked ~ * .nav3 > *{
+	transform: translateY(-1.8rem);
 	color:white;
 }
-nav:has(.choices > .choice3:checked) .labels .nav3 >*{
-	transform: translateY(-1.5rem);
+
+.nav .choice4:checked ~ * .nav4 > *{
+	transform: translateY(-1.8rem);
 	color:white;
 }
-nav:has(.choices > .choice4:checked) .labels .nav4 >*{
-	transform: translateY(-1.5rem);
+
+.nav .choice5:checked ~ * .nav5 > *{
+	transform: translateY(-1.8rem);
 	color:white;
 }
-nav:has(.choices > .choice5:checked) .labels .nav5 >*{
-	transform: translateY(-1.5rem);
-	color:white;
-}
-nav:has(.choices > .choice1:checked) #bg  {
+
+.nav .choice1:checked ~ * #bg  {
 	transform: translateX(40%);
 	color:white;
 }
-nav:has(.choices > .choice2:checked) #bg  {
+.nav .choice2:checked ~ * #bg  {
 	transform: translateX(20%);
 	color:white;
 }
-nav:has(.choices > .choice3:checked) #bg  {
+.nav .choice3:checked ~ * #bg{
 	transform: translateX(-0%);
 	color:white;
 }
-nav:has(.choices > .choice4:checked) #bg  {
+.nav .choice4:checked ~ * #bg  {
 	transform: translateX(-20%);
 	color:white;
 }
-nav:has(.choices > .choice5:checked) #bg  {
+.nav .choice5:checked ~ * #bg  {
 	transform: translateX(-40%);
 	color:white;
 }
 
+*::-webkit-scrollbar{
+	width:5px
+}
+*::-webkit-scrollbar-track{
+	background-color:rgba(253, 253, 253, 0.3)
+}
+*::-webkit-scrollbar-thumb {
+	background-color: gray;
+	box-shadow: inset 0 0 6px rgba(253, 253, 253, 0.3);
+	border-radius: 50px;
+
+  }
 
