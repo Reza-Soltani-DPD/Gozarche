@@ -4,9 +4,9 @@
 
 .choice{
 	opacity:0;
-	width: 30px;
-	height: 30px;
-	transform: translateY(93vh);
+	width: 60px;
+	height: 60px;
+	transform: translateY(90vh);
 	z-index: 10;
 }
 

@@ -21,7 +21,6 @@ export default function MainLayout({ title, children }: MainLayoutType) {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const session = useSession();
-
   const controlNavbar = () => {
     if (typeof window !== "undefined") {
       if (
@@ -61,7 +60,7 @@ export default function MainLayout({ title, children }: MainLayoutType) {
       </Head>
       <MobileTabBar>
       <div
-        className={`absolute top-0 right-0 z-20 m-auto flex w-full justify-between border-b bg-white max-sm:-translate-x-[200vw] shadow-lg duration-300 ease-in-out ${
+        className={`fixed top-0 max-sm:right-[200vw] z-20 m-auto flex w-full justify-between border-b bg-white  shadow-lg duration-300 ease-in-out ${
           !show && "-translate-y-24"
         }`}
       >
@@ -69,17 +68,17 @@ export default function MainLayout({ title, children }: MainLayoutType) {
           <div className="flex justify-between">
             <div className="flex flex-row items-center">
               <button
-                className="outline-none"
+                className="outline-none max-sm:hidden"
                 onClick={() => setMainNav(!mainNav)}
                 onMouseEnter={() => setMainNav(true)}
               >
                 <Bars3Icon className="mx-2 h-8 w-8 text-gray-500" />
               </button>
-              <Link href="/">
+              <Link href="/" className='m-2'>
                 <Image
                   src="/gozarche logo long.png"
-                  width={100}
-                  height={40}
+                  width={120}
+                  height={50}
                   alt="logo"
                 ></Image>
               </Link>
@@ -98,9 +97,8 @@ export default function MainLayout({ title, children }: MainLayoutType) {
                 </button>
               </form>
             </div>
-            <div className="flex items-center p-2">
-              {session.status == "loading" ? ("بارگذاری"
-              ) : session.status == "unauthenticated" ? (
+            <div className="flex items-center p-2 ">
+              {session.status == "loading" ? (<div className='aspect-square bg-slate-400'/>   ) : session.status == "unauthenticated" ? (
                 <button onClick={() => signIn()}>
                   <div className=" transition-border m-auto  flex items-center rounded-lg border-2 p-2 duration-500 hover:rounded-3xl">
                     <UserCircleIcon className="h-6  text-gray-700" />
@@ -112,7 +110,7 @@ export default function MainLayout({ title, children }: MainLayoutType) {
               ) : (
                 <span className='px-2'>{session.data?.user?.name}</span>
               )}
-              <ShoppingCartIcon className="mx-2 h-6 text-gray-700" />
+              <ShoppingCartIcon className="mx-2 h-6 text-gray-700 max-sm:hidden" />
             </div>
           </div>
         </nav>
@@ -120,12 +118,12 @@ export default function MainLayout({ title, children }: MainLayoutType) {
       <NavMenu show={mainNav} setShow={setMainNav}>
         hello
       </NavMenu>
-      <div className="mx-auto flex min-h-screen flex-col">
+      <div className="mx-auto flex flex-col min-h-screen">
         <div className={`h-16 ${show ?? "hidden"}`} />
         {children}
       </div>
       <MainFooter/>
-      <div className='max-sm:h-24'/>
+      <div className='max-sm:h-16'/>
       </MobileTabBar>
 
     </>

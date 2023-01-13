@@ -9,7 +9,7 @@ export default function MobileTabBar(props:MobileTabBarProps) {
   const {children} =props
   return (
     <>
-      <div className="nav fixed top-0 flex h-[100vh] w-[100vw] transform-all justify-around ">
+      <div className="nav max-sm:fixed max-sm:top-0 flex h-[100vh] w-[100vw]  justify-around pr-[3px]">
         <input
           type="radio"
           name="choice"
@@ -38,24 +38,23 @@ export default function MobileTabBar(props:MobileTabBarProps) {
         />
         <div
           id="pages"
-          className="pages z-2 fixed top-0 right-0 h-[100vh]  w-[100vw]   
+          className="pages z-2 max-sm:fixed max-sm:top-0 max-sm:right-0   w-[100vw]   
           max-sm:peer-checked/choice1:translate-x-[0vw]
           max-sm:peer-checked/choice2:translate-x-[100vw]
           max-sm:peer-checked/choice3:translate-x-[200vw]
           max-sm:peer-checked/choice4:translate-x-[300vw]
           max-sm:peer-checked/choice5:translate-x-[400vw]
-
-           "
+          "
         >
-          <div className="pagecontainer flex  h-[100vh] max-sm:w-[500vw] w-[100vw] ">
-            <div className="h-[100vh] w-[100vw] bg-red-200 sm:hidden"></div>
-            <div className="h-[100vh] w-[100vw] bg-blue-200 sm:hidden"></div>
-            <div className="h-[100vh] w-[100vw] bg-yellow-200 overflow-auto overflow-x-hidden">{children}</div>
-            <div className="h-[100vh] w-[100vw] bg-slate-300  sm:hidden"></div>
-            <div className="h-[100vh] w-[100vw] bg-green-400 sm:hidden"></div>
+          <div className="pagecontainer max-sm:flex  max-sm:w-[500vw] h-[100vh] w-[100vw] ">
+            <div className=" w-[100vw] bg-red-200 sm:hidden overflow-x-hidden"></div>
+            <div className=" w-[100vw] bg-blue-200 sm:hidden overflow-x-hidden"></div>
+            <div className=" w-[100vw]  overflow-x-hidden">{children}</div>
+            <div className=" w-[100vw] bg-slate-300  sm:hidden overflow-x-hidden"></div>
+            <div className=" w-[100vw] bg-green-400 sm:hidden overflow-x-hidden"></div>
           </div>
         </div>
-        <nav className="absolute bottom-0 left-0  h-[10vh] w-[100vw] sm:hidden">
+        <nav className="fixed bottom-0 left-0  h-[10vh] w-[100vw] sm:hidden overflow-ellipsis">
           <div id="bg" className="flex  h-[100vh] w-[100vw] justify-center">
             <div
               id="dot "
@@ -67,7 +66,7 @@ export default function MobileTabBar(props:MobileTabBarProps) {
             </div>
             <div
               id="cutout"
-              className=" absolute top-0 z-0 flex justify-items-center
+              className="absolute top-0 z-0 flex justify-items-center
                 before:h-[10vh]
                 before:w-[100vw]
                 before:translate-x-[1.2rem]
@@ -88,8 +87,7 @@ export default function MobileTabBar(props:MobileTabBarProps) {
             ></div>
           </div>
 
-          <div
-            id="labels"
+          <div id="labels"
             className={`labels absolute left-0 bottom-0 z-[1] flex h-[8vh] w-[100vw] translate-y-4 justify-around sm:hidden`}
           >
             <label htmlFor="nav1" className="nav1">

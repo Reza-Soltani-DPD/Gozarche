@@ -10,12 +10,12 @@ export default function MainNav(props: mainNav) {
 
   return (
     <div
-      className={`transition-color absolute z-10 h-full  w-full  top-0  bg-black bg-opacity-50 duration-300 ease-in-out ${
-        !show ? "collapse bg-opacity-0 " : ""
+      className={`transition-color absolute z-10 h-full  w-full  top-0  bg-black bg-opacity-50 duration-300 ease-in-out max-sm:collapse ${
+        !show && "collapse bg-opacity-0 " 
       }`}
     >
       <div className=" h-full w-full  md:justify-items-center">
-        <div className="p-6" />
+        <div className="p-4" />
         
         <div className="flex w-full max-md:h-full md:container md:m-auto ">
           <div

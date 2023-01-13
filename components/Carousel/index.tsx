@@ -1,9 +1,8 @@
 import React from "react";
 
 import SwiperCore, { Navigation } from "swiper";
-
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { ChevronLeftIcon,ChevronRightIcon } from '@heroicons/react/24/outline';
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -22,7 +21,10 @@ export default function Carousel() {
   };
   return (
     <>
+    <div className='flex m-1 -translate-x-0'>
+
       <Swiper
+      className='order-2'
       onBeforeInit={onBeforeInit}
         navigation={{
           prevEl: navigationPrevRef.current,
@@ -31,16 +33,17 @@ export default function Carousel() {
 
         modules={[Navigation]}
         spaceBetween={8}
-        slidesPerView={3}
+        slidesPerView={1}
       >
-        {[...Array(100).keys()].map((number)=>(
-        <SwiperSlide key={number}>
-          <div className="flex justify-center bg-black text-rose-600 h-48">{number}</div>
+        {[...Array(10).keys()].map((number)=>(
+          <SwiperSlide key={number}>
+          <div className="  flex justify-center bg-fuchsia-300 text-rose-600 h-80 items-center text-3xl font-bold">{number}</div>
         </SwiperSlide>
         ))}
-        <div ref={navigationPrevRef}>perv</div>
-        <div ref={navigationNextRef}>next</div>
       </Swiper>
+        <div ref={navigationPrevRef} className="transition-opacity flex opacity-5 hover:opacity-100 duration-500 fixed bottom-1/2 right-0 w-8 z-10 order-1 items-center"><ChevronRightIcon className='w-8 h-8'/></div>
+        <div ref={navigationNextRef} className="transition-opacity flex opacity-5 hover:opacity-100 duration-500 fixed bottom-1/2  left-0 w-8 z-10 order-3 items-center"><ChevronLeftIcon  className='w-8 h-8'/></div>
+      </div>
     </>
   );
 }
