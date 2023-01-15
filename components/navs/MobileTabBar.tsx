@@ -9,7 +9,7 @@ export default function MobileTabBar(props:MobileTabBarProps) {
   const {children} =props
   return (
     <>
-      <div className="nav max-sm:fixed max-sm:top-0 flex h-[100vh] w-[100vw]  justify-around pr-[3px]">
+      <div className="cubic nav max-sm:fixed max-sm:top-0 flex h-[100vh] w-[100vw]  justify-around pr-[3px]">
         <input
           type="radio"
           name="choice"
@@ -38,7 +38,7 @@ export default function MobileTabBar(props:MobileTabBarProps) {
         />
         <div
           id="pages"
-          className="pages z-2 max-sm:fixed max-sm:top-0 max-sm:right-0   w-[100vw]   
+          className="pages z-2 max-sm:fixed max-sm:top-0 max-sm:right-0   w-[100vw] cubic  
           max-sm:peer-checked/choice1:translate-x-[0vw]
           max-sm:peer-checked/choice2:translate-x-[100vw]
           max-sm:peer-checked/choice3:translate-x-[200vw]
@@ -46,7 +46,7 @@ export default function MobileTabBar(props:MobileTabBarProps) {
           max-sm:peer-checked/choice5:translate-x-[400vw]
           "
         >
-          <div className="pagecontainer max-sm:flex  max-sm:w-[500vw] h-[100vh] w-[100vw] ">
+          <div className="pagecontainer  max-sm:flex  max-sm:w-[500vw] h-[100vh] w-[100vw] ">
             <div className=" w-[100vw] bg-red-200 sm:hidden overflow-x-hidden"></div>
             <div className=" w-[100vw] bg-blue-200 sm:hidden overflow-x-hidden"></div>
             <div className=" w-[100vw]  overflow-x-hidden">{children}</div>
@@ -54,11 +54,11 @@ export default function MobileTabBar(props:MobileTabBarProps) {
             <div className=" w-[100vw] bg-green-400 sm:hidden overflow-x-hidden"></div>
           </div>
         </div>
-        <nav className="fixed bottom-0 left-0  h-[10vh] w-[100vw] sm:hidden overflow-ellipsis">
-          <div id="bg" className="flex  h-[100vh] w-[100vw] justify-center">
+        <nav className="fixed bottom-0 left-0  h-[10vh] w-[100vw] sm:hidden cubic overflow-ellipsis">
+          <div id="bg" className="flex  h-[100vh] w-[100vw] justify-center cubic">
             <div
               id="dot "
-              className={`z-[1] h-[3.8rem] w-[3.8rem] translate-y-[-0.8rem] rounded-full ${styles.cmshadow}`}
+              className={`cubic z-[1] h-[3.8rem] w-[3.8rem] translate-y-[-0.8rem] rounded-full ${styles.cmshadow}`}
             >
               <div
                 className={`m-[0.4rem] h-[3rem] w-[3rem] rounded-full bg-primary-400   ${styles.dot}`}
@@ -90,20 +90,20 @@ export default function MobileTabBar(props:MobileTabBarProps) {
           <div id="labels"
             className={`labels absolute left-0 bottom-0 z-[1] flex h-[8vh] w-[100vw] translate-y-4 justify-around sm:hidden`}
           >
-            <label htmlFor="nav1" className="nav1">
-              <Bars3Icon className="h-8 w-8 text-gray-600" />
+            <label htmlFor="nav1" className="nav1 cubic">
+              <Bars3Icon className="h-8 w-8 cubic text-gray-600" />
             </label>
-            <label htmlFor="nav2" className="nav2">
-              <TagIcon className="h-8 w-8 text-gray-600" />
+            <label htmlFor="nav2" className="nav2 cubic">
+              <TagIcon className="h-8 w-8 cubic text-gray-600" />
             </label>
-            <label htmlFor="nav3" className="nav3">
-              <HomeIcon className="h-8 w-8 text-gray-600" />
+            <label htmlFor="nav3" className="nav3 cubic">
+              <HomeIcon className="h-8 w-8 cubic text-gray-600" />
             </label>
-            <label htmlFor="nav4" className="nav4">
-              <MagnifyingGlassIcon className="h-8 w-8 text-gray-600" />
+            <label htmlFor="nav4" className="nav4 cubic">
+              <MagnifyingGlassIcon className="h-8 w-8 cubic text-gray-600" />
             </label>
-            <label htmlFor="nav5" className="nav5">
-              <ShoppingCartIcon className="h-8 w-8 text-gray-600" />
+            <label htmlFor="nav5" className="nav5 cubic">
+              <ShoppingCartIcon className="h-8 w-8 cubic text-gray-600" />
             </label>
           </div>
         </nav>

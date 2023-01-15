@@ -1,29 +1,29 @@
-.nav * {
+.cubic {
 	transition: transform .5s cubic-bezier(0.5, 1, 0.5,-0.5),color .2s ease-out;
 	/* transition: transform .4s cubic-bezier(.5, -0.5, .5, 1.5),color .2s ease-out; */
 }
 
-.nav .choice1:checked ~ * .nav1 > *{
+.nav .choice1:checked ~ * .labels .nav1 >*{
 	transform: translateY(-1.8rem);
 	color:white;
 }
 
-.nav .choice2:checked ~ * .nav2 > *{
+.nav .choice2:checked ~ * .labels .nav2 >*{
 	transform: translateY(-1.8rem);
 	color:white;
 }
 
-.nav .choice3:checked ~ * .nav3 > *{
+.nav .choice3:checked ~ * .labels .nav3 >*{
 	transform: translateY(-1.8rem);
 	color:white;
 }
 
-.nav .choice4:checked ~ * .nav4 > *{
+.nav .choice4:checked ~ * .labels .nav4 >*{
 	transform: translateY(-1.8rem);
 	color:white;
 }
 
-.nav .choice5:checked ~ * .nav5 > *{
+.nav .choice5:checked ~ * .labels .nav5  >*{
 	transform: translateY(-1.8rem);
 	color:white;
 }

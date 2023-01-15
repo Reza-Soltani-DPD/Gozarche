@@ -10,28 +10,50 @@ export default function Home() {
   return (
     <>
       <MainLayout>
-        <div className="container mx-auto ">
-          <div className=" p-auto  ">
+        <div className="  ">
+          <div className="   ">
             {/* <p>image slider</p> */}
-            <Carousel />
+            <Carousel>
+              {[...Array(10).keys()].map((number) => (
+                <div
+                  className="  h-80 bg-fuchsia-300 text-center text-3xl  font-bold text-rose-600"
+                  key={number}
+                >
+                  {number}
+                </div>
+              ))}
+            </Carousel>
             {/* <p> special offer  product and link</p> */}
             <div
-              className="w-100 flex overflow-hidden"
+              className="w-100 container m-auto flex rounded-2xl p-4"
               style={{
                 backgroundImage: "url(mbg.png)",
                 backgroundSize: "cover",
               }}
             >
-              <div className="flex flex-col items-center p-3 m-auto">
-                discount
-                <Link
-                  href="/"
-                  className="font-yakan whitespace-nowrap text-lg font-bold rounded-md bg-secondary-300 p-2 m-2"
-                >
-                  تخفیف ویژه
-                </Link>
+              <div className="m-auto content-center p-3 max-sm:hidden">
+                <p className="p-4 text-center">discount</p>
+                <p className="text-center  ">
+                  <Link
+                    href="/"
+                    className="m-2 whitespace-nowrap rounded-md bg-secondary-300 px-4 py-2 font-iransans text-lg font-bold"
+                  >
+                    تخفیف ویژه
+                  </Link>
+                </p>
               </div>
-              <Carousel />
+              <div className="flex overflow-auto">
+                <Carousel>
+                  {[...Array(10).keys()].map((number, index) => (
+                    <div
+                      className="  flex h-80 items-center justify-center rounded-2xl bg-white text-3xl font-bold  text-rose-600 shadow-md"
+                      key={index}
+                    >
+                      {number}
+                    </div>
+                  ))}
+                </Carousel>
+              </div>
             </div>
             {/* <p>discount  banner link</p> */}
             {/* <p>box for shop ad </p> */}
