@@ -64,9 +64,39 @@
 
   }
 
-.mmp:hover ~ .mmbg{
-	opacity:0.3;
-	display: block;
+.hoverablemegamenu{
+	position:absolute;
+	width: 100vw;
+	height: 0px;
+	overflow:hidden;
+}
+
+.hoverablemega:hover > .hoverablemegamenu > .megamenu{
+	height: auto;
+	transform: translateY(0px);
 	
+}
+.megamenu{
+	transform: translateY(-100%);
+}
+.hoverablemega:hover .hoverablemegamenu{
+	display:block;
+	height: auto;
+	opacity: 1;
+
+}	
+.hoverablemega:hover ~ .hoverablebackground{
+	visibility:visible;
+	opacity:0.4;
+	
+}
+
+.hoverablebackground{
+	visibility: collapse;
+	position:absolute;
+	width: 100vw;
+	height: 100vh;
+	opacity: 0;
+
 }
 

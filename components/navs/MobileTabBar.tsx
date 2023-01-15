@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./MobileTabBar.module.css";
 import {ShoppingCartIcon,MagnifyingGlassIcon,HomeIcon,Bars3Icon,TagIcon} from '@heroicons/react/24/outline'
 
 type MobileTabBarProps ={
@@ -13,28 +12,28 @@ export default function MobileTabBar(props:MobileTabBarProps) {
         <input
           type="radio"
           name="choice"
-          className={`choice1 ${styles.choice} sm:hidden peer choice1`}
+          className="choice1 sm:hidden peer choice1 opacity-0 w-16 h-16 z-10 translate-y-[90vh]"
         />
         <input
           type="radio"
           name="choice"
-          className={`choice2 ${styles.choice} sm:hidden peer/choice2`}
+          className="choice2 sm:hidden peer/choice2 opacity-0 w-16 h-16 z-10 translate-y-[90vh]"
         />
         <input
           type="radio"
           name="choice"
-          className={`choice3 ${styles.choice} sm:hidden peer/choice3`}
+          className="choice3 sm:hidden peer/choice3 opacity-0 w-16 h-16 z-10 translate-y-[90vh]"
           defaultChecked
         />
         <input
           type="radio"
           name="choice"
-          className={`choice4 ${styles.choice} sm:hidden peer/choice4`}
+          className="choice4 sm:hidden peer/choice4 opacity-0 w-16 h-16 z-10 translate-y-[90vh]"
         />
         <input
           type="radio"
           name="choice"
-          className={`choice5 ${styles.choice} sm:hidden peer/choice5 `}
+          className="choice5 sm:hidden peer/choice5 opacity-0 w-16 h-16 z-10 translate-y-[90vh]"
         />
         <div
           id="pages"
@@ -58,10 +57,10 @@ export default function MobileTabBar(props:MobileTabBarProps) {
           <div id="bg" className="flex  h-[100vh] w-[100vw] justify-center cubic">
             <div
               id="dot "
-              className={`cubic z-[1] h-[3.8rem] w-[3.8rem] translate-y-[-0.8rem] rounded-full ${styles.cmshadow}`}
+              className="cubic z-[1] h-[3.8rem] w-[3.8rem] translate-y-[-0.8rem] rounded-full shadow-[0_3rem_0_1rem_white]"
             >
               <div
-                className={`m-[0.4rem] h-[3rem] w-[3rem] rounded-full bg-primary-400   ${styles.dot}`}
+                className="m-[0.4rem] h-[3rem] w-[3rem] rounded-full bg-primary-400   shadow-md"
               />
             </div>
             <div

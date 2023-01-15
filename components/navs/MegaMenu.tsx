@@ -9,51 +9,41 @@ interface MegaMenuType {
 const MegaMenu: FC<MegaMenuType> = (props) => {
   return (
     <>
-      <div
-        className={`
-        absolute
-        top-0
-        right-0
-        h-screen
-        w-screen
-        ${props.margintop}
-        bg-black
-        opacity-0
-        duration-500
-        peer-hover/bg:opacity-30
-  `}
-      >
-        hello
-      </div>
-      <div className="peer/bg group/box">
+      <div className="hoverablemega">
         <div className="flex h-14 items-center p-2 font-vazir text-sm">
           <Bars3Icon className="  h-10 w-10 p-2 text-gray-500" />
           دسته بندی
         </div>
         <div
           className={`
+          hoverablemegamenu
           transition-color 
-          absolute
+          z-10
           top-0
-          
           right-0
-          h-0 
-          w-screen
           ${props.margintop}
           opacity-0
           duration-500
-          hover:block
-          hover:h-auto
-          hover:opacity-100 
-          group-hover/box:block
-          group-hover/box:h-auto
-          group-hover/box:opacity-100`}
+          `}
         >
-          <div className="container m-auto h-0 transition-all duration-500 rounded-b-lg border-2 border-t-0  bg-white shadow-xl group-hover/box:h-auto">
+          <div className="megamenu container m-auto rounded-b-lg border-2 border-t-0  bg-white shadow-xl transition-all duration-500">
             hello
           </div>
         </div>
       </div>
+          <div
+            className={`
+            hoverablebackground
+            top-0
+            right-0
+            z-0
+            ${props.margintop}
+            bg-black
+            duration-500
+      `}
+          >
+            hello
+          </div>
     </>
   );
 };

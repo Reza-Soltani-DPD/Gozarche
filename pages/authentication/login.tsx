@@ -41,7 +41,7 @@ const LoginPage: NextPage = () => {
               <h1 className="w-full py-8 px-2 text-center text-lg font-bold ">
                 ورود
               </h1>
-              <label className=" mx-4 font-iransans font-bold ">ایمیل/نام کاربری : <span className='text-red-500 font-bold text-sm'>{errors.username&&errors.username.message}</span></label>
+              <label className=" mx-4 font-vazir text-sm">ایمیل/نام کاربری : <span className='text-red-500 font-bold text-sm'>{errors.username&&errors.username.message}</span></label>
 
               <input
                 className={errors.username?'shadow-[0_0_5px_rgba(255,50,50,0.7)]':`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
@@ -49,7 +49,7 @@ const LoginPage: NextPage = () => {
               />
 
 
-              <label className=" mx-4 font-iransans font-bold">رمز :  <span className='text-red-500 font-bold text-sm'>{errors.password&&errors.password.message}</span></label>
+              <label className=" mx-4 font-vazir text-sm">رمز :  <span className='text-red-500 font-bold text-sm'>{errors.password&&errors.password.message}</span></label>
               <input
                 className={errors.password?'shadow-[0_0_5px_rgba(255,50,50,0.7)]':`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
                 type="password"
@@ -61,10 +61,10 @@ const LoginPage: NextPage = () => {
             </form>
             <div className='flex flex-row justify-around mb-4'>
               <div>
-                <Link href="/authentication/registeration" className='text-sm'>ثبت نام؟</Link>
+                <Link href="/authentication/registeration" className='text-sm font-vazir text-gray-400 hover:text-gray-700'>ثبت نام؟</Link>
               </div>
               <div>
-                <Link href={"/"}className='text-sm'>صفحه اصلی</Link>
+                <Link href={"/"}className='text-sm font-vazir text-gray-400 hover:text-gray-700'>صفحه اصلی</Link>
               </div>
             </div>
           </div>

@@ -132,7 +132,7 @@ export default function MainLayout({
                     : "h-12"
                 }`}
               >
-                <MegaMenu className="" margintop={topbanner?"translate-y-[10.5rem]":"translate-y-28"}/>
+                <MegaMenu className="" margintop={topbanner?"translate-y-[10.5rem]":"translate-y-[7rem]"}/>
                 <div className='flex'>
                 <ShoppingCartIcon className="mx-2 h-6 text-gray-700 max-sm:hidden " />
                 <ArrowsUpDownIcon className="mx-2 h-6 text-gray-700 max-sm:hidden " />
