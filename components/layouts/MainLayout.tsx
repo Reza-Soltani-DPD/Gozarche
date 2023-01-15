@@ -5,12 +5,10 @@ import React, { useEffect, useState } from "react";
 import {
   HeartIcon,
   ShoppingCartIcon,
-  Bars3Icon,
   UserIcon,
   MagnifyingGlassIcon,
   ArrowsUpDownIcon,
 } from "@heroicons/react/24/outline";
-import NavMenu from "../navs/NavMenu";
 import { useSession, signIn } from "next-auth/react";
 import MobileTabBar from "../navs/MobileTabBar";
 import MainFooter from "../footers/mainfooter";
@@ -116,12 +114,10 @@ export default function MainLayout({
                 ) : (
                   <>
                     <span className="px-2">{session.data?.user?.name}</span>
-                    <UserIcon className="mx-1 h-6 px-2 text-gray-700 sm:border-l" />
+                    <UserIcon className="mx-1 h-6 px-2 text-gray-700" />
                   </>
                 )}
-                <ShoppingCartIcon className="mx-2 h-6 text-gray-700 max-sm:hidden " />
-                <ArrowsUpDownIcon className="mx-2 h-6 text-gray-700 max-sm:hidden " />
-                <HeartIcon className="mx-2 h-6 text-gray-700 max-sm:hidden" />
+                
               </div>
             </div>
             <div
@@ -130,20 +126,23 @@ export default function MainLayout({
               }`}
             >
               <div
-                className={`z-0 flex items-center bg-white duration-500 max-sm:hidden ${
+                className={`z-0 flex items-center justify-between bg-white duration-500 max-sm:hidden ${
                   !show
                     ? "collapse h-0 -translate-y-14 overflow-hidden"
                     : "h-12"
                 }`}
               >
-                <MegaMenu />
+                <MegaMenu className="" margintop={topbanner?"translate-y-[10.5rem]":"translate-y-28"}/>
+                <div className='flex'>
+                <ShoppingCartIcon className="mx-2 h-6 text-gray-700 max-sm:hidden " />
+                <ArrowsUpDownIcon className="mx-2 h-6 text-gray-700 max-sm:hidden " />
+                <HeartIcon className="mx-2 h-6 text-gray-700 max-sm:hidden" />
+                </div>
+                
               </div>
             </div>
           </nav>
         </div>
-        <NavMenu margintop={topbanner ? 42 : 28}>
-          <span>hello</span>
-        </NavMenu>
         <div className="mx-auto min-h-screen">
           <div
             className={`${

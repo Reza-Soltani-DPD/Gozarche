@@ -64,3 +64,9 @@
 
   }
 
+.mmp:hover ~ .mmbg{
+	opacity:0.3;
+	display: block;
+	
+}
+

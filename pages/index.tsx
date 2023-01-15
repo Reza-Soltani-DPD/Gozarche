@@ -1,15 +1,13 @@
 import MainLayout from "../components/layouts/MainLayout";
 import Link from "next/link";
-// import { signIn, signOut, useSession } from "next-auth/react";
 
-// import { trpc } from "../utils/trpc";
 
 import Carousel from "../components/Carousel";
 
 export default function Home() {
   return (
     <>
-      <MainLayout>
+      <MainLayout >
         <div className="  ">
           <div className="   ">
             {/* <p>image slider</p> */}
