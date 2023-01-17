@@ -3,15 +3,26 @@ import Link from "next/link";
 
 
 import Carousel from "../components/Carousel";
+import ProductCard from "../components/ProductCard";
 
-export default function Home() {
+const Home = () => {
   return (
     <>
-      <MainLayout >
+      <MainLayout>
         <div className="  ">
           <div className="   ">
             {/* <p>image slider</p> */}
-            <Carousel>
+            <Carousel
+              breakpoints={{
+                z: { slideperview: 1 },
+                xs: { slideperview: 1 },
+                sm: { slideperview: 1 },
+                md: { slideperview: 1 },
+                lg: { slideperview: 1 },
+                xl: { slideperview: 1 },
+                dxl: { slideperview: 1 },
+              }}
+            >
               {[...Array(10).keys()].map((number) => (
                 <div
                   className="  h-80 bg-fuchsia-300 text-center text-3xl  font-bold text-rose-600"
@@ -41,31 +52,64 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex overflow-auto">
-                <Carousel>
+                <Carousel
+                  breakpoints={{
+                    z: { slideperview: 1 },
+                    xs: { slideperview: 2 },
+                    sm: { slideperview: 2 },
+                    md: { slideperview: 3 },
+                    lg: { slideperview: 4 },
+                    xl: { slideperview: 5 },
+                    dxl: { slideperview: 6 },
+                  }}
+                >
                   {[...Array(10).keys()].map((number, index) => (
-                    <div
-                      className="  flex h-80 items-center justify-center rounded-2xl bg-white text-3xl font-bold  text-rose-600 shadow-md"
+                    <ProductCard
+                      className="  flex h-80 items-center justify-center rounded-2xl text-3xl font-bold shadow-md"
                       key={index}
+                    
+                      imgurl="/icons/gozarche logo short.png"
                     >
                       {number}
-                    </div>
+                    </ProductCard>
                   ))}
                 </Carousel>
               </div>
             </div>
-            {/* <p>discount  banner link</p> */}
-            {/* <p>box for shop ad </p> */}
-            {/* <p> cat</p> */}
-            {/* <p>box for special offer banner</p> */}
-            {/* <p>cat sugestion</p> */}
-            {/* <p>top brands</p> */}
-            {/* <p>some sugestion</p> */}
-            {/* <p>top brands</p> */}
-            {/* <p>top sale</p> */}
-            {/* <p>readable</p> */}
+            <div className="container m-auto">
+              <p>discount banner link</p>
+            </div>
+            <div className="container m-auto">
+              <p>box for shop ad </p>
+            </div>
+            <div className="container m-auto">
+              <p className=' shadow-center'> cat</p>
+            </div>
+            <div className="container m-auto">
+              <p>box for special offer banner</p>
+            </div>
+            <div className="container m-auto">
+              <p>cat sugestion</p>
+            </div>
+            <div className="container m-auto">
+              <p>top brands</p>
+            </div>
+            <div className="container m-auto">
+              <p>some sugestion</p>
+            </div>
+            <div className="container m-auto">
+              <p>top brands</p>
+            </div>
+            <div className="container m-auto">
+              <p>top sale</p>
+            </div>
+            <div className="container m-auto">
+              <p>readable</p>
+            </div>
           </div>
         </div>
       </MainLayout>
     </>
   );
-}
+};
+export default Home;

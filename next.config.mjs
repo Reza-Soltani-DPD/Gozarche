@@ -10,6 +10,12 @@ const config = {
   reactStrictMode: true,
   // swcMinify: true,
   output: "standalone",
+  images: {
+    unoptimized:true,
+    domains: [
+      'picsum.photos',
+    ]
+  }
  
 };
 export default config;

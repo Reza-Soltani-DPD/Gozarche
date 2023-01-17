@@ -8,6 +8,9 @@ import {
   UserIcon,
   MagnifyingGlassIcon,
   ArrowsUpDownIcon,
+  ShoppingBagIcon,
+  BookOpenIcon,
+  MapPinIcon
 } from "@heroicons/react/24/outline";
 import { useSession, signIn } from "next-auth/react";
 import MobileTabBar from "../navs/MobileTabBar";
@@ -78,7 +81,7 @@ export default function MainLayout({
               <div className="z-20 flex flex-row items-center bg-white">
                 <Link href="/" className="m-2">
                   <Image
-                    src="/gozarche logo long.png"
+                    src="/icons/gozarche logo long.png"
                     width={120}
                     height={50}
                     alt="logo"
@@ -131,9 +134,13 @@ export default function MainLayout({
                     ? "collapse h-0 -translate-y-14 overflow-hidden"
                     : "h-12"
                 }`}
-              >
+              ><div className="flex items-center ">
                 <MegaMenu className="" margintop={topbanner?"translate-y-[10.5rem]":"translate-y-[7rem]"}/>
-                <div className='flex'>
+                <Link href="/shop" className='cubic font-vazir text-sm px-3 flex items-center text-gray-500 hover:text-primary-700'><ShoppingBagIcon className=' h-6 w-6'/> <span className='p-1'>فروشگاه</span></Link>
+                <Link href="/blog" className='cubic font-vazir text-sm px-3 flex items-center text-gray-500 hover:text-primary-700'><BookOpenIcon className=' h-6 w-6'/> <span className='p-1'>خواندنی</span></Link>
+                <Link href="/contact_us" className='cubic font-vazir text-sm px-3 flex items-center text-gray-500 hover:text-primary-700'><MapPinIcon className=' h-6 w-6'/> <span className='p-1'>تماس با ما</span></Link>
+              </div>
+                <div className='flex z-0'>
                 <ShoppingCartIcon className="mx-2 h-6 text-gray-700 max-sm:hidden " />
                 <ArrowsUpDownIcon className="mx-2 h-6 text-gray-700 max-sm:hidden " />
                 <HeartIcon className="mx-2 h-6 text-gray-700 max-sm:hidden" />

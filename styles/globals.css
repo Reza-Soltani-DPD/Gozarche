@@ -54,3 +54,24 @@ ul.footer{
   font-family: 'samim';
   src:  url('/fonts/Samim.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'diroozFD';
+  src:  url('/fonts/Dirooz-FD-WOL.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'parastooFD';
+  src:  url('/fonts/Parastoo-FD.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'sahelFD';
+  src:  url('/fonts/Sahel-FD.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'samimFD';
+  src:  url('/fonts/Samim-FD.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'vazirFD';
+  src:  url('/fonts/Vazir-FD-WOL.ttf') format('truetype');
+}

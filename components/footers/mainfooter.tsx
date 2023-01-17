@@ -12,7 +12,7 @@ export default function MainFooter() {
         <div className="flex w-full justify-between border-b max-md:flex-col">
           <div className="grow  max-md:m-auto p-2">
             <Image
-              src="/gozarche logo long.png"
+              src="/icons/gozarche logo long.png"
               width={214}
               height={70}
               alt="logo"

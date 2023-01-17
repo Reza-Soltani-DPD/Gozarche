@@ -41,7 +41,15 @@ module.exports = {
         iransans:['iransans'],
         samim:['samim'],
         homa:['homa'],
-        vazir:['vazir']
+        vazir:['vazir'],
+        FDdirooz:['diroozFD'],
+        FDparastoo:['parastooFD'],
+        FDsahel:['sahelFD'],
+        FDsamim:['samimFD'],
+        FDvazir:['vazirFD'],
+      },
+      boxShadow:{
+        "center":"0 0 0.5rem 0 rgba(0 , 0 , 0 , 0.15)"
       }
     },
   },
