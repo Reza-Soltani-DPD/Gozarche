@@ -40,14 +40,14 @@ const Home = () => {
                 backgroundSize: "cover",
               }}
             >
-              <div className="m-auto content-center p-3 max-sm:hidden">
+              <div className="m-auto content-center p-2 max-sm:hidden">
                 <p className="p-4 text-center">discount</p>
                 <p className="text-center  ">
                   <Link
                     href="/"
-                    className="m-2 whitespace-nowrap rounded-md bg-secondary-300 px-4 py-2 font-iransans text-lg font-bold"
+                    className="m-1 whitespace-nowrap rounded-md bg-secondary-300 px-2 py-2 font-iransans  font-bold"
                   >
-                    تخفیف ویژه
+                    پیشنهاد ویژه
                   </Link>
                 </p>
               </div>
@@ -65,10 +65,12 @@ const Home = () => {
                 >
                   {[...Array(10).keys()].map((number, index) => (
                     <ProductCard
-                      className="  flex h-80 items-center justify-center rounded-2xl text-3xl font-bold shadow-md"
+                      className="flex h-80 items-center justify-center rounded-2xl text-3xl font-bold shadow-md"
                       key={index}
-                    
-                      imgurl="/icons/gozarche logo short.png"
+                      productTitle={"mobile"}
+                      maxPrice={1000}
+                      minPrice={9000}
+                      imgurl={["/icons/gozarche logo short.png"]}
                     >
                       {number}
                     </ProductCard>
@@ -76,33 +78,43 @@ const Home = () => {
                 </Carousel>
               </div>
             </div>
+            {/* <p>discount banner link</p> */}
             <div className="container m-auto">
               <p>discount banner link</p>
             </div>
+              {/* <p>box for shop ad </p> */}
             <div className="container m-auto">
               <p>box for shop ad </p>
             </div>
+              {/* <p className=' shadow-center'> cat</p> */}
             <div className="container m-auto">
-              <p className=' shadow-center'> cat</p>
+              <p > cat</p>
             </div>
+              {/* <p>box for special offer banner</p> */}
             <div className="container m-auto">
               <p>box for special offer banner</p>
             </div>
+              {/* <p>cat sugestion</p> */}
             <div className="container m-auto">
               <p>cat sugestion</p>
             </div>
+              {/* <p>top brands</p> */}
             <div className="container m-auto">
               <p>top brands</p>
             </div>
+              {/* <p>some sugestion</p> */}
             <div className="container m-auto">
               <p>some sugestion</p>
             </div>
+              {/* <p>top brands</p> */}
             <div className="container m-auto">
               <p>top brands</p>
             </div>
+              {/* <p>top sale</p> */}
             <div className="container m-auto">
               <p>top sale</p>
             </div>
+              {/* <p>readable</p> */}
             <div className="container m-auto">
               <p>readable</p>
             </div>

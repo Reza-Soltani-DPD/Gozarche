@@ -305,7 +305,7 @@ enum productstatus {
 model product{
   id             String          @id  @default(cuid())
   title          String 
-  slug           String
+  slug           String          @unique
   summary        String
   type           producttype     @default(PSC)
   sku            String?
@@ -336,6 +336,7 @@ model productinventory {
   id        String     @id    @default(cuid())
   quant     Float      @default(0)
   price     Float
+  slug      String     @unique
   createdAT DateTime   @default(now())
   updatedAT DateTime   @updatedAt
   deletedAT DateTime?
@@ -388,10 +389,11 @@ model productvariant {
   sku        String?
   inventoryId String
   inventory  productinventory[]
-  productid  String?
-  products   product[]
+  productid  String
+  product    product       @relation(fields: [productid] ,references: [id] )
   status     productstatus @default(ACTIVE)
   properties productprop[]
+  tag        tags[]
 }
 model productreview {
   id          String   @id @default(cuid())
@@ -450,6 +452,7 @@ model tags {
   meta      tagmeta[]
   category  category[]
   product   product[]
+  productvariant productvariant[]
 }
 model tagmeta {
   id    String  @id @default(cuid())

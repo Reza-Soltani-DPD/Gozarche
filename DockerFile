@@ -1,58 +1,3 @@
-# ##### DEPENDENCIES
-
-# FROM --platform=linux/amd64 node:16-alpine AS deps
-# RUN apk add --no-cache libc6-compat openssl1.1-compat
-# WORKDIR /app
-
-
-# COPY prisma ./
-# COPY package.json yarn.lock ./
-
-# RUN yarn --frozen-lockfile
-
-# ##### BUILDER
-# FROM --platform=linux/amd64 node:16-alpine AS builder
-# RUN apk add --no-cache libc6-compat openssl1.1-compat
-# WORKDIR /app
-
-# ENV DATABASE_URL postgresql://root:IokxLnuo9vltRPu1mrEVSjBL@esme.iran.liara.ir:30836/
-# ENV NEXTAUTH_SECRET 2497766051bc79ad394d017575fb3b13
-# ENV NEXTAUTH_URL https://gozarche.iran.liara.run
-# COPY --from=deps /app/node_modules ./node_modules
-# COPY prisma ./prisma/
-# COPY . .
-# RUN export NODE_ENV=production
-# RUN apk add --update --no-cache openssl1.1-compat
-# RUN yarn prisma generate
-# RUN yarn build
-
-
-# ##### RUNNER
-
-# FROM --platform=linux/amd64 node:16-alpine AS runner
-# WORKDIR /app
-
-# ARG DB
-
-# RUN printenv
-# ENV NODE_ENV production
-# ENV DATABASE_URL postgresql://root:IokxLnuo9vltRPu1mrEVSjBL@esme.iran.liara.ir:30836/
-# ENV NEXTAUTH_SECRET 2497766051bc79ad394d017575fb3b13
-# ENV NEXTAUTH_URL https://gozarche.iran.liara.run
-# ENV PORT 3000
-
-
-# COPY --from=builder /app/next.config.mjs ./
-# COPY --from=builder /app/public ./public
-# COPY --from=builder /app/package.json  /app/yarn.lock ./
-# COPY --from=builder /app/.next/standalone ./
-# COPY --from=builder /app/.next/static ./.next/static
-
-# EXPOSE 3000
-
-# CMD ["node", "server.js"]
-##### DEPENDENCIES
-
 FROM --platform=linux/amd64 node:16-alpine AS deps
 RUN apk add --no-cache libc6-compat openssl1.1-compat
 WORKDIR /app
@@ -78,7 +23,7 @@ RUN \
 FROM --platform=linux/amd64 node:16-alpine AS builder
 WORKDIR /app
 
-ENV DATABASE_URL postgresql://root:St2cTJlo1pi7fYtDxzcFuzru@esme.iran.liara.ir:33721/postgres
+ENV DATABASE_URL "psql -h gozarchedb -p 5432 -U root -W postgres"
 ENV NEXTAUTH_SECRET 2497766051bc79ad394d017575fb3b13
 ENV NEXTAUTH_URL https://gozarche.iran.liara.run
 COPY --from=deps /app/node_modules ./node_modules
@@ -97,7 +42,7 @@ RUN \
 
 FROM --platform=linux/amd64 node:16-alpine AS runner
 WORKDIR /app
-ENV DATABASE_URL postgresql://root:St2cTJlo1pi7fYtDxzcFuzru@esme.iran.liara.ir:33721/postgres
+ENV DATABASE_URL postgresql://root:tF05eN7OPrqmo85LNHiO3PTR@gozarchedb:5432/postgres
 ENV NEXTAUTH_SECRET 2497766051bc79ad394d017575fb3b13
 ENV NEXTAUTH_URL https://gozarche.iran.liara.run
 ENV NODE_ENV production
