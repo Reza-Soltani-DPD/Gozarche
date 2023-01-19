@@ -10,7 +10,7 @@ COPY prisma ./
 
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml\* ./
 
-ENV DATABASE_URL postgresql://root:tF05eN7OPrqmo85LNHiO3PTR@gozarchedb:5432/postgres
+ENV DATABASE_URL postgresql://root:tF05eN7OPrqmo85LNHiO3PTR@esme.iran.liara.ir:33767/postgres
 RUN \
  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
  elif [ -f package-lock.json ]; then npm ci; \
@@ -22,8 +22,7 @@ RUN \
 
 FROM --platform=linux/amd64 node:16-alpine AS builder
 WORKDIR /app
-
-ENV DATABASE_URL postgresql://root:tF05eN7OPrqmo85LNHiO3PTR@gozarchedb:5432/postgres
+ENV DATABASE_URL postgresql://root:tF05eN7OPrqmo85LNHiO3PTR@esme.iran.liara.ir:33767/postgres
 ENV NEXTAUTH_SECRET 2497766051bc79ad394d017575fb3b13
 ENV NEXTAUTH_URL https://gozarche.iran.liara.run
 COPY --from=deps /app/node_modules ./node_modules
@@ -42,7 +41,7 @@ RUN \
 
 FROM --platform=linux/amd64 node:16-alpine AS runner
 WORKDIR /app
-ENV DATABASE_URL postgresql://root:tF05eN7OPrqmo85LNHiO3PTR@gozarchedb:5432/postgres
+ENV DATABASE_URL postgresql://root:tF05eN7OPrqmo85LNHiO3PTR@esme.iran.liara.ir:33767/postgres
 ENV NEXTAUTH_SECRET 2497766051bc79ad394d017575fb3b13
 ENV NEXTAUTH_URL https://gozarche.iran.liara.run
 ENV NODE_ENV production

@@ -76,8 +76,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
 
           
         }}):null
-        const user= await userpromise
-        
+        const user= await userpromise        
         if(user) {
           return user
         }

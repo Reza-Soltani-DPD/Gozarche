@@ -1,7 +1,7 @@
 import React from "react";
 import type { FC } from "react";
 import { PlusIcon,ChevronUpDownIcon } from "@heroicons/react/24/outline";
-import SvgToman from "./SVG/Toman";
+import SvgToman from "../SVG/Toman";
 import Image from "next/image";
 interface ProductCardProps {
   children: React.ReactNode;
