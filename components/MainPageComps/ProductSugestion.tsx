@@ -5,6 +5,6 @@ export default function ProductSugestion ()  {
     <div className="w-100 container m-auto p-4">
       <p>some sugestion</p>
     </div>
-  );
-};
+  )
+}
 

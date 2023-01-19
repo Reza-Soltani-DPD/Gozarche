@@ -5,5 +5,5 @@ export default function CategorySugestion () {
     <div className="w-100 m-auto container  p-4">
       <p>cat sugestion</p>
     </div>
-  );
+  )
 }

@@ -5,5 +5,5 @@ export default function TopSale () {
     <div className="w-100 container m-auto p-4">
       <p>top sale</p>
     </div>
-  );
+  )
 }

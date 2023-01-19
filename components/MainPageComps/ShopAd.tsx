@@ -5,5 +5,5 @@ export default function ShopAd () {
     <div className=" w-100 container m-auto p-4">
       <p>box for shop ad </p>
     </div>
-  );
+  )
 }

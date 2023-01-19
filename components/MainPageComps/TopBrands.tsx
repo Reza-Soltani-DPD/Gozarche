@@ -5,5 +5,5 @@ export default function TopBrands ()  {
     <div className="w-100 container m-auto p-4">
       <p>cat sugestion</p>
     </div>
-  );
+  )
 }

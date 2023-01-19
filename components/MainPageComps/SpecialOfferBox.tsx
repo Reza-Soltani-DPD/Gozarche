@@ -5,5 +5,5 @@ export default function SpecialOfferBox () {
     <div className="w-100 container m-auto p-4">
       <p>box for special offer banner</p>
     </div>
-  );
+  )
 }

@@ -11,6 +11,9 @@ module.exports = {
     
     extend: {
       colors:{
+        screens:{
+          'xs':'480px'
+        },
         primary:{
           50:"#ffece6",
           100:"#ffc5b3",

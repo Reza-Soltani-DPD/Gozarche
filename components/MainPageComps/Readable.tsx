@@ -5,6 +5,6 @@ export default function Readable ()  {
     <div className='w-100 m-auto container p-4'>
       <p>readable</p>
     </div>
-  );
-};
+  )
+}
 

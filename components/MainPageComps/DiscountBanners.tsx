@@ -5,5 +5,5 @@ export default function DiscountBanners() {
     <div className="container m-auto p-4 ">
       <p>discount banner link</p>
     </div>
-  );
+  )
 }

@@ -50,5 +50,5 @@ export default function SpecialOfferProduct () {
         </Carousel>
       </div>
     </div>
-  );
+  )
 }

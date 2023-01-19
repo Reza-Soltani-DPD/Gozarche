@@ -6,5 +6,5 @@ export default function CategoryComp () {
     <div className="w-100 container m-auto p-4">
       <p> cat</p>
     </div>
-  );
+  )
 }
