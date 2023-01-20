@@ -1,6 +1,7 @@
 import Head from "next/head";
 import * as React from "react";
 import AdminSideBar from '../AdminComponenets/AdminSideBar';
+import AdminLayoutHeader from "../AdminComponenets/AdminLayoutHeader";
 
 export interface IAppProps {
   children: React.ReactNode;
@@ -14,14 +15,12 @@ export default function AdminLayout(props: IAppProps) {
       <Head>
         <title>{title ? title + " - Gozarche" : "Admin - Gozarche"}</title>
       </Head>
-      <div className="min-w-[768px] h-screen overflow-scroll ">
-        <div className='h-[4vh] flex items-center '>head</div>
-		<div className='flex h-[96vh]'>
-				<AdminSideBar/>
-				<div className=''>
-        {children}
-				</div>
-		</div>
+      <div className="h-screen min-w-[768px]  ">
+        <AdminLayoutHeader />
+        <div className="flex h-[95vh]">
+          <AdminSideBar className=" h-full " />
+          <div className="h-full w-full">{children}</div>
+        </div>
       </div>
     </div>
   );
