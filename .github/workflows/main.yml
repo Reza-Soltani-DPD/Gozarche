@@ -15,5 +15,5 @@ jobs:
         env:
           LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
         run: |
-          npm i -g @liara/cli --no-audit
-          liara deploy --platform=docker --app="gozarche" --api-token="$LIARA_TOKEN" --detach
+          npm i -g @liara/cli 
+          liara deploy --platform=docker --app="gozarche" --port=3000 --api-token="$LIARA_TOKEN" --detach
