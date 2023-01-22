@@ -1,6 +1,6 @@
 import * as React from "react";
 import AdminSideBarElement from './AdminSideBarElement';
-import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
+import { ArchiveBoxIcon ,UserIcon} from "@heroicons/react/24/outline";
 
 interface AdminSideBarProps {
   className: string;
@@ -16,40 +16,36 @@ export default function AdminSideBar(props: AdminSideBarProps) {
     >
       <AdminSideBarElement
         title="محصولات"
-        Icon={ArrowDownCircleIcon}
+        Icon={ArchiveBoxIcon}
         width="w-full"
         dropdown='right'
       >
         <AdminSideBarElement
-          title="محصولات"
+          title="همه محصولات"
           link="/admin/products"
-          Icon={ArrowDownCircleIcon}
           width="w-full"
         />
         <AdminSideBarElement
           title="تگ ها"
           link="/admin/products"
-          Icon={ArrowDownCircleIcon}
           width="w-full"
         />
         
       </AdminSideBarElement>
       <AdminSideBarElement
         title="کاربران"
-        Icon={ArrowDownCircleIcon}
+        Icon={UserIcon}
         width="w-full"
         dropdown='right'
       >
         <AdminSideBarElement
           title="تغییر رمز"
           link="/admin/products"
-          Icon={ArrowDownCircleIcon}
           width="w-full"
         />
         <AdminSideBarElement
-          title=""
+          title="خروج"
           link="/admin/products"
-          Icon={ArrowDownCircleIcon}
           width="w-full"
         />
         

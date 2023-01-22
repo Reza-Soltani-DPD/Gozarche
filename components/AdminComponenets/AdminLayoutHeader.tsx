@@ -4,11 +4,12 @@ import { BuildingLibraryIcon, HomeIcon } from "@heroicons/react/24/outline";
 
 export default function AdminLayoutHeader() {
   return (
-    <div className="flex h-[5vh] w-full items-center justify-between bg-zinc-700 ">
+    <div className="flex h-[5vh] w-full  items-center justify-between bg-zinc-700 ">
       <div className="flex items-center ">
         <AdminSideBarElement
           link="/admin/"
           title="خانه "
+          width='w-auto'
           Icon={BuildingLibraryIcon}
         />
         <AdminSideBarElement

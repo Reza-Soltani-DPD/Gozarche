@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { router, protectedProcedure } from "../../../trpc";
 export const productRouter = router({
-  getproducts: protectedProcedure
+  getallproducts: protectedProcedure
     .input(
       z.object({
         skip: z.optional(z.number()),
