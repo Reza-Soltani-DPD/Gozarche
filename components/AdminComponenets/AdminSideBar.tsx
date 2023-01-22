@@ -21,7 +21,7 @@ export default function AdminSideBar(props: AdminSideBarProps) {
         dropdown='right'
       >
         <AdminSideBarElement
-          title="تگ ها"
+          title="محصولات"
           link="/admin/products"
           Icon={ArrowDownCircleIcon}
           width="w-full"
@@ -32,30 +32,27 @@ export default function AdminSideBar(props: AdminSideBarProps) {
           Icon={ArrowDownCircleIcon}
           width="w-full"
         />
+        
+      </AdminSideBarElement>
+      <AdminSideBarElement
+        title="کاربران"
+        Icon={ArrowDownCircleIcon}
+        width="w-full"
+        dropdown='right'
+      >
         <AdminSideBarElement
-          title="تگ ها"
+          title="تغییر رمز"
           link="/admin/products"
           Icon={ArrowDownCircleIcon}
           width="w-full"
         />
         <AdminSideBarElement
-          title="تگ ها"
+          title=""
           link="/admin/products"
           Icon={ArrowDownCircleIcon}
           width="w-full"
         />
-        <AdminSideBarElement
-          title="تگ ها"
-          link="/admin/products"
-          Icon={ArrowDownCircleIcon}
-          width="w-full"
-        />
-        <AdminSideBarElement
-          title="تگ ها"
-          link="/admin/products"
-          Icon={ArrowDownCircleIcon}
-          width="w-full"
-        />
+        
       </AdminSideBarElement>
     </div>
   );

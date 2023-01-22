@@ -28,7 +28,7 @@ export default function AdminSideBarElement(props: AdminSideBarElementProps) {
         {link ? (
           <Link
             href={link}
-            className={`group/link  flex h-10  items-center justify-center    rounded-lg p-2 text-center font-vazir text-sm text-white  ${
+            className={`group/link  flex h-10  items-center     rounded-lg p-2 text-center font-vazir text-sm text-white  ${
               width ? width : "w-auto"
             }`}
           >
@@ -41,7 +41,7 @@ export default function AdminSideBarElement(props: AdminSideBarElementProps) {
           </Link>
         ) : (
           <div
-            className={`group/link  flex h-10  items-center justify-center    rounded-lg p-2 text-center font-vazir text-sm text-white  ${
+            className={`group/link  flex h-10  items-cente rounded-lg p-2 text-center font-vazir text-sm text-white  ${
               width ? width : "w-auto"
             }`}
           >
