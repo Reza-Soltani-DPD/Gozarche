@@ -32,7 +32,7 @@ export default function Products() {
     "all" | "published" | "trashed"
   >("all");
   const [pageNumber, setPageNumber] = React.useState<number>(1);
-  const { data, isLoading, isFetching, isRefetching, refetch } =
+  const { data, refetch } =
     trpc.admin.products.product.getproducts.useQuery({
       take: 5,
       skip: (pageNumber - 1) * 5,
@@ -42,6 +42,7 @@ export default function Products() {
     if (data) {
       refetch();
     }
+    
   }, [pageNumber]);
   const { data: datacount } =
     trpc.admin.products.product.productCount.useQuery();
