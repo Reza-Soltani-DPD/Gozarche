@@ -80,7 +80,7 @@ export default function Products() {
                 refetch();
               }}
             >
-              {datacount?.all ? "(" + datacount?.all + ")" : ""}همه{" "}
+              {datacount?.all ? "(" + datacount?.all + ")" : " "}همه{" "}
             </span>
           ) : (
             ""
