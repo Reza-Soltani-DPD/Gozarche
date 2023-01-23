@@ -1,6 +1,6 @@
 import * as React from "react";
 import AdminSideBarElement from './AdminSideBarElement';
-import { ArrowDownCircleIcon } from "@heroicons/react/24/outline";
+import { ArchiveBoxIcon ,UserIcon} from "@heroicons/react/24/outline";
 
 interface AdminSideBarProps {
   className: string;
@@ -16,46 +16,39 @@ export default function AdminSideBar(props: AdminSideBarProps) {
     >
       <AdminSideBarElement
         title="محصولات"
-        Icon={ArrowDownCircleIcon}
+        Icon={ArchiveBoxIcon}
         width="w-full"
         dropdown='right'
       >
         <AdminSideBarElement
-          title="تگ ها"
+          title="همه محصولات"
           link="/admin/products"
-          Icon={ArrowDownCircleIcon}
           width="w-full"
         />
         <AdminSideBarElement
           title="تگ ها"
           link="/admin/products"
-          Icon={ArrowDownCircleIcon}
+          width="w-full"
+        />
+        
+      </AdminSideBarElement>
+      <AdminSideBarElement
+        title="کاربران"
+        Icon={UserIcon}
+        width="w-full"
+        dropdown='right'
+      >
+        <AdminSideBarElement
+          title="تغییر رمز"
+          link="/admin/products"
           width="w-full"
         />
         <AdminSideBarElement
-          title="تگ ها"
+          title="خروج"
           link="/admin/products"
-          Icon={ArrowDownCircleIcon}
           width="w-full"
         />
-        <AdminSideBarElement
-          title="تگ ها"
-          link="/admin/products"
-          Icon={ArrowDownCircleIcon}
-          width="w-full"
-        />
-        <AdminSideBarElement
-          title="تگ ها"
-          link="/admin/products"
-          Icon={ArrowDownCircleIcon}
-          width="w-full"
-        />
-        <AdminSideBarElement
-          title="تگ ها"
-          link="/admin/products"
-          Icon={ArrowDownCircleIcon}
-          width="w-full"
-        />
+        
       </AdminSideBarElement>
     </div>
   );
