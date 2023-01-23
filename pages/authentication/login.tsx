@@ -23,12 +23,11 @@ const LoginPage: NextPage = () => {
     formState: { errors },
   } = useForm<formdata>({resolver:zodResolver(formschema)});
   const onSubmit = handleSubmit(async (data) => {
-    const d = await signIn("credentials",{
+    await signIn("credentials",{
       username: data.username,
       password: data.password,
       callbackUrl:"/",
   })
-  console.log(d);
   
   })
   return (
