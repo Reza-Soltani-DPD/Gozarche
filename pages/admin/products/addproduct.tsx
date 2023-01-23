@@ -3,11 +3,9 @@ import AdminLayout from "../../../components/layouts/AdminLayout";
 import { trpc } from "../../../utils/trpc";
 
 export default function Products() {
-  const {data} = trpc.admin.products.product.getallproducts.useQuery({ skip: 0 });
 
   return (
     <AdminLayout>
-      {data ? JSON.stringify(data) : "is loading"}
     </AdminLayout>
   );
 }

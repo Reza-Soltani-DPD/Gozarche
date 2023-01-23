@@ -110,10 +110,14 @@ model wallet {
   depositAllow  Boolean          @default(true)
   withrawAllow  Boolean          @default(true)
 
-  createdAT     DateTime         @default(now())
-  activefrom    DateTime         @default(now())
-  updatedAT     DateTime         @updatedAt 
-  deleteAT      DateTime?
+  published      Boolean         @default(false)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime?
 
   Items     walletItem[]
   wallettransactikons walletTransaction[]
@@ -218,8 +222,14 @@ model message {
   intro        String?
   describtion  String
   read         Boolean   @default(false)
-  createdat    DateTime  @default(now())
-  updatedat    DateTime  @updatedAt
+  published      Boolean         @default(true)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime?
   responsedate DateTime?
   type         messagetype     @default(REQUESTS)
   user         user?     @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
@@ -239,10 +249,14 @@ model adress {
   line1       String?  @db.VarChar(150)
   line2       String?  @db.VarChar(150)
   postalcode  String?  @db.VarChar(150)
-  createdat   DateTime @default(now())
-  updatedat   DateTime @updatedAt
-  deleteAt    DateTime?
-  active      Boolean  @default(true)
+  published      Boolean         @default(true)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime?
 
   userid      String?
   user        user?    @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
@@ -312,9 +326,14 @@ model product{
   minquant       Float?          @default(1)
   ratingcount    Int             @default(0)
   imageid        String[]
+  published      Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  trashed        Boolean         @default(false)
   createdAT      DateTime        @default(now())
   updatedAT      DateTime        @updatedAt
-  startedAT      DateTime        @default(now())
+  publishedAT      DateTime      @default(now())
+  trashedAT      DateTime?
+  deletedAT      DateTime?        
   variants       productvariant[]
   meta           meta[]
   tag            tags[]
@@ -328,18 +347,29 @@ model   discount  {
   name   String?
   desc   String?
   amount Float?
-  active Boolean    @default(true)
-
+  published      Boolean         @default(false)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime? 
   products productinventory[]
 }
 model productinventory {
-  id        String     @id    @default(cuid())
-  quant     Float      @default(0)
-  price     Float
-  slug      String     @unique
-  createdAT DateTime   @default(now())
-  updatedAT DateTime   @updatedAt
-  deletedAT DateTime?
+  id             String     @id    @default(cuid())
+  quant          Float      @default(0)
+  price          Float
+  slug           String     @unique
+  published      Boolean         @default(false)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime? 
   rating         Float?
   productId      String 
   product        productvariant  @relation(fields: [productId],references: [id])
@@ -365,6 +395,14 @@ model productvisit {
   user           user     @relation(fields: [userId],references: [id])  
   productId      String
   product        productinventory  @relation(fields: [productId],references: [id])
+  published      Boolean         @default(false)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime? 
 }
 model productprop {
   id                   String                 @id @default(cuid())
@@ -387,6 +425,14 @@ model productvariant {
   id         String        @id @default(cuid())
   value      String?
   sku        String?
+  published      Boolean         @default(false)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime? 
   inventoryId String
   inventory  productinventory[]
   productid  String
@@ -402,9 +448,14 @@ model productreview {
   productid   String?
   content     String?
   iframeurl   String?
-  createdat   DateTime @default(now())
-  updatedat   DateTime @updatedAt
-  publishedat DateTime @default(now())
+  published      Boolean         @default(false)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime? 
   user        user?    @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
   product     productinventory? @relation(fields: [productid], references: [id],onDelete: SetNull, onUpdate: Cascade)
 }
@@ -424,9 +475,14 @@ model productcomment {
   id        String              @id @default(cuid())
   title     String              @db.Char(50)
   content   String
-  createdat DateTime            @default(now())
-  updatedat DateTime            @updatedAt
-  deletedat DateTime?
+  published      Boolean         @default(false)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime? 
   productid String
   product   productinventory    @relation(fields: [productid],references: [id])
   userid    String?
@@ -478,11 +534,17 @@ model category {
   slug      String?
   imgid     String?
   content   String?
-  active    Boolean    @default(true)
+  published      Boolean         @default(false)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime? 
   tags      tags[]
   meta      meta[]
-  createdat DateTime   @default(now())
-  updatedat DateTime   @updatedAt
+
   product   product[]
   parent    category[] @relation("categoryParenting")
   child     category[] @relation("categoryParenting")
@@ -491,6 +553,15 @@ model category {
 
 
 
+//--------------------------------------------------------------------------
+//
+//
+//
+//                                    CART MODELS
+//
+//
+//
+//-------------------------------------------------------------------------
 
 enum Cartstatus {
   DEACTIVATED
@@ -503,9 +574,14 @@ model cart {
   token         String
   cartstatus    Cartstatus
 
-  createdAT     DateTime @default(now())
-  updatedAT     DateTime @updatedAt
-  deactivatedAT DateTime?
+  published      Boolean         @default(false)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime?
 
   cartitems     cartitem[] 
 
@@ -567,11 +643,15 @@ model shop{
   phonenumber  String[]
   adress       String[]
   rating       Float?
-  active       Boolean         @default(true)
   ratingcount  Int?
-  createdat    DateTime        @default(now())
-  updatedat    DateTime        @updatedAt
-  deletedat    DateTime?
+  published      Boolean         @default(false)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime?
   shoptype     shoptype        @default(SHOP)
   products     productinventory[]
   comments     shopcomment[]
@@ -587,7 +667,10 @@ model shoprating {
   userid    String?
   shopid    String?
   rate      Int?
-  createdat DateTime @default(now())
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  deletedAT      DateTime?
   user      user?    @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: SetNull)
   shop      shop?    @relation(fields: [shopid], references: [id],onDelete: SetNull, onUpdate: SetNull)
 }
@@ -597,12 +680,22 @@ model shopcomment {
   id        String   @id @default(cuid())
   userid    String?
   shopid    String?
-  createdat DateTime @default(now())
-  updatedat DateTime @updatedAt
+  published      Boolean         @default(false)
+  trashed        Boolean         @default(false)
+  deleted        Boolean         @default(false)
+  createdAT      DateTime        @default(now())
+  updatedAT      DateTime        @updatedAt
+  publishedAT    DateTime?
+  trashedAT      DateTime?
+  deletedAT      DateTime?
   content   String?
   user      user?    @relation(fields: [userid], references: [id],onDelete: SetNull, onUpdate: Cascade)
   shop      shop?    @relation(fields: [shopid], references: [id],onDelete: SetNull, onUpdate: Cascade)
 }
+
+
+
+
 
 enum paymenttype {
   WITHDRAW
@@ -630,10 +723,6 @@ model shoppayment {
   content     String?
   shop        shop?         @relation(fields: [shopid], references: [id],onDelete: SetNull, onUpdate: Cascade)
 }
-
-
-
-
 
 
 //--------------------------------------------------------------------------
