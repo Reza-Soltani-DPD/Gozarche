@@ -92,7 +92,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
         const user = await userpromise;
         if (user) {
           return {
-            username: user.username,
+            username: user.username?user.username:" ",
             isStaff: user.isStaff,
             isSuperUser: user.isSuperUser,
             id: user.id,

@@ -12,5 +12,15 @@ declare module "next-auth" {
       id: string;
     } & DefaultSession["user"];
   }
+  interface User{
+    username:string
+    isStaff:boolean
+    isSuperUser:boolean
+    id:string
+    name:string|null
+    email:string|null
+    image:string|null
+    phonenumber:string|null
+  }
 
 }

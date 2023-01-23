@@ -43,14 +43,14 @@ const LoginPage: NextPage = () => {
               <label className=" mx-4 font-vazir text-sm">ایمیل/نام کاربری : <span className='text-red-500 font-bold text-sm'>{errors.username&&errors.username.message}</span></label>
 
               <input
-                className={errors.username?'shadow-[0_0_5px_rgba(255,50,50,0.7)]':`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
+                className={errors.username?'shadow-[0_0_5px_rgba(255,50,50,0.7)]':`shadow-[0_0_5px_0_rgba(0,0,2,0.4)] outline-none mb-8 rounded-md hover:rounded-3xl active:rounded-2xl focus:rounded-2xl  mt-2 mx-4 p-2  transition-all duration-500`}
                 {...register("username")}
               />
 
 
               <label className=" mx-4 font-vazir text-sm">رمز :  <span className='text-red-500 font-bold text-sm'>{errors.password&&errors.password.message}</span></label>
               <input
-                className={errors.password?'shadow-[0_0_5px_rgba(255,50,50,0.7)]':`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
+                className={errors.password?'shadow-[0_0_5px_rgba(255,50,50,0.7)]':`shadow-[0_0_5px_0_rgba(0,0,2,0.4)] outline-none mb-8 rounded-md hover:rounded-3xl active:rounded-2xl focus:rounded-2xl  mt-2 mx-4 p-2  transition-all duration-500`}
                 type="password"
                 {...register("password")}
               />

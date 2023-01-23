@@ -61,40 +61,40 @@ const LoginPage: NextPage = () => {
               
               <label className=" mx-4 text-sm font-vazir">نام کاربری : <span className='text-red-500 font-bold text-sm'>{"   "}{errors.username && errors.username?.message}</span></label>
               <input
-                className={errors.username?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
+                className={errors.username?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)] outline-none mb-8 rounded-md hover:rounded-3xl active:rounded-2xl focus:rounded-2xl  mt-2 mx-4 p-2  transition-all duration-500`}
                 {...register("username")}
               />
 
               <label className=" mx-4 text-sm font-vazir">نام  : <span className='text-red-500 font-bold'>{"   "}{errors.name && errors.name?.message}</span></label>
               <input
-                className={errors.name?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
+                className={errors.name?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)] outline-none mb-8 rounded-md hover:rounded-3xl active:rounded-2xl focus:rounded-2xl  mt-2 mx-4 p-2  transition-all duration-500`}
                 {...register("name")}
               />
 
               <label className=" mx-4 text-sm font-vazir">نام خانوادگی : <span className='text-red-500 font-bold'>{"   "}{errors.lastname && errors.lastname?.message}</span></label>
               <input
-                              className={errors.lastname?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
+                              className={errors.lastname?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)] outline-none mb-8 rounded-md hover:rounded-3xl active:rounded-2xl focus:rounded-2xl  mt-2 mx-4 p-2  transition-all duration-500`}
 
                 {...register("lastname")}
               />
 
               <label className=" mx-4 text-sm font-vazir">ایمیل : <span className='text-red-500 font-bold'>{"   "}{errors.email && errors.email?.message}</span></label>
               <input
-                              className={errors.email?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
+                              className={errors.email?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)] outline-none mb-8 rounded-md hover:rounded-3xl active:rounded-2xl focus:rounded-2xl  mt-2 mx-4 p-2  transition-all duration-500`}
 
                 {...register("email")}
               />
 
               <label className=" mx-4 text-sm font-vazir">شماره موبایل : <span className='text-red-500 font-bold'>{"   "}{errors.phonenumber && errors.phonenumber?.message}</span></label>
               <input
-                              className={errors.phonenumber?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
+                              className={errors.phonenumber?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)] outline-none mb-8 rounded-md hover:rounded-3xl active:rounded-2xl focus:rounded-2xl  mt-2 mx-4 p-2  transition-all duration-500 `}
 
                 {...register("phonenumber")}
               />
 
               <label className=" mx-4 text-sm font-vazir">رمز : <span className='text-red-500 font-bold'>{"   "}{errors.password && errors.password?.message}</span></label>
               <input
-                              className={errors.password?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
+                              className={errors.password?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)] outline-none mb-8 rounded-md hover:rounded-3xl active:rounded-2xl focus:rounded-2xl  mt-2 mx-4 p-2  transition-all duration-500`}
 
                 type="password"
                 {...register("password")}
@@ -102,7 +102,7 @@ const LoginPage: NextPage = () => {
               
               <label className=" mx-4 text-sm font-vazir">تکرار رمز : <span className='text-red-500 font-bold'>{"   "}{errors.pasconfirm && errors.pasconfirm?.message}</span></label>
               <input
-                className={errors.pasconfirm?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)]`}
+                className={errors.pasconfirm?`shadow-[0_0_5px_0_rgba(255,50,50,0.7)]`:`shadow-[0_0_5px_0_rgba(0,0,2,0.4)] outline-none mb-8 rounded-md hover:rounded-3xl active:rounded-2xl focus:rounded-2xl  mt-2 mx-4 p-2  transition-all duration-500`}
 
                 type="password"
                 {...register("pasconfirm")}

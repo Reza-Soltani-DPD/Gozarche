@@ -3,7 +3,7 @@ import * as React from "react";
 interface paginationProps {
   pageNumber: number;
   numberOfPages: number;
-  setPage: React.Dispatch<number>;
+  setPage: (page:number)=>void;
 }
 
 export default function Pagination(props: paginationProps) {

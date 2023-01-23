@@ -19,7 +19,7 @@ export default function AdminLayout(props: IAppProps) {
         <AdminLayoutHeader />
         <div className="flex h-[95vh]">
           <AdminSideBar className=" h-full " />
-          <div className="h-full w-full bg-zinc-300 ">{children}</div>
+          <div className="h-full w-full bg-zinc-300 overflow-scroll ">{children}</div>
         </div>
       </div>
     </div>
