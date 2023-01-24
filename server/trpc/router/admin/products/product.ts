@@ -54,6 +54,10 @@ export const productRouter = router({
 
       return [...products.map((product)=>{return {id:product.id,imageid:product.imageid,slug:product.slug,title:product.title,createdAT:product.createdAT}})];
     }),
+    deleteproducts:adminProcedure.input(z.array(z.string())).mutation(({input})=>{
+      console.log(input);
+      
+    }),
   productCount: adminProcedure
     .output(
       z.object({
