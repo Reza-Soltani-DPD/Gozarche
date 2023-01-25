@@ -16,7 +16,7 @@ export default function Modal(props: IAppProps) {
       />
       <div className="w-full h-full flex items-center justify-center">
         <div className={`${!show?"-translate-y-[100vh]":"translate-y-0"}  bg-white ease-[cubic-bezier(0.33,-1,0.66,2)] transition-all duration-500
-		rounded-lg p-4 shadow-[0_0_4px_0_rgba(0,0,0,0.3)] `}>{children}</div>
+		rounded-lg p-4 shadow-[0_0_4px_0_rgba(0,0,0,0.3)] max-w-[96vw] max-h-[96vh] `}>{children}</div>
       </div>
     </div>
   );

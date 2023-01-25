@@ -4,12 +4,11 @@
 
 
 @import url('./nav.css');
+@import url('./inputs.css');
 
 .card{
 	@apply shadow-[0_0_20px_4px_rgba(0,0,0,0.2)] rounded-3xl 
 }
-
-
 
 .grid-center-container{
 	@apply flex flex-col items-center mt-2
@@ -19,6 +18,12 @@
   @apply  items-center p-2 font-vazir font-bold rounded-md hover:rounded-3xl bg-primary-500 shadow-xl text-white  mx-4  mt-4 transition-all duration-500 flex-grow
   }
 
+.animate{
+  @apply transition-all duration-500
+}
+.animateShadow{
+  @apply transition-all duration-500 shadow-[0_0_3px_0] rounded-md hover:rounded-3xl shadow-sky-400
+}
 ul > li.footer{
   @apply  text-center  p-1
 }

@@ -42,7 +42,7 @@ export default function Products() {
   const { data: datacount } =
     trpc.admin.products.product.productCount.useQuery();
   const {mutate:deleteMutation,isError:deleteIsError,isLoading:deleteIsLoading,status:deleteStatus} =trpc.admin.products.product.deleteproducts.useMutation()
-  const { data, refetch } = trpc.admin.products.product.getproducts.useQuery({
+  const { data, refetch ,isLoading} = trpc.admin.products.product.getproducts.useQuery({
     take: 6,
     skip: (pageNumber - 1) * 6,
     filter: { filtername: productstate, filterState: true },
@@ -88,6 +88,13 @@ export default function Products() {
             </Link>
           </span>
         </div>
+        {!data?(isLoading?
+        <div className="flex h-full w-full items-center justify-center font-vazir text-2xl font-semibold">
+            بارگزاری
+          </div>:
+          <div className="flex h-full w-full items-center justify-center font-vazir text-2xl font-semibold">
+          خطایی رخ داده است
+        </div>):
        <AdminTable<colName>
         datacount={datacount}
         itemstate={productstate}
@@ -104,7 +111,8 @@ export default function Products() {
         setDeleteModalShow={setDeleteModalShow}
         DeleteItems={DeleteItems}
         editlink='/admin/products/'
-       />
+        />
+      }
       </div>
     </AdminLayout>
   );

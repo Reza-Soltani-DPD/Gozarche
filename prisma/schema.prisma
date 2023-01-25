@@ -944,4 +944,7 @@ model media {
   mediatype   mediatype?
   description String?
   ariaLabel   String?
+  deleted     Boolean       @default(false)
+  createdat   DateTime       @default(now())
+  deletedat   DateTime?       
 }

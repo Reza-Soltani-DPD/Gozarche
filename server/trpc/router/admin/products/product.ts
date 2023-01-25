@@ -60,6 +60,10 @@ export const productRouter = router({
       console.log(input);
       
     }),
+    editproduct:adminProcedure.mutation(({input})=>{
+console.log(input);
+
+    }),
   productCount: adminProcedure
     .output(
       z.object({

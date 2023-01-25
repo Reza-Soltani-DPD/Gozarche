@@ -1,0 +1,7 @@
+.textInput{
+ @apply  transition-all duration-500 rounded-md max-w-lg shadow-[0_0_4px_0_"#38bgf8"] shadow-sky-400  p-1 bg-white disabled:text-gray-400 disabled:bg-white m-2 font-vazir hover:rounded-3xl 
+}
+
+.textLabel{
+	@apply transition-all duration-500    p-1  disabled:text-gray-400 disabled:bg-white mt-4 mr-2 font-vazir text-sm hover:font-semibold 
+}
