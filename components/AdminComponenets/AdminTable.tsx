@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Pagination from "../Pagination";
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
+import Modal from '../Modal';
+import { useRouter } from 'next/router';
 
 
 type colname=string
@@ -20,6 +22,10 @@ interface AdminTableProps<T extends colname>{
   setPage:(page:number)=>void
   SetSelected(id:string):void
   data:{[key in colname ]:unknown}[]|undefined
+  deleteModalShow:boolean
+  setDeleteModalShow:React.Dispatch<boolean>
+  DeleteItems():void
+  editlink:string
 }
 export default function AdminTable<T extends colname> (props:AdminTableProps<T>) {
 	const{
@@ -33,10 +39,25 @@ export default function AdminTable<T extends colname> (props:AdminTableProps<T>)
     pageNumber,
     setPage,
     SetSelected,
-    data
+    data,
+    deleteModalShow,
+    setDeleteModalShow,
+    DeleteItems,
+    editlink
+
 	}=props
+  const router=useRouter()
   return (
 	<div>
+    <Modal show={deleteModalShow} setShow={setDeleteModalShow}>
+      <div className='font-vazir font-medium'>
+         آیا مطمئن هستید موارد مورد نظر را حذف کنید؟  
+      </div>
+      <div className='flex font-vazir font-bold mt-4 justify-around '>
+        <div className='text-gray-600 text-center bg-sky-400 rounded py-2 px-8 text-sm ' onClick={()=>setDeleteModalShow(false)}>خیر</div>
+        <div className='text-gray-600 text-center bg-sky-400 rounded py-2 px-8 text-sm ' onClick={()=>{DeleteItems();setDeleteModalShow(false)}}>بله!</div>
+      </div>
+    </Modal>
 	   <div className='flex justify-between'>
           <div>
             {datacount?.all != 0 ? (
@@ -95,10 +116,10 @@ export default function AdminTable<T extends colname> (props:AdminTableProps<T>)
           </div>
           <div className='flex'>
             <span className={`transition-all duration-700 ${selected.length>0?"text-gray-600":'text-gray-400'} px-2`}>
-              <TrashIcon className='h-5 w-5 '/>
+              <TrashIcon className='h-5 w-5 ' onClick={()=>{if(selected.length>0)setDeleteModalShow(true)}}/>
             </span>
             <span className={`transition-all duration-700 ${selected.length!=1?"text-gray-400":'text-gray-600'} px-2`}>
-              <PencilIcon className='h-5 w-5 '/>
+              <PencilIcon className='h-5 w-5  ' onClick={()=>{if(selected.length==1)router.push(editlink+selected[0])}}/>
             </span>
             </div>
         </div>

@@ -54,7 +54,9 @@ export const productRouter = router({
 
       return [...products.map((product)=>{return {id:product.id,imageid:product.imageid,slug:product.slug,title:product.title,createdAT:product.createdAT}})];
     }),
+    getproductById:adminProcedure.input(z.string()).query(async ({ctx,input})=>{return await ctx.prisma.product.findUnique({where:{id:input}})}),
     deleteproducts:adminProcedure.input(z.array(z.string())).mutation(({input})=>{
+      
       console.log(input);
       
     }),

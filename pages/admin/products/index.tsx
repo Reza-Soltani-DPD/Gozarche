@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import AdminTable from '../../../components/AdminComponenets/AdminTable';
 import type{tablecol} from '../../../components/AdminComponenets/AdminTable';
+import { AdminHeader } from '../../../components/AdminComponenets/AdminHeader';
 
 
 type colName="id"|"title"|"imageid"|"slug"|"createdAT"
@@ -32,14 +33,15 @@ const tableCols: tablecol<colName>[] = [
   }
 ];
 export default function Products() {
+  const [deleteModalshow,setDeleteModalShow]=React.useState<boolean>(false)
   const [pageNumber, setPageNumber] = React.useState<number>(1);
   const [selected, setSelected] = React.useState<string[]>([]);
   const [productstate, setProductState] = React.useState<
     "all" | "published" | "trashed"
   >("all");
-
   const { data: datacount } =
     trpc.admin.products.product.productCount.useQuery();
+  const {mutate:deleteMutation,isError:deleteIsError,isLoading:deleteIsLoading,status:deleteStatus} =trpc.admin.products.product.deleteproducts.useMutation()
   const { data, refetch } = trpc.admin.products.product.getproducts.useQuery({
     take: 6,
     skip: (pageNumber - 1) * 6,
@@ -60,11 +62,17 @@ export default function Products() {
       setSelected(Array(id));
     }
   };
+  console.log(deleteIsLoading,deleteIsError,deleteStatus);
+  
+  const DeleteItems = ()=>{
+    deleteMutation(selected)
+
+
+    
+  }
   return (
     <AdminLayout>
-      <div className="flex w-full justify-between bg-white">
-        <h1 className="text-md px-10 py-5 font-vazir font-bold">محصولات</h1>
-      </div>
+      <AdminHeader title='محصولات'/>
       <div className="mt-4  w-full px-4 ">
         <div className="flex items-center py-4">
           <span>
@@ -92,6 +100,10 @@ export default function Products() {
         pageNumber={pageNumber}
         setPageNumber={setPageNumber}
         selected={selected}
+        deleteModalShow={deleteModalshow}
+        setDeleteModalShow={setDeleteModalShow}
+        DeleteItems={DeleteItems}
+        editlink='/admin/products/'
        />
       </div>
     </AdminLayout>
