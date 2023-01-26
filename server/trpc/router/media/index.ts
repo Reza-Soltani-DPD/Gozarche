@@ -5,7 +5,7 @@ export const mediaRouter = router({
   getAllMediaByType: publicProcedure
     .input(
       z.object({
-        ids: z.array(z.string()),
+        ids: z.optional(z.array(z.string())),
         mediaType: z.optional(z.array(z.enum(["IMG", "VID", "AUD"]))),
       })
     )

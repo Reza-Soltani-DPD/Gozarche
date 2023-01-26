@@ -62,7 +62,6 @@ export default function Products() {
       setSelected(Array(id));
     }
   };
-  console.log(deleteIsLoading,deleteIsError,deleteStatus);
   
   const DeleteItems = ()=>{
     deleteMutation(selected)

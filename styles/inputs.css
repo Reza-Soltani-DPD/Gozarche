@@ -3,5 +3,15 @@
 }
 
 .textLabel{
-	@apply transition-all duration-500    p-1  disabled:text-gray-400 disabled:bg-white mt-4 mr-2 font-vazir text-sm hover:font-semibold 
+	@apply  p-1  disabled:text-gray-400 disabled:bg-white mt-4 mr-2 font-vazir text-sm font-semibold 
+}
+
+.FileInput::-webkit-file-upload-button{
+	visibility: hidden;
+}
+.FileInput::before{
+	content: 'بارگزاری فایل';
+}
+.FileInput{
+	
 }

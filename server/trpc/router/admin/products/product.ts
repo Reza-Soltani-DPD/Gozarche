@@ -57,11 +57,9 @@ export const productRouter = router({
     getproductById:adminProcedure.input(z.string()).query(async ({ctx,input})=>{return await ctx.prisma.product.findUnique({where:{id:input}})}),
     deleteproducts:adminProcedure.input(z.array(z.string())).mutation(({input})=>{
       
-      console.log(input);
       
     }),
     editproduct:adminProcedure.mutation(({input})=>{
-console.log(input);
 
     }),
   productCount: adminProcedure

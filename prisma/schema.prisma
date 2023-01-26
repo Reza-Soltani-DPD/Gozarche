@@ -92,7 +92,7 @@ model user {
   productrating  productrating[]
   productreview  productreview[]
   postcomments   postcomment[]
-  adresses       adress[]
+  addresses      address[]
   subscription   subscription[]
   posts          post[]  @relation(name: "postowner")
   readedpost     post[]  @relation(name: "postread")
@@ -238,7 +238,7 @@ model message {
 }
 
 
-model adress {
+model address {
   id          String   @id @default(cuid())
   phonenumber String[] @db.Char(15)
   country     String?  @db.VarChar(150)
@@ -333,8 +333,9 @@ model product{
   updatedAT      DateTime        @updatedAt
   publishedAT      DateTime      @default(now())
   trashedAT      DateTime?
-  deletedAT      DateTime?        
-  variants       productvariant[]
+  deletedAT      DateTime?     
+  variations     productvariant[]   
+  properties     productprop[]
   meta           meta[]
   tag            tags[]
   category       category[]
@@ -407,7 +408,7 @@ model productvisit {
 model productprop {
   id                   String                 @id @default(cuid())
   title                String
-  product              productvariant[]
+  product              product[]
   producpropertiestype producproptype[]
   
 }
@@ -438,8 +439,21 @@ model productvariant {
   productid  String
   product    product       @relation(fields: [productid] ,references: [id] )
   status     productstatus @default(ACTIVE)
-  properties productprop[]
+  properties variationOption[]
   tag        tags[]
+}
+model variation{
+  id String @id @default(cuid())
+  name  String 
+  options variationOption[]
+}
+
+model variationOption{
+  id String @id @default(cuid())
+  option String 
+  productvariant productvariant[] 
+  variationtypeID String
+  variationtype variation @relation(fields: [variationtypeID],references: [id])
 }
 model productreview {
   id          String   @id @default(cuid())
@@ -641,7 +655,7 @@ model shop{
   imgid        String?
   description  String?
   phonenumber  String[]
-  adress       String[]
+  address      String[]
   rating       Float?
   ratingcount  Int?
   published      Boolean         @default(false)
@@ -937,11 +951,13 @@ enum mediatype {
   VID
   AUD
 }
+
+
 model media {
   id          String @id @default(cuid())
   url         String
   title       String?
-  mediatype   mediatype?
+  mediatype   mediatype
   description String?
   ariaLabel   String?
   deleted     Boolean       @default(false)
