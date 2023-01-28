@@ -10,9 +10,7 @@ export default function AdminSideBar(props: AdminSideBarProps) {
   const { minHeight } = props;
   return (
     <div
-      className={`flex min-h-${
-        minHeight ? minHeight : "0"
-      } w-40 flex-col items-center overflow-visible bg-zinc-800 text-white z-10`}
+      className={`flex h-[95vh] w-40 flex-col items-center overflow-scroll bg-zinc-800 text-white z-10`}
     >
       <AdminSideBarElement
         title="محصولات"

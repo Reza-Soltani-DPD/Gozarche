@@ -1,21 +1,32 @@
 import { z } from "zod";
 import { publicProcedure, router } from "../../trpc";
-
 export const mediaRouter = router({
   getAllMediaByType: publicProcedure
     .input(
       z.object({
         ids: z.optional(z.array(z.string())),
-        mediaType: z.optional(z.array(z.enum(["IMG", "VID", "AUD"]))),
+        mediaType: z.optional(z.array(z.enum(['IMG', 'VID', 'AUD']))),
       })
     )
     .query(async ({ ctx, input }) => {
+      
       const medias = await ctx.prisma.media.findMany({
         where: {
           mediatype:{in:input.mediaType},
-          id:{in:input.ids}
         },
+        orderBy:{createdat:'desc'}
       });
+      
       return medias
     }),
+    getMediaById:publicProcedure.input(z.optional(z.array(z.string()))).query(async ({ctx,input})=>{
+      if(input){
+
+        return await ctx.prisma.media.findMany({where:{
+          id:{in:input}
+        }})
+      }
+      return undefined;
+
+    })
 });

@@ -161,7 +161,7 @@ export default function AdminTable<T extends colname> (props:AdminTableProps<T>)
                               type="radio"
                               className="peer z-10 h-4 w-4 opacity-0"
                               checked={selected.includes(product.id as string)}
-                              
+                              onChange={(e)=>e}                              
                             />
                             <label className="absolute  h-4 w-4 rounded  border border-gray-400 bg-white shadow-[inset_0_0_4px_0_rgba(0,0,0,0.4)] duration-700 transition-all  peer-checked:bg-sky-400 peer-checked:shadow-[inset_0_0_6px__rgba(250,250,250,0.4)]"></label>
                           </div>

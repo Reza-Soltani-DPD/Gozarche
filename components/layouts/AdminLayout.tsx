@@ -11,15 +11,15 @@ export interface IAppProps {
 export default function AdminLayout(props: IAppProps) {
   const { title, children } = props;
   return (
-    <div>
+    <div className='h-screen'>
       <Head>
         <title>{title ? title + " - Gozarche" : "Admin - Gozarche"}</title>
       </Head>
       <div className="h-screen min-w-[768px]  ">
         <AdminLayoutHeader />
-        <div className="flex h-[95vh]">
-          <AdminSideBar className=" h-full " />
-          <div className="h-full w-full bg-zinc-300 overflow-scroll ">{children}</div>
+        <div className="flex  h-full">
+          <AdminSideBar className=" h-[95vh] " />
+          <div className="h-[95vh] w-full bg-zinc-300 overflow-scroll ">{children}</div>
         </div>
       </div>
     </div>

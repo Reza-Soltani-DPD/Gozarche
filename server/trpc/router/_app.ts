@@ -6,7 +6,7 @@ import { mediaRouter } from './media';
 export const appRouter = router({
   auth: authRouter,
   admin:adminRouter,
-  image:mediaRouter
+  media:mediaRouter,
 });
 
 // export type definition of API

@@ -1,6 +1,7 @@
 import * as React from "react";
 import ImageModal from "../ImageModal";
 import { trpc } from "../../utils/trpc";
+import Image from "next/image";
 
 export interface IImageBoxProps {
   imagesid?: string[];
@@ -9,39 +10,35 @@ export interface IImageBoxProps {
 
 export default function ImageBox(props: IImageBoxProps) {
   const { imagesid, setImagesId } = props;
-  const mediaType: "IMG" | "VID" | "AUD" = "IMG";
-  const { data, isLoading, isError } = trpc.image.getAllMediaByType.useQuery({
-    mediaType: [mediaType],
-    ids: imagesid,
-  });
+  const {
+    data: images,
+    isLoading,
+    isError,
+  } = trpc.media.getMediaById.useQuery(imagesid);
 
   return (
     <>
-      <div className="flex">
-        <ImageModal imagesIdList={imagesid} setImagesIdList={setImagesId} />
-        <div className="grid grid-cols-3">
-          {imagesid && imagesid.length > 0 ? (
+      <div className="">
+        <ImageModal imagesList={images?images.map(image=>{return{id:image.id,url:image.url,ariaLabel:image.ariaLabel}}):undefined} setImagesIdList={setImagesId} />
+        <div>
+          {!images && isLoading ? (
+            <div>بارگزاری</div>
+          ) : (
             <>
-              {isLoading ? (
-                <div>بارگزاری</div>
+              {!isError ? (
+                <div className="grid grid-cols-3 gap-4 w-8/12">
+                  {images
+                    ? images.map((image, index) => (
+                        <div className="aspect-square p-2 shadow-[0_0_4px_0_rgba(0,0,0,0.3)] bg-white rounded" key={index}>
+                          <Image src={image.url} width={400} height={500} alt={image.ariaLabel?image.ariaLabel:'image '} className='aspect-square object-contain'/>
+                        </div>
+                      ))
+                    : "خالی"}
+                </div>
               ) : (
-                <>
-                  {data && !isError ? (
-                    <div>
-                      {data.map((data, index) => (
-                        <div key={index}></div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div>
-                      خطا در نمایش تصاویر
-                    </div>
-                  )}
-                </>
+                <div>خطا در نمایش تصاویر</div>
               )}
             </>
-          ) : (
-            <div className="m-auto  text-center">خالی</div>
           )}
         </div>
       </div>

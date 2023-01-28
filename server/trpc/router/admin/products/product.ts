@@ -54,13 +54,14 @@ export const productRouter = router({
 
       return [...products.map((product)=>{return {id:product.id,imageid:product.imageid,slug:product.slug,title:product.title,createdAT:product.createdAT}})];
     }),
-    getproductById:adminProcedure.input(z.string()).query(async ({ctx,input})=>{return await ctx.prisma.product.findUnique({where:{id:input}})}),
+    getproductById:adminProcedure.input(z.optional(z.string())).query(async ({ctx,input})=>{
+      if(!input)return undefined
+      return await ctx.prisma.product.findUnique({where:{id:input}})}),
     deleteproducts:adminProcedure.input(z.array(z.string())).mutation(({input})=>{
-      
-      
+      //
     }),
     editproduct:adminProcedure.mutation(({input})=>{
-
+//
     }),
   productCount: adminProcedure
     .output(
