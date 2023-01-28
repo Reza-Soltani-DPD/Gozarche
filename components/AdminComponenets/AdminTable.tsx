@@ -158,7 +158,7 @@ export default function AdminTable<T extends colname> (props:AdminTableProps<T>)
                         <th className="co-center items-center">
                           <div className="relative m-auto flex max-h-min max-w-min" onClick={() => SetSelected(product.id as string)}>
                             <input
-                              type="radio"
+                              type="checkbox"
                               className="peer z-10 h-4 w-4 opacity-0"
                               checked={selected.includes(product.id as string)}
                               onChange={(e)=>e}                              

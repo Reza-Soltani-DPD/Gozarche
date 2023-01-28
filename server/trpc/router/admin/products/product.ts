@@ -25,7 +25,7 @@ export const productRouter = router({
       z.array(
         z.object({
           id: z.string(),
-          imageid: z.array(z.string()),
+          imageurl: z.array(z.string()),
           slug: z.string(),
           title: z.string(),
           createdAT: z.date(),
@@ -52,14 +52,17 @@ export const productRouter = router({
         },
       });
 
-      return [...products.map((product)=>{return {id:product.id,imageid:product.imageid,slug:product.slug,title:product.title,createdAT:product.createdAT}})];
+      return [...products.map((product)=>{return {id:product.id,imageurl:product.imageurl,slug:product.slug,title:product.title,createdAT:product.createdAT}})];
     }),
+
     getproductById:adminProcedure.input(z.optional(z.string())).query(async ({ctx,input})=>{
       if(!input)return undefined
-      return await ctx.prisma.product.findUnique({where:{id:input}})}),
+      return await ctx.prisma.product.findUnique({where:{id:input},include:{variations:true,properties:true,meta:true,tag:true,category:true}})}),
+
     deleteproducts:adminProcedure.input(z.array(z.string())).mutation(({input})=>{
       //
     }),
+    
     editproduct:adminProcedure.mutation(({input})=>{
 //
     }),
