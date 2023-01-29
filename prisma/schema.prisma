@@ -324,14 +324,13 @@ model product{
   type           producttype     @default(PSC)
   sku            String?
   minquant       Float?          @default(1)
-  ratingcount    Int             @default(0)
   imageurl       String[]
   published      Boolean         @default(false)
   deleted        Boolean         @default(false)
   trashed        Boolean         @default(false)
   createdAT      DateTime        @default(now())
   updatedAT      DateTime        @updatedAt
-  publishedAT      DateTime      @default(now())
+  publishedAT    DateTime        @default(now())
   trashedAT      DateTime?
   deletedAT      DateTime?     
   variations     productvariant[]   
@@ -363,6 +362,8 @@ model productinventory {
   quant          Float      @default(0)
   price          Float
   slug           String     @unique
+  minquant       Float?          @default(1)
+  ratingcount    Int             @default(0)
   published      Boolean         @default(false)
   trashed        Boolean         @default(false)
   deleted        Boolean         @default(false)
@@ -390,17 +391,17 @@ model productinventory {
 
 
 model productvisit {
-  id             String   @id @default(cuid())
+  id             String           @id @default(cuid())
   numberofvisit  Int
   userId         String
-  user           user     @relation(fields: [userId],references: [id])  
+  user           user             @relation(fields: [userId],references: [id])  
   productId      String
-  product        productinventory  @relation(fields: [productId],references: [id])
-  published      Boolean         @default(false)
-  trashed        Boolean         @default(false)
-  deleted        Boolean         @default(false)
-  createdAT      DateTime        @default(now())
-  updatedAT      DateTime        @updatedAt
+  product        productinventory @relation(fields: [productId],references: [id])
+  published      Boolean          @default(false)
+  trashed        Boolean          @default(false)
+  deleted        Boolean          @default(false)
+  createdAT      DateTime         @default(now())
+  updatedAT      DateTime         @updatedAt
   publishedAT    DateTime?
   trashedAT      DateTime?
   deletedAT      DateTime? 
@@ -423,23 +424,24 @@ model producproptype {
 }
 
 model productvariant {
-  id         String        @id @default(cuid())
-  value      String
-  sku        String?
-  published      Boolean         @default(false)
-  trashed        Boolean         @default(false)
-  deleted        Boolean         @default(false)
-  createdAT      DateTime        @default(now())
-  updatedAT      DateTime        @updatedAt
-  publishedAT    DateTime?
-  trashedAT      DateTime?
-  deletedAT      DateTime? 
-  inventory  productinventory[]
-  productid  String
-  product    product       @relation(fields: [productid] ,references: [id] )
-  status     productstatus @default(ACTIVE)
-  properties variationOption[]
-  tag        tags[]
+  id          String          @id @default(cuid())
+  sku         String?
+  imageurl    String[]
+  minquant    Float?          @default(1)
+  published   Boolean         @default(false)
+  trashed     Boolean         @default(false)
+  deleted     Boolean         @default(false)
+  createdAT   DateTime        @default(now())
+  updatedAT   DateTime        @updatedAt
+  publishedAT DateTime?
+  trashedAT   DateTime?
+  deletedAT   DateTime? 
+  inventory   productinventory[]
+  productid   String
+  product     product       @relation(fields: [productid] ,references: [id] )
+  status      productstatus @default(ACTIVE)
+  variations  variationOption[]
+  tag         tags[]
 }
 model variation{
   id String @id @default(cuid())
@@ -954,7 +956,7 @@ enum mediatype {
 
 model media {
   id          String @id @default(cuid())
-  url         String
+  url         String @unique
   title       String?
   mediatype   mediatype
   description String?

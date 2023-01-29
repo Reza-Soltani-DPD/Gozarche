@@ -3,69 +3,69 @@ import { router, adminProcedure } from "../../../trpc";
 
 export const productRouter = router({
   getproducts: adminProcedure
-    .input(
-      z.object({
-        skip: z.optional(z.number()),
-        take: z.optional(z.number()),
-        orderBy: z.optional(
-          z.object({
-            order: z.string(),
-            asc: z.boolean(),
-          })
-        ),
-        filter: z.optional(
-          z.object({
-            filtername: z.string(),
-            filterState: z.boolean(),
-          })
-        ),
-      })
-    )
-    .output(
-      z.array(
+      .input(
         z.object({
-          id: z.string(),
-          imageurl: z.array(z.string()),
-          slug: z.string(),
-          title: z.string(),
-          createdAT: z.date(),
+          skip: z.optional(z.number()),
+          take: z.optional(z.number()),
+          orderBy: z.optional(
+            z.object({
+              order: z.string(),
+              asc: z.boolean(),
+            })
+          ),
+          filter: z.optional(
+            z.object({
+              filtername: z.string(),
+              filterState: z.boolean(),
+            })
+          ),
         })
       )
-    )
-    .query(async ({ ctx, input }) => {
-      const products = await ctx.prisma.product.findMany({
-        take: input.take,
-        skip: input.skip,
-        where:
-          input.filter && input.filter.filtername != "all"
-            ? {
-                ...{
-                  [input.filter?.filtername]: input.filter?.filterState,
-                },
-              }
-            : undefined,
-        orderBy: {
-          [input.orderBy?.order ? input.orderBy.order : "createdAT"]: input
-            .orderBy?.asc
-            ? "asc"
-            : "desc",
-        },
-      });
+      .output(
+        z.array(
+          z.object({
+            id: z.string(),
+            imageurl: z.array(z.string()),
+            slug: z.string(),
+            title: z.string(),
+            createdAT: z.date(),
+          })
+        )
+      )
+      .query(async ({ ctx, input }) => {
+        const products = await ctx.prisma.product.findMany({
+          take: input.take,
+          skip: input.skip,
+          where:
+            input.filter && input.filter.filtername != "all"
+              ? {
+                  ...{
+                    [input.filter?.filtername]: input.filter?.filterState,
+                  },
+                }
+              : undefined,
+          orderBy: {
+            [input.orderBy?.order ? input.orderBy.order : "createdAT"]: input
+              .orderBy?.asc
+              ? "asc"
+              : "desc",
+          },
+        });
 
-      return [...products.map((product)=>{return {id:product.id,imageurl:product.imageurl,slug:product.slug,title:product.title,createdAT:product.createdAT}})];
-    }),
+        return [...products.map((product)=>{return {id:product.id,imageurl:product.imageurl,slug:product.slug,title:product.title,createdAT:product.createdAT}})];
+      }),
 
-    getproductById:adminProcedure.input(z.optional(z.string())).query(async ({ctx,input})=>{
-      if(!input)return undefined
-      return await ctx.prisma.product.findUnique({where:{id:input},include:{variations:true,properties:true,meta:true,tag:true,category:true}})}),
-
-    deleteproducts:adminProcedure.input(z.array(z.string())).mutation(({input})=>{
-      //
-    }),
+  getproductById:adminProcedure.input(z.optional(z.string())).query(async ({ctx,input})=>{
+    if(!input)return undefined
+    return await ctx.prisma.product.findUnique({where:{id:input},include:{variations:true,properties:true,meta:true,tag:true,category:true}})}),
     
-    editproduct:adminProcedure.mutation(({input})=>{
+  deleteproducts:adminProcedure.input(z.array(z.string())).mutation(({input})=>{
+    //
+  }),
+  
+  editproduct:adminProcedure.mutation(({input})=>{
 //
-    }),
+  }),
   productCount: adminProcedure
     .output(
       z.object({

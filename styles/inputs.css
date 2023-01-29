@@ -1,6 +1,6 @@
 .textInput{
  @apply  transition-all duration-500 rounded-md max-w-lg shadow-[0_0_4px_0_"#38bgf8"] shadow-sky-400  p-1 bg-white disabled:text-gray-400 disabled:bg-white m-2
-  outline-none font-vazir hover:rounded-3xl 
+  outline-none font-vazir hover:rounded-2xl focus:rounded-2xl 
 }
 
 .textLabel{
