@@ -20,7 +20,6 @@ export default function Products() {
         }
       },
     });
-  console.log(product);
   const setImagesId = (list: string[]) => {
     if (product) setProduct({ ...product, imageurl: list });
   };
@@ -105,7 +104,6 @@ export default function Products() {
             <label className="textLabel ">تصاویر:</label>
             <ImageBox imagesid={product?.imageurl} setImagesId={setImagesId} />
           </div>
-
           <div id="variations " className="max-w-lg">
             <label className="textLabel flex items-center">مدل‌ها:</label>
             <ProductVariationSelector ids={product?.variations?product.variations.map(item=>item.id):[]} setIds={(id)=>setProduct(product?

@@ -10,8 +10,15 @@ import TopBrands from "../components/MainPageComps/TopBrands";
 import ProductSugestion from "../components/MainPageComps/ProductSugestion";
 import TopSale from "../components/MainPageComps/TopSale";
 import Readable from "../components/MainPageComps/Readable";
+import type { GetServerSideProps } from "next";
+import { authOptions } from "./api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
 
 const Home = () => {
+  const { data: session } = useSession();
+  console.log(session);
+
   return (
     <>
       <MainLayout>
@@ -33,3 +40,15 @@ const Home = () => {
   );
 };
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const ses = await getServerSession(context.req, context.res, authOptions);
+  if (ses && ses.user && ses.user.image == undefined) {
+    ses.user.image = null;
+  }
+  return {
+    props: {
+      session: ses,
+    },
+  };
+};

@@ -14,7 +14,7 @@ export default function ImageBox(props: IImageBoxProps) {
     data: images,
     isLoading,
     isError,
-  } = trpc.media.getMediaById.useQuery(imagesid);
+  } = trpc.media.getMediaById.useQuery(imagesid?imagesid:[]);
 
   return (
     <>

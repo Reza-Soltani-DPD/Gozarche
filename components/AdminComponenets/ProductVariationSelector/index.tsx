@@ -10,38 +10,63 @@ export interface IRealationSelectorProps {
 export function ProductVariationSelector(props: IRealationSelectorProps) {
   const { ids, setIds } = props;
 
-  const { data: variations } =
-    trpc.admin.products.variations.getVariationsByIds.useQuery({
+  const { data: productVariations } =
+    trpc.admin.products.variations.getProductVariationsByIds.useQuery({
       ids,
-      includes: ["variations", "tag"],
     });
-  console.log(variations);
 
-  // const {data:VOpts}=trpc.
   return (
-    <div className=" box-border w-full rounded-lg border border-gray-400 m-2 ">
+    <div className=" m-2 box-border w-full rounded-lg border border-gray-400 bg-gray-200 ">
       <div className=" w-full ">
         <div className="m-2">
-          {variations
-            ? variations.map((item, index) => (
+          {productVariations
+            ? productVariations.map((item, index) => (
                 <div
                   key={index}
-                  className="my-2 flex w-full items-center justify-between rounded-lg border border-gray-400 p-2"
+                  className="my-2  w-full items-center justify-between rounded-lg border border-sky-400 p-2 shadow"
                 >
-                  <span> {item.id}</span>
-                  <div>
-                    <PlusIcon
-                      className="h-5 w-5 rotate-45 text-red-500"
-                      onClick={() => {
-                        setIds(
-                          ids
-                            ? ids.filter((I) => {
-                                return I != item.id;
-                              })
-                            : []
-                        );
-                      }}
-                    />
+                  <div className="my-2 flex w-full items-center justify-between p-2 ">
+                    <span> {item.title}</span>
+                    <span className="flex items-center rounded border border-rose-500 p-2 font-vazir font-bold text-rose-600 ">
+                      حذف
+                      <PlusIcon
+                        className="h-5 w-5 rotate-45 "
+                        onClick={() => {
+                          setIds(
+                            ids
+                              ? ids.filter((I) => {
+                                  return I != item.id;
+                                })
+                              : []
+                          );
+                        }}
+                      />
+                    </span>
+                  </div>
+                  <div className="flex p-2">
+                    <span className="my-2 font-vazir">مشخصات:</span>
+                    <div className="flex p-2  ">
+                      {item.options &&
+                        item.options.map((option, index) => (
+                          <div
+                            key={index}
+                            className="m-1 whitespace-nowrap rounded border border-gray-400 p-1 font-vazir flex flex-nowrap items-center"
+                          >
+                            {option.option ? (
+                              <div>
+                                {" "}
+                                {option.option}:{option.optiontype.name}
+                              </div>
+                            ) : (
+                              " "
+                            )}
+                            <div>
+                              <PlusIcon className='w-5 h-5 m-1 text-rose-500 rotate-45 hover:scale-125 stroke-2 duration-50 transition-all' />
+                              </div>
+                          </div>
+                        ))}
+                      <div className='flex  border border-sky-400 rounded items-center m-1 p-2 font-vazir'>افزودن<PlusIcon className='w-5 h-5 text-sky-500 hover:scale-125 duration-50 transition-all'/></div>
+                    </div>
                   </div>
                 </div>
               ))

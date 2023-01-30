@@ -98,7 +98,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
             id: user.id,
             name: user.name,
             email: user.email,
-            image: user.imageId,
+            imageurl: user.imageurl?user.imageurl:null,
             phonenumber: user.phonenumber,
           };
         }
@@ -155,6 +155,7 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
             isSuperUser: user.isSuperUser,
             phonenumber: user.phonenumber,
             id: user.id,
+            image:user.image||null
           },
         };
       }

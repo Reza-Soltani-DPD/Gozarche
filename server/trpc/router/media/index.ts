@@ -19,14 +19,10 @@ export const mediaRouter = router({
       
       return medias
     }),
-    getMediaById:publicProcedure.input(z.optional(z.array(z.string()))).query(async ({ctx,input})=>{
-      if(input){
-
+    getMediaById:publicProcedure.input(z.array(z.string())).query(async ({ctx,input})=>{
         return await ctx.prisma.media.findMany({where:{
           id:{in:input}
         }})
-      }
-      return undefined;
-
+      
     })
 });

@@ -59,7 +59,7 @@ model user {
   email         String?   @unique
   password      String?
   phonenumber   String?   @unique
-  imageurl       String?
+  imageurl      String?   @unique
   slug          String?   @unique
   about         String?   @db.Text
 
@@ -425,6 +425,7 @@ model producproptype {
 
 model productvariant {
   id          String          @id @default(cuid())
+  title       String
   sku         String?
   imageurl    String[]
   minquant    Float?          @default(1)
@@ -440,21 +441,21 @@ model productvariant {
   productid   String
   product     product       @relation(fields: [productid] ,references: [id] )
   status      productstatus @default(ACTIVE)
-  variations  variationOption[]
+  options     variationOption[]
   tag         tags[]
 }
-model variation{
+model options{
   id String @id @default(cuid())
   name  String 
   options variationOption[]
 }
 
 model variationOption{
-  id String @id @default(cuid())
-  option String 
-  productvariant productvariant[] 
-  variationtypeID String
-  variationtype variation @relation(fields: [variationtypeID],references: [id])
+  id              String            @id @default(cuid())
+  option          String 
+  productvariant  productvariant[] 
+  optiontypeID    String
+  optiontype      options           @relation(fields: [optiontypeID],references: [id])
 }
 model productreview {
   id          String   @id @default(cuid())
