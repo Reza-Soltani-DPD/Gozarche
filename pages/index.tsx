@@ -13,12 +13,8 @@ import Readable from "../components/MainPageComps/Readable";
 import type { GetServerSideProps } from "next";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
-import { useSession } from "next-auth/react";
 
 const Home = () => {
-  const { data: session } = useSession();
-  console.log(session);
-
   return (
     <>
       <MainLayout>

@@ -4,22 +4,22 @@ import { trpc } from "../../utils/trpc";
 import Image from "next/image";
 
 export interface IImageBoxProps {
-  imagesid?: string[];
-  setImagesId(list: string[]): void;
+  imagesUrl?: string[];
+  setImagesUrl(list: string[]): void;
 }
 
 export default function ImageBox(props: IImageBoxProps) {
-  const { imagesid, setImagesId } = props;
+  const { imagesUrl, setImagesUrl } = props;
   const {
     data: images,
     isLoading,
     isError,
-  } = trpc.media.getMediaById.useQuery(imagesid?imagesid:[]);
-
+  } = trpc.media.getMediaByUrl.useQuery(imagesUrl?imagesUrl:[]);
+  
   return (
     <>
       <div className="">
-        <ImageModal imagesList={images?images.map(image=>{return{id:image.id,url:image.url,ariaLabel:image.ariaLabel}}):undefined} setImagesIdList={setImagesId} />
+        <ImageModal imagesList={images?images.map(image=>{return{id:image.id,url:image.url,ariaLabel:image.ariaLabel}}):undefined} setImagesUrlList={setImagesUrl} />
         <div>
           {!images && isLoading ? (
             <div>بارگزاری</div>

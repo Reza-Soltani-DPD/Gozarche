@@ -8,8 +8,10 @@ declare module "next-auth" {
     user?: {
       username:string
       isStaff:boolean
-      isSuperUser:boolean
+      isSuperUser: boolean
+      phonenumber:string
       id: string;
+      imageurl:string|null
     } & DefaultSession["user"];
   }
   interface User{
@@ -18,9 +20,10 @@ declare module "next-auth" {
     isSuperUser:boolean
     id:string
     name:string|null
-    email:string|null
+    email: string | null
+    image?:null|undefined
     imageurl:string|null
-    phonenumber:string|null
+    phonenumber:string
   }
 
 }

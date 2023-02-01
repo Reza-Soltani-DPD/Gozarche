@@ -19,9 +19,9 @@ export const mediaRouter = router({
       
       return medias
     }),
-    getMediaById:publicProcedure.input(z.array(z.string())).query(async ({ctx,input})=>{
+    getMediaByUrl:publicProcedure.input(z.array(z.string())).query(async ({ctx,input})=>{
         return await ctx.prisma.media.findMany({where:{
-          id:{in:input}
+          url:{in:input}
         }})
       
     })

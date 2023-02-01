@@ -29,6 +29,8 @@ export default function MainLayout({
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const session = useSession();  
+  console.log(session);
+
   const controlNavbar = () => {
     if (typeof window !== "undefined") {
       if (
@@ -115,12 +117,64 @@ export default function MainLayout({
                     </div>
                   </button>
                 ) : (
-                  <>
-                    <span className="px-2">{session.data?.user?.name}</span>
-                    <UserIcon className="mx-1 h-6 px-2 text-gray-700" />
-                  </>
+                  <div className="relative">
+                    <div className="peer flex items-center">
+                      <span className="px-2 font-vazir">
+                        {session.data?.user?.name}
+                      </span>
+                      {session?.data?.user?.imageurl ? (
+                        <div className="overflow-hidden rounded-full border border-gray-400 shadow-[0_0_3px_0_rgba(0,0,0,0.4)] transition-all duration-500 hover:shadow-[0_0_5px_0_rgba(0,0,0,0.4)]">
+                          <Image
+                            src={session.data.user.imageurl}
+                            height={40}
+                            width={40}
+                            alt="user avatar"
+                          />
+                        </div>
+                      ) : (
+                        <UserIcon className="mx-1 h-6 px-2 text-gray-700" />
+                      )}
+                    </div>
+                    <div className="max-sm:hidden absolute left-0  h-0 rounded-xl border-2 bg-white opacity-0 transition-all duration-500 hover:h-auto hover:opacity-100 peer-hover:h-auto peer-hover:opacity-100 ">
+                      <Link
+                        href="/"
+                        className="m-1 flex flex-nowrap items-center justify-between  rounded-xl bg-opacity-0 p-1 hover:bg-secondary-100 "
+                      >
+                        <span className="m-1 whitespace-nowrap font-vazir">
+                          حساب کاربری
+                        </span>
+                        <UserIcon className="m-1 h-5 w-5" />
+                      </Link>
+                      <Link
+                        href="/"
+                        className="m-1 flex flex-nowrap items-center justify-between  rounded-xl bg-opacity-0 p-1 hover:bg-secondary-100 "
+                      >
+                        <span className="m-1 whitespace-nowrap font-vazir">
+                          حساب کاربری
+                        </span>
+                        <UserIcon className="m-1 h-5 w-5" />
+                      </Link>
+                      <Link
+                        href="/"
+                        className="m-1 flex flex-nowrap items-center justify-between  rounded-xl bg-opacity-0 p-1 hover:bg-secondary-100 "
+                      >
+                        <span className="m-1 whitespace-nowrap font-vazir">
+                          حساب کاربری
+                        </span>
+                        <UserIcon className="m-1 h-5 w-5" />
+                      </Link>
+                      <Link
+                        href="/"
+                        className="m-1 flex flex-nowrap items-center justify-between  rounded-xl bg-opacity-0 p-1 hover:bg-secondary-100 "
+                      >
+                        <span className="m-1 ml-2 whitespace-nowrap font-vazir">
+خروج از حساب کاربری
+                            </span>
+                        <UserIcon className="m-1 h-5 w-5" />
+                      </Link>
+                    </div>
+                  </div>
                 )}
-                
               </div>
             </div>
             <div
@@ -134,18 +188,41 @@ export default function MainLayout({
                     ? "collapse h-0 -translate-y-14 overflow-hidden"
                     : "h-12"
                 }`}
-              ><div className="flex items-center ">
-                <MegaMenu className="" margintop={topbanner?"translate-y-[10.5rem]":"translate-y-[7rem]"}/>
-                <Link href="/shop" className='cubic font-vazir text-sm px-3 flex items-center text-gray-500 hover:text-primary-700'><ShoppingBagIcon className=' h-6 w-6'/> <span className='p-1'>فروشگاه</span></Link>
-                <Link href="/blog" className='cubic font-vazir text-sm px-3 flex items-center text-gray-500 hover:text-primary-700'><BookOpenIcon className=' h-6 w-6'/> <span className='p-1'>خواندنی</span></Link>
-                <Link href="/contact_us" className='cubic font-vazir text-sm px-3 flex items-center text-gray-500 hover:text-primary-700'><MapPinIcon className=' h-6 w-6'/> <span className='p-1'>تماس با ما</span></Link>
-              </div>
-                <div className='flex z-0'>
-                <ShoppingCartIcon className="mx-2 h-6 text-gray-700 max-sm:hidden " />
-                <ArrowsUpDownIcon className="mx-2 h-6 text-gray-700 max-sm:hidden " />
-                <HeartIcon className="mx-2 h-6 text-gray-700 max-sm:hidden" />
+              >
+                <div className="flex items-center ">
+                  <MegaMenu
+                    className=""
+                    margintop={
+                      topbanner ? "translate-y-[10.5rem]" : "translate-y-[7rem]"
+                    }
+                  />
+                  <Link
+                    href="/shop"
+                    className="cubic flex items-center px-3 font-vazir text-sm text-gray-500 hover:text-primary-700"
+                  >
+                    <ShoppingBagIcon className=" h-6 w-6" />{" "}
+                    <span className="p-1">فروشگاه</span>
+                  </Link>
+                  <Link
+                    href="/blog"
+                    className="cubic flex items-center px-3 font-vazir text-sm text-gray-500 hover:text-primary-700"
+                  >
+                    <BookOpenIcon className=" h-6 w-6" />{" "}
+                    <span className="p-1">خواندنی</span>
+                  </Link>
+                  <Link
+                    href="/contact_us"
+                    className="cubic flex items-center px-3 font-vazir text-sm text-gray-500 hover:text-primary-700"
+                  >
+                    <MapPinIcon className=" h-6 w-6" />{" "}
+                    <span className="p-1">تماس با ما</span>
+                  </Link>
                 </div>
-                
+                <div className="z-0 flex">
+                  <ShoppingCartIcon className="mx-2 h-6 text-gray-700 max-sm:hidden " />
+                  <ArrowsUpDownIcon className="mx-2 h-6 text-gray-700 max-sm:hidden " />
+                  <HeartIcon className="mx-2 h-6 text-gray-700 max-sm:hidden" />
+                </div>
               </div>
             </div>
           </nav>
