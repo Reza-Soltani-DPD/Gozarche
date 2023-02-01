@@ -14,7 +14,7 @@ type image = {
 };
 export interface IAppProps {
   children?: React.ReactNode;
-  setImagesIdList(list: string[]): void;
+  setImagesUrlList(list: string[]): void;
   imagesList?: image[] | undefined;
 }
 
@@ -39,20 +39,21 @@ const uploadFileRequest = async (
   return response.data;
 };
 export default function ImageModal(props: IAppProps) {
-  const { children, imagesList, setImagesIdList } = props;
+  const { children, imagesList, setImagesUrlList } = props;
   const [modalShow, setModalShow] = React.useState<boolean>(false);
   const [isUpLoading, setIsUpLoading] = React.useState(false);
   const [uploadPercent, setUploadPercent] = React.useState<number | undefined>(
     50
   );
-  const [modalSelectedImages,setmodalSelectedImages]=React.useState<string[]|undefined>(imagesList?.map(image=>image.id))
+  const [modalSelectedImages,setmodalSelectedImages]=React.useState<string[]|undefined>(imagesList?.map(image=>image.url))
   const { data } = trpc.media.getAllMediaByType.useQuery({
     mediaType: ["IMG"],
   });
+  
   React.useEffect(()=>{
     if(imagesList){
       
-      setmodalSelectedImages(imagesList?.map(image=>image.id))
+      setmodalSelectedImages(imagesList?.map(image=>image.url))
     }
     },[imagesList])
   const fileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,17 +68,17 @@ export default function ImageModal(props: IAppProps) {
       });
       data &&
         (imagesList
-          ? setImagesIdList([...imagesList.map((image) => image.id), data])
-          : setImagesIdList([data]));
+          ? setImagesUrlList([...imagesList.map((image) => image.url), data])
+          : setImagesUrlList([data]));
 
       setIsUpLoading(false);
     }
   };
-  const imageClickHandle = (id: string) => {
-    if (modalSelectedImages?.includes(id)) {
-      setmodalSelectedImages([...modalSelectedImages?.filter((image) => image != id)]);
+  const imageClickHandle = (url: string) => {
+    if (modalSelectedImages?.includes(url)) {
+      setmodalSelectedImages([...modalSelectedImages?.filter((image) => image != url)]);
     } else {
-      setmodalSelectedImages(modalSelectedImages?[...modalSelectedImages,id]:[id])
+      setmodalSelectedImages(modalSelectedImages?[...modalSelectedImages,url]:[url])
     }
   };
   return (
@@ -129,9 +130,9 @@ export default function ImageModal(props: IAppProps) {
               return (
                 <div
                   key={index}
-                  className={`aspect-square p-2 rounded-lg ${modalSelectedImages?.includes(image.id)?'shadow-[0_0_10px_-3px_rgba(50,50,200,1)]':
+                  className={`aspect-square p-2 rounded-lg ${modalSelectedImages?.includes(image.url)?'shadow-[0_0_10px_-3px_rgba(50,50,200,1)]':
                   'shadow-[0_0_10px_-3px_rgba(0,0,0,0.4)]'} `}
-                  onClick={() => imageClickHandle(image.id)}
+                  onClick={() => imageClickHandle(image.url)}
                 >
                   <Image
                     src={image.url}
@@ -145,15 +146,15 @@ export default function ImageModal(props: IAppProps) {
             })}
             {data ? (
               data.map((image, index) => {
-                if (imagesList?.map(image=>image.id).includes(image.id)) {
+                if (imagesList?.map(image=>image.url).includes(image.url)) {
                   return;
                 }
                 return (
                   <div
                     key={index}
-                    className={`aspect-square p-2 rounded-lg ${modalSelectedImages?.includes(image.id)?'shadow-[0_0_10px_-3px_rgba(56,248,56,1)]':
+                    className={`aspect-square p-2 rounded-lg ${modalSelectedImages?.includes(image.url)?'shadow-[0_0_10px_-3px_rgba(56,248,56,1)]':
                     'shadow-[0_0_10px_-3px_rgba(0,0,0,0.4)]'} `}
-                    onClick={() => imageClickHandle(image.id)}
+                    onClick={() => imageClickHandle(image.url)}
                   >
                     <Image
                       src={image.url}
@@ -171,12 +172,12 @@ export default function ImageModal(props: IAppProps) {
           </div>
           <div className='p-2 mt-1 border-t-2 border-gray-500 flex justify-around'>
             <div className='border rounded-md hover:rounded-3xl border-red-400 p-2 px-4 flex items-center font-vazir text-red-500'
-            onClick={()=>{setImagesIdList(imagesList?.map(image=>image.id)||[]);setModalShow(false)}}>
+            onClick={()=>{setImagesUrlList(imagesList?.map(image=>image.url)||[]);setModalShow(false)}}>
               لغو
               <PlusIcon className=' font-light h-12 w-12 p-2 rotate-45 '/>
             </div>
             <div className='border rounded-md hover:rounded-3xl border-green-400 p-2 px-4 flex items-center font-vazir text-green-500' 
-            onClick={()=>{setImagesIdList(modalSelectedImages||[]);setModalShow(false)}}>
+            onClick={()=>{setImagesUrlList(modalSelectedImages||[]);setModalShow(false)}}>
               ثبت
               <CheckIcon className=' font-light h-12 w-12 p-2 '/>
             </div>

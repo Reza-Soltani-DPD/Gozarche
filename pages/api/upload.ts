@@ -23,6 +23,7 @@ const upload = multer({
         file.originalname.split(".")[file.originalname.split(".").length - 1];
 
       cb(null, Date.now().toString() + "." + fileExt);
+      
     },
   }),
 });

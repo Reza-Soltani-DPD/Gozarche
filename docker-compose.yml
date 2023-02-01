@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  next:
+    containder-name: NextJS
+    platform: "linux/amd64"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_CLIENTVAR: "clientvar"
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    image: t3-app
+    environment:
+      - DATABASE_URL=database_url_goes_here
+  nginx:
+    container-name: nginx
+    image: nginx:1.19-alpine
+    ports:
+      - "8080:80"
+    dependon: 
+      -next
+    networks: 
+      -app
+
+  networs: 
+    app: 
+      driver: bridge

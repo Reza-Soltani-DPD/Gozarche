@@ -44,6 +44,7 @@ export const authOptions: NextAuthOptions = {
             isSuperUser: user.isSuperUser,
             phonenumber: user.phonenumber,
             id: user.id,
+            imageurl:user.imageurl
           },
         };
       }
@@ -90,6 +91,8 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
             })
           : null;
         const user = await userpromise;
+        console.log(user);
+        
         if (user) {
           return {
             username: user.username?user.username:" ",
@@ -99,9 +102,10 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
             name: user.name,
             email: user.email,
             imageurl: user.imageurl?user.imageurl:null,
-            phonenumber: user.phonenumber,
+            phonenumber: user.phonenumber?user.phonenumber:" ",
           };
         }
+        
         return null;
       },
     }),
@@ -155,7 +159,8 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
             isSuperUser: user.isSuperUser,
             phonenumber: user.phonenumber,
             id: user.id,
-            image:user.image||null
+            image:null,
+            imageurl:user.imageurl?user.imageurl:null
           },
         };
       }

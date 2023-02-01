@@ -20,7 +20,7 @@ export default function Products() {
         }
       },
     });
-  const setImagesId = (list: string[]) => {
+  const setImagesUrl = (list: string[]) => {
     if (product) setProduct({ ...product, imageurl: list });
   };
   if (!data) {
@@ -102,9 +102,9 @@ export default function Products() {
           </div>
           <div id="images" className="flex flex-col">
             <label className="textLabel ">تصاویر:</label>
-            <ImageBox imagesid={product?.imageurl} setImagesId={setImagesId} />
+            <ImageBox imagesUrl={product?.imageurl} setImagesUrl={setImagesUrl} />
           </div>
-          <div id="variations " className="max-w-lg">
+          <div id="variations " className="max-w-xl">
             <label className="textLabel flex items-center">مدل‌ها:</label>
             <ProductVariationSelector ids={product?.variations?product.variations.map(item=>item.id):[]} setIds={(id)=>setProduct(product?
               {...product,variations:product.variations&&product.variations?.filter(item=>id.includes(item.id))}:undefined
