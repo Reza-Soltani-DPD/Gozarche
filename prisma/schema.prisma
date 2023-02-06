@@ -76,7 +76,6 @@ model user {
   createdAT     DateTime         @default(now())
   updatedAT     DateTime         @updatedAt
   deactiveAT    DateTime?
-
   followers      user[]   @relation("userfollows")
   followings     user[]   @relation("userfollows")
   
@@ -444,18 +443,18 @@ model productvariant {
   options     variationOption[]
   tag         tags[]
 }
-model options{
-  id String @id @default(cuid())
-  name  String 
-  options variationOption[]
+model optionValue{
+  id         String @id @default(cuid())
+  value      String 
+  optionType variationOption[]
 }
 
 model variationOption{
   id              String            @id @default(cuid())
-  option          String 
+  optionType      String 
   productvariant  productvariant[] 
-  optiontypeID    String
-  optiontype      options           @relation(fields: [optiontypeID],references: [id])
+  optionValueId   String
+  optionValue     optionValue       @relation(fields: [optionValueId],references: [id])
 }
 model productreview {
   id          String   @id @default(cuid())

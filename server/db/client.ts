@@ -1,5 +1,4 @@
 import {prisma as cl} from './db'
-
 // cl.$use(async (params,next)=>{
 //   try{
 //     if(params.model=="dbchanges" && !["create","createMany","updata","updataMany","delete","deleteMany","upsert"].includes(params.action)){
@@ -20,4 +19,4 @@ import {prisma as cl} from './db'
 //   }
 // })
 
-export const prisma =cl
+export const prisma = cl
