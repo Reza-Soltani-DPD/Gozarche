@@ -7,11 +7,14 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_CLIENTVAR: "clientvar"
+         NEXT_PUBLIC_CLIENTVAR: "clientvar"
     working_dir: /app
     ports:
       - "3000:3000"
     image: t3-app
+    etworks: 
+      -app
+
     environment:
       - DATABASE_URL=database_url_goes_here
   nginx:

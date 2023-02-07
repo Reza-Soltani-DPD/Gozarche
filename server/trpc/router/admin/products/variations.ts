@@ -21,7 +21,12 @@ export const variationsRouter = router({
         return undefined;
       }
     }),
-    getProductVariationsByIds:adminProcedure.input(z.object({ids:z.array(z.string())})).query(async({ctx,input})=>{
-      return await ctx.prisma.productvariant.findMany({where:{id:{in:input.ids} },include:{options:{include:{optiontype:true}}}})
-       })
+  getProductVariationsByIdsIncludeOptions: adminProcedure
+    .input(z.object({ ids: z.array(z.string()) }))
+    .query(async ({ ctx, input }) => {
+      return await ctx.prisma.productvariant.findMany({
+        where: { id: { in: input.ids } },
+        include: { options: true },
+      });
+    }),
 });

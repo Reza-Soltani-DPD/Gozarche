@@ -29,7 +29,6 @@ export default function MainLayout({
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const session = useSession();  
-  console.log(session);
 
   const controlNavbar = () => {
     if (typeof window !== "undefined") {

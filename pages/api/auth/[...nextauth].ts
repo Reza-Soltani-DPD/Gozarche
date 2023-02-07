@@ -91,7 +91,6 @@ export default async function auth(req: NextApiRequest, res: NextApiResponse) {
             })
           : null;
         const user = await userpromise;
-        console.log(user);
         
         if (user) {
           return {

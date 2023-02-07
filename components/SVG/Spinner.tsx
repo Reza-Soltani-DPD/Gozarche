@@ -4,8 +4,8 @@ export interface IAppProps {
 	percentage?:number
 	bgColor:string
 	spColor:string
-	hidden:boolean
-	opacity:string
+	hidden?:boolean
+	opacity?:string
 	dimensions:number
 }
 

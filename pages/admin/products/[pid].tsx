@@ -27,6 +27,7 @@ export default function Products() {
     return <div>خطا</div>;
   }
 
+  
   return (
     <AdminLayout>
       <AdminHeader title="محصولات" subtitle="ویرایش محصول" />
@@ -83,7 +84,7 @@ export default function Products() {
               <select
                 defaultValue={product?.type || "PSC"}
                 className="textInput mx-4 font-vazir "
-                onChange={(e) => console.log(e.target.value)}
+                  onChange={(e) => e }
               >
                 <option value="PSC">فیزیکی </option>
                 <option value="DIG">دیجیتالی </option>
@@ -106,9 +107,8 @@ export default function Products() {
           </div>
           <div id="variations " className="max-w-xl">
             <label className="textLabel flex items-center">مدل‌ها:</label>
-            <ProductVariationSelector ids={product?.variations?product.variations.map(item=>item.id):[]} setIds={(id)=>setProduct(product?
-              {...product,variations:product.variations&&product.variations?.filter(item=>id.includes(item.id))}:undefined
-              )}
+              <ProductVariationSelector variations={product?.variations}
+                setVariations={(vari) => setProduct(product && { ...product, variations: vari } )}
             />
           </div>
           <div id="published" className="">
