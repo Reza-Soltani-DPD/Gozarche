@@ -108,7 +108,7 @@ export default function Products() {
           <div id="variations " className="max-w-xl">
             <label className="textLabel flex items-center">مدل‌ها:</label>
               <ProductVariationSelector variations={product?.variations}
-                setVariations={(vari) => setProduct(product && { ...product, variations: [vari] } )}
+                setVariations={(vari) => setProduct(product && { ...product, variations: vari } )}
             />
           </div>
           <div id="published" className="">

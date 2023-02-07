@@ -6,7 +6,7 @@ import type { ProductVariantType } from '../../../server/db/dbtypes'
 
 export interface IRealationSelectorProps {
   variations: ProductVariantType[]|undefined;
-  setVariations: (variations: ProductVariantType) => void;
+  setVariations: (variations: ProductVariantType[]) => void;
 }
 
 export function ProductVariationSelector(
@@ -27,7 +27,11 @@ export function ProductVariationSelector(
                 <ProductVariationBox
                   key={index}
                   variation={item}
-                  setVariation={() => setVariations(undefined)}
+                  setVariation={(variation) => {
+                    if (variations) {
+                      setVariations([...variations,variation])
+                    }
+                  }}
                 />
               ))
             : ""}

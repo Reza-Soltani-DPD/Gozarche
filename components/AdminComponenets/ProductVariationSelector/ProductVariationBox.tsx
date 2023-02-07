@@ -9,11 +9,11 @@ import type {
 
 export interface ProductOptionBoxPropsType {
   variation: ProductVariantType_Include_Options;
-  setVariations: (variation: ProductVariantType) => void;
+  setVariation: (variation: ProductVariantType) => void;
 }
 
 export default function ProductOptionBox(props: ProductOptionBoxPropsType) {
-  const { variation } = props;
+  const { variation,setVariation } = props;
   const [variationState, setVariationState] =
     React.useState<ProductVariantType_Include_Options>(variation);
 
