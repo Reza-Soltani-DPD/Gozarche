@@ -30,25 +30,39 @@ export const variationOptionsRouter = router({
     .query(async ({ ctx, input }) => {
       return await ctx.prisma.variationOption.findMany({
         where: { id: { in: input.ids } },
-        include: { optionValue: true },
+        include: { variation: true },
       });
     }),
-  searchVariationOptionByIncludeOptionvalue: adminProcedure
+  searchVariationOptionByIncludeVariation: adminProcedure
     .input(
       z.object({ type: z.optional(z.string()), value: z.optional(z.string()) })
     )
     .mutation(async ({ ctx, input }) => {
       const { type, value } = input;
-      if (!type) return [];
-      const find = await ctx.prisma.variationOption.findMany({
-        where: { optionType: { contains: type } },
-        include: { optionValue: true },
-      });
-      const res = value
-        ? find
-          ? find.filter((item) => item.optionValue.value.includes(value))
-          : []
-        : find;
+      let variations
+      let variationOptions
+      if (type) {
+        variations = await ctx.prisma.variation.findMany({
+          where: { Name: { contains: type } },
+        });
+      }
+      if (value) {
+        variationOptions = await ctx.prisma.variationOption.findMany({
+          where: { optionValue: { contains: value } },
+          include:{variation:true}
+        });
+      }
+      
+      const varID = variations ? variations.map((vari) => vari.id) : [];
+      const res = variationOptions
+        ? type
+          ? varID
+            ? variationOptions.filter((item) =>
+                varID.includes(item.variationId)
+              )
+            : []
+          : variationOptions
+        : [];
       return res;
     }),
 });

@@ -26,7 +26,6 @@ export default function PropertyBox(props: IPropertyProps) {
             className=" group m-1 flex flex-nowrap items-center whitespace-nowrap rounded border border-gray-400 p-1 font-vazir"
           >
             <OptionBox variationoption={property} setVariationOption={(item) => {
-              // const { optionValue:_,...newobj}=item;
               setProperties([...properties.filter(pr => item.id != pr.id), item]);
               refetch()
             }} />

@@ -27,7 +27,7 @@ export type VariationOptionType = Prisma.variationOptionGetPayload<
 	typeof VariationOptionValidator
   >;
   const VariationOptionValidator_Include_OptionValue = Prisma.validator<Prisma.variationOptionArgs>()({
-	include:{optionValue:true}
+	include:{variation:true}
   });
 export type VariationOptionType_Include_OptionValue = Prisma.variationOptionGetPayload<
 	typeof VariationOptionValidator_Include_OptionValue

@@ -59,12 +59,12 @@ export const productRouter = router({
     if(!input)return undefined
     return await ctx.prisma.product.findUnique({where:{id:input},include:{variations:true,properties:true,meta:true,tag:true,category:true}})}),
     
-  deleteproducts:adminProcedure.input(z.array(z.string())).mutation(({input})=>{
+  deleteproducts:adminProcedure.input(z.array(z.string())).mutation(({input})=>{console.log(input)
     //
   }),
   
-  editproduct:adminProcedure.mutation(({input})=>{
-//
+  editproduct:adminProcedure.mutation(({input})=>{console.log(input);
+  
   }),
   productCount: adminProcedure
     .output(

@@ -13,12 +13,12 @@ export default function OptionTypeBox(props: IOptionTypeBoxProps) {
   const { variationoption,setVariationOption } = props;
   const [edit, setEdit] = React.useState<boolean>(false);
   const [panelShow, setPanelShow] = React.useState<boolean>(false);
-  const [optionType, setOptionType] = React.useState<string|undefined>(variationoption.optionType);
-  const [optionValue, setOptionValue] = React.useState<string|undefined >(variationoption.optionValue.value );
+  const [optionType, setOptionType] = React.useState<string|undefined>(variationoption?.variation?.Name);
+  const [optionValue, setOptionValue] = React.useState<string|undefined >(variationoption.optionValue );
   const typeref=React.useRef(null)
   const valueref=React.useRef(null)
   const mutation =
-    trpc.admin.products.variationOptions.searchVariationOptionByIncludeOptionvalue.useMutation();
+    trpc.admin.products.variationOptions.searchVariationOptionByIncludeVariation.useMutation();
 
   type debounceinput = {
     type: string | undefined;
@@ -32,7 +32,6 @@ export default function OptionTypeBox(props: IOptionTypeBoxProps) {
   const handleEditClose = () => {
     setEdit(false)
     setPanelShow(false)
-    console.log("helloll", optionValue,optionType);
     
   }
   const handlesearchPanelclick = (item:VariationOptionType_Include_OptionValue) => {
@@ -44,7 +43,7 @@ export default function OptionTypeBox(props: IOptionTypeBoxProps) {
   return (
     <div className="group flex min-w-fit flex-nowrap items-center p-1 transition-all duration-1000">
       <div className={`${!edit ? "w-50" : "w-0"} overflow-hidden `}>
-        {variationoption.optionType + ": " + variationoption.optionValue.value}
+        {variationoption.variation.Name + ": " + variationoption.optionValue}
       </div>
       <div className={`${edit ? "w-50" : "w-0"} relative  `}>
         <div className="overflow-hidden">
@@ -52,7 +51,7 @@ export default function OptionTypeBox(props: IOptionTypeBoxProps) {
             ref={typeref}
             className='m-1 w-14 max-w-lg rounded-md bg-white p-1  font-vazir shadow-[0_0_4px_0_"#38bgf8"] shadow-sky-400 outline-none transition-all
             duration-500 hover:rounded-xl focus:rounded-xl disabled:bg-white   disabled:text-gray-400'
-            defaultValue={variationoption.optionType}
+            defaultValue={variationoption.variation.Name}
             onChange={(e) => {
               setOptionType(e.target.value);
               setPanelShow(true);
@@ -63,7 +62,7 @@ export default function OptionTypeBox(props: IOptionTypeBoxProps) {
             ref={valueref}
             className='m-1 w-14 max-w-lg rounded-md bg-white p-1  font-vazir shadow-[0_0_4px_0_"#38bgf8"] shadow-sky-400 outline-none transition-all
   duration-500 hover:rounded-xl focus:rounded-xl disabled:bg-white   disabled:text-gray-400'
-            defaultValue={variationoption.optionValue.value}
+            defaultValue={variationoption.optionValue}
             onChange={(e) => {
               setOptionValue(e.target.value);
               setPanelShow(true);
@@ -81,7 +80,7 @@ export default function OptionTypeBox(props: IOptionTypeBoxProps) {
              ? (
               mutation.data.map((res, index) => (
                 <div key={index} className="hover:bg-gray-300 transition-all duration-500 p-2 rounded" onClick={()=>handlesearchPanelclick(res)}>
-                  {res.optionType + ": " + res.optionValue.value}
+                  {res.variation.Name + ": " + res.optionValue}
                 </div>
               ))
             ) : (

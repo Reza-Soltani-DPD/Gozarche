@@ -2,11 +2,11 @@ import { router } from "../../../trpc";
 import { productRouter } from './product';
 import { tagsRouter } from './tags';
 import { variationOptionsRouter } from './variationoptions';
-import { variationsRouter } from './variations';
+import { variationsRouter } from './productvariations';
 
 export const productsRouter = router({
   product:productRouter,
   tag:tagsRouter,
-  variations:variationsRouter,
+  productvariations:variationsRouter,
   variationOptions:variationOptionsRouter
 });

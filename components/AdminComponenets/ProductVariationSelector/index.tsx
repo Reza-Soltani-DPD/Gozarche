@@ -15,7 +15,7 @@ export function ProductVariationSelector(
   const { variations, setVariations } = props;
 
   const { data: productVariations } =
-    trpc.admin.products.variations.getProductVariationsByIdsIncludeOptions.useQuery({
+    trpc.admin.products.productvariations.getProductVariationsByIdsIncludeOptions.useQuery({
       ids:variations?variations.map(vari=>vari.id):[],
     });
   return (

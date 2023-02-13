@@ -12,13 +12,6 @@ jobs:
         with:
           node-version: "16"
       - name: update-liara
-        env:
-          DATABASE_URL: ${{ secrets.LIARA_API_TOKEN }}
-          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
-          MEDIAFILES_DIR: ${{ secrets.MEDIAFILES_DIR }}
-          MEDIAFILES_URL: ${{ secrets.MEDIAFILES_URL }}
-          LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
         run: |
           npm i -g @liara/cli 
           liara deploy --platform=docker --app="gozarche" --port=3000 --api-token="$LIARA_TOKEN" --detach
