@@ -3,6 +3,7 @@ import * as React from "react";
 
 interface iconprops {
   className: string;
+  size:number
 }
 export interface AdminSideBarElementProps {
   title: string;
@@ -33,7 +34,7 @@ export default function AdminSideBarElement(props: AdminSideBarElementProps) {
             }`}
           >
             {Icon ? (
-              <Icon className="h-7 p-1 text-white group-hover/link:text-sky-200" />
+              <Icon className="h-7  w-7 p-1 text-white group-hover/link:text-sky-200" size={30} />
             ) : (
               ""
             )}
@@ -46,7 +47,7 @@ export default function AdminSideBarElement(props: AdminSideBarElementProps) {
             }`}
           >
             {Icon ? (
-              <Icon className="h-7 p-1 text-white group-hover/link:text-sky-200" />
+              <Icon className="h-7 p-1 text-white group-hover/link:text-sky-200" size={30}/>
             ) : (
               ""
             )}
@@ -67,7 +68,7 @@ export default function AdminSideBarElement(props: AdminSideBarElementProps) {
       )}
       {dropdown ? (
         <div
-          className={`absolute z-20 flex flex-col ${
+          className={`absolute z-30 flex flex-col  ${
             dropdown == "right" ? "top-0 right-0 mr-[100%]" : ""
           } ${
             dropdown == "bottom" ? "right-0" : ""

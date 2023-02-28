@@ -21,7 +21,7 @@ export const variationOptionsRouter = router({
         return undefined;
       }
     }),
-  getVariationOptionByIdsIncludeOptionvalue: adminProcedure
+  getVariationOptionByIdsIncludeOptiontype: adminProcedure
     .input(
       z.object({
         ids: z.array(z.string()),

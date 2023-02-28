@@ -1,5 +1,5 @@
 .cubic {
-	transition: transform .5s cubic-bezier(0.5, 1, 0.5,-0.5),color .2s ease-out;
+	transition: transform .5s cubic-bezier(0, 0.5, 0.5,1),color .2s ease-out;
 	/* transition: transform .4s cubic-bezier(.5, -0.5, .5, 1.5),color .2s ease-out; */
 }
 

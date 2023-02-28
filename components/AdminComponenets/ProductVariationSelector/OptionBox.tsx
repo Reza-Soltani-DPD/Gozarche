@@ -58,7 +58,7 @@ export default function OptionTypeBox(props: IOptionTypeBoxProps) {
               debounceCallback({ type: e.target.value, value: optionValue });
             }}
             />
-          <input
++          <input
             ref={valueref}
             className='m-1 w-14 max-w-lg rounded-md bg-white p-1  font-vazir shadow-[0_0_4px_0_"#38bgf8"] shadow-sky-400 outline-none transition-all
   duration-500 hover:rounded-xl focus:rounded-xl disabled:bg-white   disabled:text-gray-400'

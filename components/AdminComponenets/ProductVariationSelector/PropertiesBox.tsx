@@ -12,7 +12,7 @@ export interface IPropertyProps {
 export default function PropertyBox(props: IPropertyProps) {
   const { properties,setProperties } = props;
   const { data: propertylist,refetch } =
-    trpc.admin.products.variationOptions.getVariationOptionByIdsIncludeOptionvalue.useQuery(
+    trpc.admin.products.variationOptions.getVariationOptionByIdsIncludeOptiontype.useQuery(
       {
         ids: properties && properties.map((property) => property.id),
       }
